@@ -1,4 +1,4 @@
-###You Don’t Know JS Yet: Get Started 
+### You Don’t Know JS Yet: Get Started 
 ***
 
 **What is JS?**  
@@ -15,7 +15,17 @@
 - the one environment that rules JS is the web, this is the only reality that matters.
   > How JS is implemented for web browser.
 
+<style>
+r { color: Red }
+o { color: Orange }
+g { color: Green }
+</style>
 
+# TODOs:
+
+- <r>TODO:</r> Important thing to do
+- <o>TODO:</o> Less important thing to do
+- <g>DONE:</g> Breath deeply and improve karma
 
 
 
