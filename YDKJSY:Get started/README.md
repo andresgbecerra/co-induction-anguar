@@ -1,8 +1,6 @@
 ###You Don’t Know JS Yet: Get Started 
 ***
 
-<section style="background-color: #FDFFF4; padding:10px">
-
 **What is JS?**  
 
 **Language Specification** 
@@ -17,7 +15,7 @@
 - the one environment that rules JS is the web, this is the only reality that matters.
   > How JS is implemented for web browser.
 
-</section>
+
 
 
 
