@@ -12,20 +12,15 @@
 ***
 
 **The web rules everything About (JS)**
-- the one environment that rules JS is the web, this is the only reality that matters.
+- The one environment that rules JS is the web, this is the only reality that matters.
   > How JS is implemented for web browser.
+- Unfortunately, there are some exceptions, these mismatches are included in Appendix B,[“Additional ECMAScript Features for Web Browsers”](https://www.ecma-international.org/ecma-262/10.0/#sec-additional-ecmascript-features-for-web-browsers).
+  > Section B.1 and B.2 cover additions to JS
+  > Section B.3 includes some conflicts where code may run in both web and non-web JS engines.
 
-<style>
-r { color: Red }
-o { color: Orange }
-g { color: Green }
-</style>
+***
+**Many Faces**
 
-# TODOs:
-
-- <r>TODO:</r> Important thing to do
-- <o>TODO:</o> Less important thing to do
-- <g>DONE:</g> Breath deeply and improve karma
 
 
 
