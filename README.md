@@ -3,10 +3,8 @@ Hi,  Welcome Welcome to my learning path, this exciting journey has some notes a
 ***
 ## Content
 
-1. JavaScript
-Book: You Don’t Know JS Yet: Get Started
-2. JavaScript
-Book: You Don’t Know JS Yet: Scope & Closures
+1. JavaScript `Book: You Don't Kow JS: Get Started`  
+2. JavaScript `Book: You Don’t Know JS Yet: Scope & Closures`
 3. Asynchronous JavaScript Patterns
 4. Pure Functions & more
 5. Testing
