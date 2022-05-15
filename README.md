@@ -3,12 +3,12 @@ Hi,  Welcome Welcome to my learning path, this exciting journey has some notes a
 ***
 ## Content
 
-1.1 JavaScript
+1. JavaScript
 Book: You Don’t Know JS Yet: Get Started
-1.2 JavaScript
+2. JavaScript
 Book: You Don’t Know JS Yet: Scope & Closures
-1.3 Asynchronous JavaScript Patterns
-1.4 Pure Functions & more
-1.5 Testing
-1.6 Managing Complexity
-1.7 Go
+3. Asynchronous JavaScript Patterns
+4. Pure Functions & more
+5. Testing
+6. Managing Complexity
+7. Go
