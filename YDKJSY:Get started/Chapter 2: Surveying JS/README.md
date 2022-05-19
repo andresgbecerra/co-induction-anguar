@@ -111,13 +111,68 @@ In JS, we should consider “function” to take the broader meaning of another 
     console.log(msg);   // Hello, Andres!
   ```
 > You can only return a single value, but if you have more values to return, you can wrap them up into a single object/array.
+
 ***
 
 **Comparisons**
 
+- ===’s equality comparison is often described is, “checking both the value and the type”.`All value comparisons in JS consider the type of the values being compared, not just the === operator.`
+- === disallows any sort of type conversion (aka, “coercion”) in its comparison.
+
+_Primitives:_
+```
+    3 === 3.0;        // true
+    "yes" === "yes";  // true
+    null === null;    // true  
+    false === false;  // true
+
+    42 === "42";          // false
+    "hello" === "Hello";  // false
+    true === 1;           // false
+    0 === null;           // false
+    "" === null;          // false
+    null === undefined;   // false
+```
+> For NaN comparisons, use the Number.isNaN(..) utility.
+> You could think of Object.is(..) as the “quadruple-equals” ====, the really- really-strict comparison instead of === that is not actually strictly exactly equal comparison, in the strictest sense.
+
+_Objects & Arrays:_
+```
+    [1,2,3]===[1,2,3];       //false
+    { a: 42 } === { a: 42 } // false
+    (x=>x*2)===(x=>x*2)    //false
+```
+- In JS, all object values are held by **reference**, are assigned and passed by reference-copy.
+- JS does not define === as structural equality for **object** values. Instead, === uses identity equality for **object** values.
+> JS does not provide a mechanism for structural equality comparison of object values, only reference identity compar- ison. To do structural equality comparison, you’ll need to implement the checks yourself.
+
+**Coercive Comparisons**
+
+> Coercion means a value of one type being converted to its respective representation in another type.
+- The == operator performs an equality comparison similarly to how the === performs it. In fact, both operators consider **the type of the values** being compared.
+- If the comparison is between the same value type, both == and === **do exactly the same thing**, no difference whatsoever.
+- If the value types being compared are different, the == differs from === in that it allows **coercion** before the comparison.
+
+> == allows type conversions first, and once the types have been converted to be the same on both sides, then == does the same thing as ===. Instead of “loose equality,” the == operator should be described as “coercive equality.”
+```
+    42 == "42"; // true 
+    1 == true; // true
+```
+In both comparisons, the value types are different, so the == causes the non-number values ("42" and true) to be converted to numbers (42 and 1, respectively) before the comparisons are made.
+`== that it prefers primitive and numeric comparisons`
+The comparison operators like <, > (and even <= and >=) just like ==, these operators will perform as if they’re “strict” if the types being relationally compared already match, they’ll allow **coercion** first (generally, to numbers) if the types differ.
+> These relational operators typically use numeric comparisons, except in the case where both values being compared are already strings; in this case, they use alphabetical comparison of the strings
+
 ***
 
-**How We Organize in J**
+**How We Organize in JS**
+
+Two major patterns for organizing code (data and behavior) are used broadly across the JS ecosystem: classes and modules.
+
+- **Classes**
+  - A class in a program is a definition of a “type” of custom data structure that includes both data and behaviors that operate on that data.
+  - Classes define how such a data structure works, but classes are not themselves concrete values. To get a concrete value that you can use in the program, a class must be instantiated (with the new keyword) one or more times.
+
 
 ***
 
