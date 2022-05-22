@@ -23,3 +23,10 @@
   * Comparisons 
   * How We Organize in JS
   * The Rabbit Hole Deepens
+  
+**Chapter 3: Digging to the Roots of JS**
+  * Iteration
+  * Closure
+  * thisKeyword
+  * Prototypes
+  * Asking “Why?”

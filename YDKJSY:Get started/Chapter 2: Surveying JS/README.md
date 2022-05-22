@@ -139,8 +139,8 @@ _Primitives:_
 _Objects & Arrays:_
 ```
     [1,2,3]===[1,2,3];       //false
-    { a: 42 } === { a: 42 } // false
-    (x=>x*2)===(x=>x*2)    //false
+    { a: 42 } === { a: 42 }  // false
+    (x=>x*2)===(x=>x*2)      //false
 ```
 - In JS, all object values are held by **reference**, are assigned and passed by reference-copy.
 - JS does not define === as structural equality for **object** values. Instead, === uses identity equality for **object** values.
@@ -156,7 +156,7 @@ _Objects & Arrays:_
 > == allows type conversions first, and once the types have been converted to be the same on both sides, then == does the same thing as ===. Instead of “loose equality,” the == operator should be described as “coercive equality.”
 ```
     42 == "42"; // true 
-    1 == true; // true
+    1 == true;  // true
 ```
 In both comparisons, the value types are different, so the == causes the non-number values ("42" and true) to be converted to numbers (42 and 1, respectively) before the comparisons are made.
 `== that it prefers primitive and numeric comparisons`
@@ -172,7 +172,141 @@ Two major patterns for organizing code (data and behavior) are used broadly acro
 - **Classes**
   - A class in a program is a definition of a “type” of custom data structure that includes both data and behaviors that operate on that data.
   - Classes define how such a data structure works, but classes are not themselves concrete values. To get a concrete value that you can use in the program, a class must be instantiated (with the new keyword) one or more times.
+  
+  
+- **Class Inheritance**
+  - Inheritance is a powerful tool for organizing data/behavior in separate logical units (classes), but allowing the child class to cooperate with the parent by accessing/using its behavior and data.
 
+```
+class Publication { constructor(title,author,pubDate) {
+  this.title = title;
+  this.author = author;
+  this.pubDate = pubDate;
+}
+    print() {
+        console.log(`
+        Title: ${ this.title } 
+        By: ${ this.author } 
+        ${ this.pubDate }
+      `); 
+      }
+}
+```
+Sub-class or Child classes:
+```
+class Book extends Publication { 
+    constructor(bookDetails) {
+        super(
+        bookDetails.title, 
+        bookDetails.author, 
+        bookDetails.publishedOn
+        );
+        this.publisher = bookDetails.publisher; 
+        this.ISBN = bookDetails.ISBN;
+    }
+    print() { 
+        super.print();
+        console.log(`
+        Publisher: ${ this.publisher }
+        ISBN: ${ this.ISBN } `);   
+    }
+}
+//------------------------------------------------
+ class BlogPost extends Publication { 
+     constructor(title,author,pubDate,URL) {
+    super(title,author,pubDate);
+    this.URL = URL; 
+    }
+    print() { 
+        super.print();
+        console.log(this.URL); 
+        }
+  }      
+```
+Using these child classes:
+```
+var YDKJS = new Book({
+    title: "You Don't Know JS", 
+    author: "Kyle Simpson", 
+    publishedOn: "June 2014", 
+    publisher: "O'Reilly", 
+    ISBN: "123456-789"
+});
+YDKJS.print();
+// Title: You Don't Know JS
+// By: Kyle Simpson
+// June 2014
+// Publisher: O'Reilly
+// ISBN: 123456-789
+
+var forAgainstLet = new BlogPost(
+"For and against let",
+"Kyle Simpson",
+"October 27, 2014", "https://davidwalsh.name/for-and-against-let"
+);
+forAgainstLet.print();
+// Title: For and against let
+// By: Kyle Simpson
+// October 27, 2014
+// https://davidwalsh.name/for-and-against-let
+```
+>Notice that both child class instances have a print() method, which was an override of the inherited print() method from the parent Publication class. Each of those overridden child class print() methods call super.print() to invoke the inherited version of the print() method.
+The fact that both the inherited and overridden methods can have the same name and co-exist is called polymorphism.
+
+- **Modules**
+  - The module pattern has essentially the same goal as the class pattern, which is to group data and behavior together into logical units. `modules can “include” or “access” the data and behaviors of other modules, for cooperation sake.`
+  - **Classic Modules**
+    - ES6 added a module syntax form to native JS syntax. 
+    - Classic module has an outer function (that runs at least once), which returns an “instance” of the module with one or more functions exposed that can operate on the module instance’s internal (hidden) data.
+  
+  ```
+  functionPublication(title,author,pubDate) {
+      var publicAPI = {
+          print() {
+              console.log(`
+                    Title:${title}
+                    By:${author}
+                    ${pubDate}`
+                    );
+                }
+              }
+    ;return publicAPI;
+    }
+    //------------------
+    functionBook(bookDetails) {
+        var pub = Publication(
+                        bookDetails.title,
+                        bookDetails.author,
+                        bookDetails.publishedOn
+                        );
+            
+            var publicAPI = { 
+                print() { 
+                            pub.print();
+                            console.log(`
+                                Publisher:${bookDetails.publisher}
+                                ISBN:${bookDetails.ISBN}`
+                                );
+                            }
+                        };
+            return publicAPI;
+            }
+    //-------------------
+    functionBlogPost(title,author,pubDate,URL) {
+        var pub = Publication(title,author,pubDate);
+
+        var publicAPI = {
+                print() {
+                    pub.print();
+                    console.log(URL);
+                    }
+                };
+        return publicAPI;
+        }
+  ```
+
+- The classform stores methods and data on an object instance, which must be accessed with the this.prefix. With modules, the methods and data are accessed as identifier variables in scope, without any this. prefix.
+> There are other variations to this factory function form that are quite common across JS,even in 2020; you may run across these forms in different JS programs: AMD (Asynchronous Module Definition), UMD(Universal Module Definition), and Common JS (classic Node.js-style modules). The variations,however, are minor (yet not quite compatible). Still, all of these forms rely on the same basic principles.
 
 ***
 
