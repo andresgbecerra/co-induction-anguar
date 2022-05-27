@@ -12,7 +12,7 @@
 
 ES6 included several mechanisms (syntax and APIs) for standardized consumption of these iterators.
 - The for..of loop:
-    ```
+    ```ruby
     // given an iterator of some data source:
     var it = /* .. */;
     // loop over its results one at a time
@@ -48,17 +48,17 @@ ES6 included several mechanisms (syntax and APIs) for standardized consumption o
 **Iterables**
 
 - ES6 defined the basic data structure/collection types in JS as iterables. This includes strings, arrays, maps, sets, and others.
-    ```
+    ```ruby
     // an array is an iterable
     var arr = [ 10, 20, 30 ];
     ```
 - Since arrays are iterables, we can shallow-copy an array using iterator consumption via the ... spread operator:
-    ```
+    ```ruby
     var arrCopy = [ ...arr ];
     ```
 
 - Maps
-  ```
+  ```ruby
     // given two DOM elements, `btn1` and `btn2`
     var buttonNames = new Map(); 
     buttonNames.set(btn1,"Button 1"); 
@@ -98,7 +98,7 @@ Closure is when a function remembers and continues to access variables from outs
     1. Closure is part of the nature of a function. Objects don’t get closures, functions do. 
     2. To observe a closure, you must execute a function in a different scope than where that function was originally defined.
 
- ```
+ ```ruby
     function greeting(msg) { 
         return function who(name) {
              console.log(`${ msg }, ${ name }!`); 
@@ -118,7 +118,7 @@ Closure is when a function remembers and continues to access variables from outs
  ```
 > These closures are not a snapshot of the msg variable’s value; they are a direct link and preservation of the variable itself. That means closure can actually observe (or make!) updates to these variables over time.
 
-```
+```ruby
 function counter(step = 1) { 
     var count = 0;
     return function increaseCount(){ 
@@ -138,7 +138,7 @@ incBy3(); //9
 
 ```
 - Closure is most common when working with asynchronous code, such as with callbacks:
-  ```
+  ```ruby
     function getSomeData(url) { 
         ajax(url,function onResponse(resp){
             console.log(
@@ -159,7 +159,7 @@ incBy3(); //9
 - this is not a fixed characteristic of a function based on the function’s definition, but rather a dynamic characteristic that’s determined each time the function is called.
 - The execution context is that it’s a tangible object whose properties are made available to a function while it executes.
 
-```
+```ruby
     function classroom(teacher) { 
         return function study() {
             console.log(
@@ -187,7 +187,7 @@ incBy3(); //9
 
 - **Object Linkage**
    - To define an object prototype linkage, you can create the object using the Object.create(..) utility:
-    ```
+    ```ruby
         var homework = { 
             topic: "JS"
         };
@@ -197,7 +197,7 @@ incBy3(); //9
     - Objects in a prototype chain
    ![prototype chain](../../assets/prototype-chain.png)
 
-    ```
+    ```ruby
     homework.topic;
     // "JS"
     otherHomework.topic;
@@ -216,7 +216,7 @@ incBy3(); //9
 
 - **this Revisited**
   - One of the main reasons this supports dynamic context based on how the function is called is so that method calls on objects which delegate through the prototype chain still maintain the expected this. 
-  ```
+  ```ruby
    var homework = { 
        study() {
               console.log(`Please study ${ this.topic }`); 

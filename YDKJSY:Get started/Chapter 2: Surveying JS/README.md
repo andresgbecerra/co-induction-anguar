@@ -20,7 +20,7 @@ _Regardless of which code organization pattern (and loading mechanism) is used f
   
 **Primitives**
   1. **strings** are ordered collections of characters, usually used to represent words and sentences.
-  ```
+  ```ruby
   const name = "Andres";
   const lastName = 'Becerra';
   const fullName = `${name} ${lastName}`; // interpolation
@@ -38,7 +38,7 @@ Other value type in JS is an **Object** value and **Arrays** are a special type 
 
 Objects are more general: an unordered, keyed collection of any various values. In other words, you access the element by a string location name (aka “key” or “property”) rather than by its numeric position (as with arrays). 
 
-```
+```ruby
 // Object
 name = {
     first: "Andres",
@@ -58,7 +58,7 @@ names = [ "Frank", "Andres", "Peter", "Susan" ];
 
 - Variables have to be declared (created) to be used.
 - The **let** keyword has some differences to **var**, with the most obvious being that **let** allows a more limited access to the variable than **var**. This is called “block scoping” as opposed to regular or function scoping.
-  ```
+  ```ruby
     var adult = true;
     if (adult) {
     var name = "Andres";
@@ -120,7 +120,7 @@ In JS, we should consider “function” to take the broader meaning of another 
 - === disallows any sort of type conversion (aka, “coercion”) in its comparison.
 
 _Primitives:_
-```
+```ruby
     3 === 3.0;        // true
     "yes" === "yes";  // true
     null === null;    // true  
@@ -137,7 +137,7 @@ _Primitives:_
 > You could think of Object.is(..) as the “quadruple-equals” ====, the really- really-strict comparison instead of === that is not actually strictly exactly equal comparison, in the strictest sense.
 
 _Objects & Arrays:_
-```
+```ruby
     [1,2,3]===[1,2,3];       //false
     { a: 42 } === { a: 42 }  // false
     (x=>x*2)===(x=>x*2)      //false
@@ -177,7 +177,7 @@ Two major patterns for organizing code (data and behavior) are used broadly acro
 - **Class Inheritance**
   - Inheritance is a powerful tool for organizing data/behavior in separate logical units (classes), but allowing the child class to cooperate with the parent by accessing/using its behavior and data.
 
-```
+```ruby
 class Publication { 
 
 constructor(title,author,pubDate) {
@@ -195,7 +195,7 @@ constructor(title,author,pubDate) {
 }
 ```
 Sub-class or Child classes:
-```
+```ruby
 class Book extends Publication { 
     constructor(bookDetails) {
         super(
@@ -227,7 +227,7 @@ class Book extends Publication {
   }      
 ```
 Using these child classes:
-```
+```ruby
 var YDKJS = new Book({
     title: "You Don't Know JS", 
     author: "Kyle Simpson", 
@@ -262,7 +262,7 @@ The fact that both the inherited and overridden methods can have the same name a
     - ES6 added a module syntax form to native JS syntax. 
     - Classic module has an outer function (that runs at least once), which returns an “instance” of the module with one or more functions exposed that can operate on the module instance’s internal (hidden) data.
   
-  ```
+  ```ruby
   functionPublication(title,author,pubDate) {
       var publicAPI = {
           print() {
@@ -312,7 +312,7 @@ The fact that both the inherited and overridden methods can have the same name a
 > There are other variations to this factory function form that are quite common across JS,even in 2020; you may run across these forms in different JS programs: AMD (Asynchronous Module Definition), UMD(Universal Module Definition), and Common JS (classic Node.js-style modules). The variations,however, are minor (yet not quite compatible). Still, all of these forms rely on the same basic principles.
 
 the usage (aka, “instantiation”) of these modulefactory functions:
-```
+```ruby
 var YDKJS = Book({
     title: "You Don't Know JS", 
     author: "Kyle Simpson", 
@@ -348,7 +348,7 @@ The only difference here is the lack of using **new**, calling the module factor
   
 The file publication.js:
 
-```
+```ruby
 function printDetails(title,author,pubDate) { 
       console.log(`
                 Title: ${ title } 
@@ -369,7 +369,7 @@ return publicAPI;
 
 To import and use this module, from another ES module like blogpost.js:
 
-```
+```ruby
 import { create as createPub } from "publication.js";
 
 function printDetails(pub,URL) { 
@@ -389,7 +389,7 @@ return publicAPI;
 ```
 And finally, to use this module, we import into another ES module like main.js:
 
-``` 
+```ruby 
 import { create as newBlogPost } from "blogpost.js";
 
 var forAgainstLet = new BlogPost(

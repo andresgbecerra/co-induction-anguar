@@ -29,3 +29,22 @@
   * this Keyword
   * Prototypes
   * Asking “Why?”
+
+**Chapter 4: The Bigger Picture**
+  * Pillar 1: Scope and Closure
+  * Pillar 2: Prototypes
+  * Pillar 3: Types and Coercion
+  * With the Grain
+  * In Order
+
+**Appendix A: Exploring Further**
+  * Values vs. References
+  * So Many Function Forms
+  * Coercive Conditional Comparison
+  * Prototypal “Classes”
+
+**Appendix B: Practice, Practice, Practice!**
+  * Practicing Comparisons
+  * Practicing Closure
+  * Practicing Prototypes
+  * Suggested Solutions
