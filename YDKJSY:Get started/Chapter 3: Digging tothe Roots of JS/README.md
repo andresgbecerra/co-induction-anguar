@@ -170,7 +170,7 @@ incBy3(); //9
     var assignment = classroom("Kyle"); // function is instantiated
 
     assignment(); // we call assignment() as a plain, normal function, without providing it any execution context.
-    
+
    // Kyle says to study undefined  -- Oops :(
 ```
 
@@ -181,8 +181,60 @@ incBy3(); //9
 
 **Prototypes**
 
-***
+- Prototype is a linkage between two objects; the linkage is hidden behind the scenes, though there are ways to expose and observe it. 
+- A series of objects linked together via prototypes is called the “prototype chain.”
+>The purpose of this prototype linkage (i.e., from an object B to another object A) is so that accesses against B for properties/methods that B does not have, are delegated to A to handle. Delegation of property/method access allows two (or more!) objects to cooperate with each other to perform a task.
 
-**Asking “Why?”**
+- **Object Linkage**
+   - To define an object prototype linkage, you can create the object using the Object.create(..) utility:
+    ```
+        var homework = { 
+            topic: "JS"
+        };
+        var otherHomework = Object.create(homework); 
+        otherHomework.topic; // "JS"
+    ```
+    - Objects in a prototype chain
+   ![prototype chain](../../assets/prototype-chain.png)
 
-***
+    ```
+    homework.topic;
+    // "JS"
+    otherHomework.topic;
+    // "JS"
+
+    otherHomework.topic = "Math";
+    otherHomework.topic;
+    // "Math"
+
+    homework.topic;
+    // "JS" -- not "Math"
+    ```
+    - The assignment to topic creates a property of that name directly on otherHomework; there’s no effect on the topic property on homework.
+    - The topic on otherHomework is “shadowing” the property of the same name on the homework object in the chain.`Another common way of creating an object with a prototype linkage is using the “prototypal class” pattern.`
+  
+
+- **this Revisited**
+  - One of the main reasons this supports dynamic context based on how the function is called is so that method calls on objects which delegate through the prototype chain still maintain the expected this. 
+  ```
+   var homework = { 
+       study() {
+              console.log(`Please study ${ this.topic }`); 
+              }
+           };
+   var jsHomework = Object.create(homework);
+    jsHomework.topic = "JS"; 
+    jsHomework.study();
+   // Please study JS
+
+   var mathHomework = Object.create(homework);
+    mathHomework.topic = "Math"; 
+    mathHomework.study();
+   // Please study Math   
+  ```
+  - The two objects jsHomework and mathHomework each pro- totype link to the single homework object, which has the study() function. jsHomework and mathHomework are each given their own topic property
+   ![prototype objects](../../assets/prototype-objects.png)
+  > jsHomework.study() delegates to homework.study(), but its this (this.topic) for that execution resolves to jsHome- work because of how the function is called, so this.topic is "JS". Similarly for mathHomework.study() delegating to homework.study() but still resolving this to mathHome- work, and thus this.topic as "Math".
+
+
+_The End_
