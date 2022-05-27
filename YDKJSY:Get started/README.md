@@ -7,7 +7,7 @@
 
 ### Contents
 
-**Chapter 1: WhatIsJavaScript?**  
+**Chapter 1: What Is JavaScript?**  
   * Language Specification
   * Many Faces
   * Backwards & Forwards

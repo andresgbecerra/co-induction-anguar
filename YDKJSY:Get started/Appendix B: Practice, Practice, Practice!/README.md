@@ -6,6 +6,7 @@
 
 **Practicing Comparisons**
 
+
 ***
 
 **Practicing Closure**
@@ -18,4 +19,5 @@
 
 **Suggested Solutions**
 
-***
+
+_The End_

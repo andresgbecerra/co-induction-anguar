@@ -1,6 +1,8 @@
 #  andres becerra
-Hi,  Welcome Welcome to my learning path, this exciting journey has some notes and practices that show everything related to JS & Angular.
+Hi,  Welcome to my learning path, this exciting journey has some notes and practices that show everything related to JS & Angular.
+
 ***
+
 ## Content
 
 1. JavaScript `Book: You Don't Kow JS: Get Started`  

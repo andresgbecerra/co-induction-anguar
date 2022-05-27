@@ -34,7 +34,6 @@
 
 **With the Grain**
 >Always keep looking for better ways to use what JS gives us to author more readable code. Everyone who works on your code, including your future self, will thank you!
-***
 
 
 _The End_
