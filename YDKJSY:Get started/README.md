@@ -21,12 +21,11 @@
   * Declaring and Using Variables 
   * Functions 
   * Comparisons 
-  * How We Organize in JS
-  * The Rabbit Hole Deepens
-  
+  * How We Organize in JS (Classes & Modules)
+   
 **Chapter 3: Digging to the Roots of JS**
   * Iteration
   * Closure
-  * thisKeyword
+  * this Keyword
   * Prototypes
   * Asking “Why?”

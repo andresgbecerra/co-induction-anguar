@@ -178,7 +178,9 @@ Two major patterns for organizing code (data and behavior) are used broadly acro
   - Inheritance is a powerful tool for organizing data/behavior in separate logical units (classes), but allowing the child class to cooperate with the parent by accessing/using its behavior and data.
 
 ```
-class Publication { constructor(title,author,pubDate) {
+class Publication { 
+
+constructor(title,author,pubDate) {
   this.title = title;
   this.author = author;
   this.pubDate = pubDate;
@@ -213,7 +215,8 @@ class Book extends Publication {
 }
 //------------------------------------------------
  class BlogPost extends Publication { 
-     constructor(title,author,pubDate,URL) {
+
+  constructor(title,author,pubDate,URL) {
     super(title,author,pubDate);
     this.URL = URL; 
     }
@@ -240,9 +243,9 @@ YDKJS.print();
 // ISBN: 123456-789
 
 var forAgainstLet = new BlogPost(
-"For and against let",
-"Kyle Simpson",
-"October 27, 2014", "https://davidwalsh.name/for-and-against-let"
+    "For and against let",
+    "Kyle Simpson",
+    "October 27, 2014", "https://davidwalsh.name/for-and-against-let"
 );
 forAgainstLet.print();
 // Title: For and against let
@@ -250,7 +253,7 @@ forAgainstLet.print();
 // October 27, 2014
 // https://davidwalsh.name/for-and-against-let
 ```
->Notice that both child class instances have a print() method, which was an override of the inherited print() method from the parent Publication class. Each of those overridden child class print() methods call super.print() to invoke the inherited version of the print() method.
+> Notice that both child class instances have a print() method, which was an override of the inherited print() method from the parent Publication class. Each of those overridden child class print() methods call super.print() to invoke the inherited version of the print() method.
 The fact that both the inherited and overridden methods can have the same name and co-exist is called polymorphism.
 
 - **Modules**
@@ -308,8 +311,105 @@ The fact that both the inherited and overridden methods can have the same name a
 - The classform stores methods and data on an object instance, which must be accessed with the this.prefix. With modules, the methods and data are accessed as identifier variables in scope, without any this. prefix.
 > There are other variations to this factory function form that are quite common across JS,even in 2020; you may run across these forms in different JS programs: AMD (Asynchronous Module Definition), UMD(Universal Module Definition), and Common JS (classic Node.js-style modules). The variations,however, are minor (yet not quite compatible). Still, all of these forms rely on the same basic principles.
 
-***
+the usage (aka, “instantiation”) of these modulefactory functions:
+```
+var YDKJS = Book({
+    title: "You Don't Know JS", 
+    author: "Kyle Simpson", 
+    publishedOn: "June 2014", 
+    publisher: "O'Reilly", 
+    ISBN: "123456-789"
+});
+YDKJS.print();
+// Title: You Don't Know JS
+// By: Kyle Simpson
+// June 2014
+// Publisher: O'Reilly
+// ISBN: 123456-789
 
-**The Rabbit Hole Deepen**
+var forAgainstLet = BlogPost(
+    "For and against let",
+    "Kyle Simpson",
+    "October 27, 2014", "https://davidwalsh.name/for-and-against-let"
+);
+forAgainstLet.print();
+// Title: For and against let
+// By: Kyle Simpson
+// October 27, 2014
+// https://davidwalsh.name/for-and-against-let
+```
+The only difference here is the lack of using **new**, calling the module factories as normal functions.
 
-***
+  - **ES Modules**
+    - ES modules (ESM), introduced to the JS language in ES6.
+    - The wrapping context is a file. ESMs are always file-based; one file, one module.
+    - You don’t interact with a module’s “API” explicitly, but rather use the **export** keyword to add a variable or method to its public API definition. If something is defined in a module but not exported, then it stays hidden (just as with classic modules).
+    - You don’t “instantiate” an ES module, you just import it to use its single instance. ESMs are, in effect, “singletons,” in that there’s only one instance ever created, at first import in your program, and all other imports just receive a reference to that same single instance. If your module needs to support multiple instantiations, you have to provide a classic module-style factory function on your ESM definition for that purpose.
+  
+The file publication.js:
+
+```
+function printDetails(title,author,pubDate) { 
+      console.log(`
+                Title: ${ title } 
+                By: ${ author } 
+                ${ pubDate }
+                `);
+             }
+
+export function create(title,author,pubDate) { 
+    var publicAPI = {
+            print() {
+                printDetails(title,author,pubDate);
+             } 
+    };
+return publicAPI; 
+}
+```
+
+To import and use this module, from another ES module like blogpost.js:
+
+```
+import { create as createPub } from "publication.js";
+
+function printDetails(pub,URL) { 
+    pub.print();
+    console.log(URL);
+}
+
+export function create(title,author,pubDate,URL) { 
+    var pub = createPub(title,author,pubDate);
+    var publicAPI = { 
+        print() {
+                printDetails(pub,URL);
+            }
+        };
+return publicAPI; 
+}
+```
+And finally, to use this module, we import into another ES module like main.js:
+
+``` 
+import { create as newBlogPost } from "blogpost.js";
+
+var forAgainstLet = new BlogPost(
+    "For and against let",
+    "Kyle Simpson",
+    "October 27, 2014", "https://davidwalsh.name/for-and-against-let"
+);
+
+forAgainstLet.print();
+// Title: For and against let
+// By: Kyle Simpson
+// October 27, 2014
+// https://davidwalsh.name/for-and-against-let
+```
+
+> However, since you’re already using ESM at that point, I’d recommend sticking with classic modules instead of class.
+> If your module only needs a single instance, you can skip the extra layers of complexity: export its public methods directly.
+
+
+
+_The End_
+
+
