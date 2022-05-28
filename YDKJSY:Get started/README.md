@@ -47,4 +47,4 @@
   * Practicing Comparisons
   * Practicing Closure
   * Practicing Prototypes
-  * Suggested Solutions
+ 
