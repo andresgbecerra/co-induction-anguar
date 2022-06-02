@@ -99,12 +99,89 @@ Unlike a program being **compiled** all at once, with **interpretation** the sou
 
 **Compiler Speak**
 
+- How the JS engine identifies variables and determines the scopes of a program as it is compiled.
+
+    ```ruby
+        var students = [
+            { id: 14, name: "Kyle" },
+            { id: 73, name: "Suzy" }, 
+            { id: 112, name: "Frank" }, 
+            { id: 6, name: "Sarah" }
+        ];
+        function getStudentName(studentID) { 
+            for (let student of students) {
+                if (student.id == studentID) { 
+                    return student.name;
+                } 
+            }
+        }
+
+        var nextStudent = getStudentName(73); 
+
+        console.log(nextStudent);
+        // Suzy
+    ```
+>How do you know if a variable is a target? Check if there is a value that is being assigned to it; if so, it’s a **target**. If not, then the variable is a **source**.
+ - **Targets:**
+    - What makes a variable a target?
+      ```
+        students = [ // ..
+        nextStudent = getStudentName(73);
+      //- This statement is clearly an assignment operation; remember, the var students part is handled entirely as a declaration at compile time, and is thus irrelevant during execution.
+
+        for (let student of students) {
+      //- That statement assigns a value to student for each iteration of the loop.
+        
+        getStudentName(73)
+      // - the argument 73 is assigned to the parameter studentID.(an assigment to a target)  
+
+        function getStudentName(studentID) {
+      //- A function declaration is a special case of a target reference.
+
+      ```
+    
+
+ - **Sources:**
+  - In `for (let student of students)`, we said that student is a *target*, but students is a *source* reference.
+  -  In the statement `if (student.id == studentID)`, both student and studentID are *source* references. `student` is also a *source* reference in `return student.name`.
+  -  In `getStudentName(73)`, getStudentName is a *source* reference (which we hope resolves to a function reference value).
+  -  In `console.log(nextStudent)`, console is a *source* reference, as is nextStudent.
+
 ***
 
 **Cheating: Runtime Scope Modifications**
+
+> Scope is determined as the program is compiled, and should not generally be affected by runtime conditions.
+- In **non-strict-mode**, there are technically still two ways to cheat this rule, modifying a program’s scopes during runtime.
+  1. The **eval(..)** function receives a string of code to compile and execute on the fly during the program runtime.
+    ```ruby
+    function badIdea() {
+        eval("var oops = 'Ugh!';");
+        console.log(oops);
+    }
+    badIdea();   // Ugh!
+    ```
+  2. The **with** keyword, which essentially dynamically turns an object into a local scope—its properties are treated as identifiers in that new scope’s block.
+   ```ruby
+    var badIdea = { oops: "Ugh!" };
+    with (badIdea) { 
+        console.log(oops); // Ugh!
+    }
+
+   ```
+>At all costs, avoid eval(..) (at least, eval(..) creating declarations) and with. Again, neither of these cheats is available in strict-mode, so if you just use strict-mode (you should!) then the temptation goes away!
 
 ***
 
 **Lexical Scope**
 
-***
+- The key idea of “lexical scope” is that it’s controlled entirely by the placement of functions, blocks, and variable declarations, in relation to one another.
+    >If you place a variable declaration inside a function, the compiler handles this declaration as it’s parsing the function, and associates that declaration with the function’s scope. If a variable is block-scope declared (let / const), then it’s associated with the nearest enclosing { .. } block, rather than its enclosing function (as with var).
+
+    >It’s important to note that compilation doesn’t actually do anything in terms of reserving memory for scopes and vari- ables. None of the program has been executed yet.
+
+    >Instead, compilation creates a map of all the lexical scopes that lays out what the program will need while it executes.
+
+
+
+_The End_
