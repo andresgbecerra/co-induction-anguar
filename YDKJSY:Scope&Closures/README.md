@@ -37,6 +37,39 @@
 
   * Why Global Scope? 
   * Where Exactly is this Global Scope? 
-  * GlobalThis
-  * GloballyAware
+  * Global This
+ 
+   
+**Chapter 5: The (Not So) Secret Lifecycle of Variables** 
+
+  * When Can I Use a Variable?
+  * Hoisting: Yet Another Metaphor
+  * Re-declaration?
+  * Uninitialized Variables (aka, TDZ) 
+  * Finally Initialized
+
+**Chapter 6:Limiting Scope Exposure** 
+  
+  * Least Exposure 
+  * Hiding in Plain (Function) Scope 
+  * Scoping with Blocks
+  * Function Declarations in Blocks (FiB)
+  * Blocked Over
+ 
+**Chapter 7:Using Closures** 
+  
+  * See the Closure
+  * The Closure Lifecycle and Garbage Collection (GC)
+  * An Alternative Perspective
+  * Why Closure?
+  * Closer to Closure
+
+**Chapter 8: The Module Pattern**
+
+  * Encapsulation and Least Exposure (POLE) 
+  * What Is a Module?
+  * Node CommonJS Modules 
+  * Modern ESModules(ESM)
+  * Exit Scope 
+ 
    
