@@ -79,6 +79,11 @@
 
   **Why Closure?**
   ```ruby
+      // HTML 
+      // <button data-kind="studentIDs">
+      //    Register Students
+      // </button>
+
       var APIendpoints = { studentIDs:
               "https://some.api/register-students",
           // ..
@@ -86,6 +91,7 @@
       var data = {
         studentIDs: [ 14, 73, 112, 6 ], // ..
       };
+      
       //------------------
       //Without using closure:
       //------------------
@@ -98,11 +104,7 @@
             data[recordKind]
           );
       }
-      // HTML
-      // <button data-kind="studentIDs">
-      //    Register Students
-      // </button>
-
+     
       btn.addEventListener("click",makeRequest);
 
       //------------------
@@ -120,12 +122,7 @@
                             data[recordKind]
                         ); 
                         }); 
-        }
-
-        // HTML
-        // <button data-kind="studentIDs">
-        //    Register Students
-        // </button>
+        }        
 
         setupButtonHandler(btn);
 
@@ -163,7 +160,7 @@
               ajax(requestURL,requestData);
           };
       }
-      
+
       function setupButtonHandler(btn) { 
         var recordKind = btn.dataset.kind; 
         var handler = defineHandler(
