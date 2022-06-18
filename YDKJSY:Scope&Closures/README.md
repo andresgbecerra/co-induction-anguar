@@ -54,8 +54,7 @@
   * Hiding in Plain (Function) Scope 
   * Scoping with Blocks
   * Function Declarations in Blocks (FiB)
-  * Blocked Over
- 
+   
 **Chapter 7:Using Closures** 
   
   * See the Closure
