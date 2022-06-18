@@ -86,12 +86,14 @@
 
       var APIendpoints = { studentIDs:
               "https://some.api/register-students",
-          // ..
-      };
+              // ..
+          };
+          
       var data = {
-        studentIDs: [ 14, 73, 112, 6 ], // ..
-      };
-      
+            studentIDs: [ 14, 73, 112, 6 ], 
+            // ..
+          };
+
       //------------------
       //Without using closure:
       //------------------
