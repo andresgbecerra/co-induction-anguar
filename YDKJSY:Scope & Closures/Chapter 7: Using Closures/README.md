@@ -95,10 +95,10 @@
 
     ``` 
   - Our **current** perspective suggests that wherever a function is passed and invoked, closure preserves a hidden link back to the original scope to facilitate the access to the closed-over variables.
-      ![prototype objects](../../assets/visualizing-closures.png)
+      ![closure perspective](../../assets/visualizing-closures.png)
   - This alternative model de-emphasizes “functions as first-class values,” and instead embraces how functions (like all non- primitive values) are held by reference in JS, and assigned/passed by reference-copy.
   - In this **alternative** model, functions stay in place and keep accessing their original scope chain just like they always could.
-     ![prototype objects](../../assets/visualizing-closures-alt.png)
+     ![closure alternative](../../assets/visualizing-closures-alt.png)
   - Closure instead describes the magic of keeping alive a function instance, along with its whole scope environment and chain, for as long as there’s at least one reference to that function instance floating around in any other part of the program.
 
 
