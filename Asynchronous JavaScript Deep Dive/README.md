@@ -5,7 +5,7 @@
 
 
 
-1. **Introduction**
+**Introduction**
 
 Primero que todo es necesario identificar como funciona el motor de JavaScript y como es su arquitectura:
  ![JS Engine](../assets/js-engine.png)
@@ -82,7 +82,7 @@ La declaración se inicia con la palabra reservada **var**, donde se generará u
 
 ***
 
-1. **The Necessity of Callbacks**
+2. **The Necessity of Callbacks**
    - En JavaScript, las funciones son objetos, y se permite pasar objetos como parametro de una funcion, por lo tanto es posible pasar funciones como parametro de otras funciones y llamarlas dentro de las funciones contenedoras.
      > Una función que se pasa a otra función como parámetro es una función **callback**.
    ```ruby
@@ -156,7 +156,7 @@ La declaración se inicia con la palabra reservada **var**, donde se generará u
 
 ***
 
-1. **Promises**
+3. **Promises**
     > Las **promesas** son la solución particular a los problemas relacionados con el uso de **callbacks**.
     - Que son las Promesas en JS:
        - Un Objeto con propiedades y metodos.
@@ -278,10 +278,10 @@ La declaración se inicia con la palabra reservada **var**, donde se generará u
    - 
 ***
 
-1. **Async Await**
+4. **Async Await**
 
 ***
 
-1. **Making Use of Generators**
+5. **Making Use of Generators**
 
 ***
