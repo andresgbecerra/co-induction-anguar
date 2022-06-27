@@ -5,7 +5,7 @@
 
 
 
-**Introduction**
+**Introducción**
 
 Primero que todo es necesario identificar como funciona el motor de JavaScript y como es su arquitectura:
  ![JS Engine](../assets/js-engine.png)
