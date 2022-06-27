@@ -273,15 +273,113 @@ La declaración se inicia con la palabra reservada **var**, donde se generará u
    >- Node.js: setImmediate()
    >- Node.js: process.nextTick()
    >- Node.js: readFile()
-- **Usando metodos estaticos de las Promesas .all y .race**
+- **Usando metodos estaticos .all y .race de las Promesas**
    - Estos metodos estaticos estan en el constructor del Objeto Promise y para acceder a las funcionalidades se usa: `Promise.all() ` y ` Promise.race()` .
-   - 
+     ```ruby
+            let firstFunction = function() {
+            return new Promise(function(resolve, reject) {
+                setTimeout(function() {
+                    resolve("Function1");
+                }, 1000);
+            });
+            };
+
+            let secondFunction = function() {
+                return new Promise(function(resolve, reject) {
+                    setTimeout(function() {
+                        resolve("Function2");
+                    }, 3000);
+                });
+            };
+
+            let thirdFunction = function() {
+                return new Promise(function(resolve, reject) {
+                    setTimeout(function() {
+                        resolve("Function3");
+                    }, 5000);
+                });
+            };
+
+            //----------------
+            // Promise.all()
+            //----------------
+            Promise.all([firstFunction(), secondFunction(), thirdFunction()])
+                .then(function(result) {                    
+                    console.log(result[0] + " " + result[2] + " " + result[1]);
+                })
+                .catch(function(result) {
+                    console.log(result);
+                });
+
+            //----------------
+            // Promise.race()
+            //----------------
+            Promise.race([firstFunction(), secondFunction(), thirdFunction()])
+                .then(function(result) {
+                    console.log(result);
+                })
+                .catch(function(result) {
+                    console.log(result);
+                });
+
+     ```
+   > Promise.all( ) y Promise.race( ) son dos herramientas de composición para ejecutar operaciones asíncronas en paralelo.
 ***
 
 4. **Async Await**
+   > Las promesas simplificaron el uso de callback, Async Await simplifica el uso de Promesas.
 
+   - La declaración de función async define una función asíncrona, la cual devuelve un objeto AsyncFunction.
+   - Las funciones Async permiten que las promesas resuelvan de una manera sincrona  y sin bloqueo en el proceso. `las funciones asyn pueden ser de expresion o declarativas`
+   - Una función async puede contener una expresión await, la cual pausa la ejecución de la función asíncrona y espera la resolución de la Promise pasada.
+   - Cuando se llama a una función async, esta devuelve un elemento Promise. 
+    ```ruby
+            const swapiFilms = async function() {
+            let url = "https://swapi.dev/api/films/",
+                filmsData = {},
+                films = [];
+
+            filmsData = await fetch(url).then(data => data.json());
+
+            //processing data
+            films = filmsData.results.map(obj => obj.title);
+            console.log(films);
+           };
+
+          swapiFilms(); // llama la función async
+    ```
+    - **await Keyword**
+       - Solo puede ser usada dentro de una función Async.
+       - Espera por la resolución de la Promesa.
+       - Causa que la función Async se pause, generando un comportamiento de codigo sincrono.
 ***
 
 5. **Making Use of Generators**
+   - Un **iterador** es un objeto que permite recorrer una colección y devolver un valor al terminar. 
+     - El iterador implementa el _protocolo de iteración_ a través del método **next( )**, el cual devuelve un objeto con dos propiedades: `{value:  ,  done:  }` donde **value** es el valor de cada secuencia y **done** representa un valor boolean que cambia su estado a _true_ cuando la iteracion se encuentra en el ultimo valor de la secuencia.
+    - Una **función generadora** (constructor GeneratorFunction) es un tipo especial de función que sirve como una fábrica de iteradores. Cuando se ejecuta, regresa un nuevo objeto Generador. 
+    - Una función se convierte en una Función Generadora si utiliza la sintáxis __function *__.
+    - Es una forma de escribir codigo que se puede pausar y continuar más tarde.
+  ```ruby
+        let arr = ['a', 'b', 'c', 'd'];
 
-***
+        //let it = arr[Symbol.iterator]();
+
+        const arrIt = function*(arr) {
+            for (let i = 0; i < arr.length; i++) {
+                yield arr[i];
+            };
+        };
+
+        let it = arrIt(arr);
+
+        it.next(); // {value: "a", done:false}
+        it.next(); // {value: "b", done:false}
+        it.next(); // {value: "c", done:false}
+        it.next(); // {value: "d", done:true}
+
+  ```
+
+>Los iteradores y los generadores proporcionan un mecanismo para personalizar el comportamiento de los bucles for...of
+
+_The End_
