@@ -64,23 +64,24 @@
   ```ruby
         Math.max(2, 8, 5); // 8
   ```
-**Currying**
-- **Properties**
-   
-  ```ruby
-        // associative
-        add(add(x, y), z) == add(x, add(y, z))
-        
-        // commutative
-        add(x, y) == add(y, x)
-        
-        // identity
-        add(x, 0) == x
-        
-        // distributive
-        add(multiply(x, y), multiply(x, z)) == multiply(x, add(y,z))
-  ```
-- Example:
+1. **Currying**
+   - **Properties**
+    
+    ```ruby
+            // associative
+            add(add(x, y), z) == add(x, add(y, z))
+            
+            // commutative
+            add(x, y) == add(y, x)
+            
+            // identity
+            add(x, 0) == x
+            
+            // distributive
+            add(multiply(x, y), multiply(x, z)) == multiply(x, add(y,z))
+    ```
+   - Example:
+  
     ```ruby
     const add = (x, y) => x + y ;
 
@@ -92,9 +93,10 @@
 
     console.log(result); // 3
     ```
-- **curry:** es posible gracias al closure y es descomponer funciones en funciones mas pequeñas para que cada una reciba un argumento.
-- It divides your function into multiple smaller functions that can handle one responsibility. 
-- This makes your function pure and less prone to errors and side effects
+   - **curry:** es posible gracias al closure y es descomponer funciones en funciones mas pequeñas para que cada una reciba un argumento.
+   - It divides your function into multiple smaller functions that can handle one responsibility. 
+   - This makes your function pure and less prone to errors and side effects.
+   - Currying doesn’t call a function. `It just transforms it.`
   
     ```ruby
         const add = (x, y) => x + y ;
@@ -132,14 +134,14 @@
 
     ```
     >  currying is when a function — instead of taking all arguments at one time — takes the first one and returns a new function, which takes the second one and returns a new function, which takes the third one, etc. until all arguments are completed.
-  - Currying can be used to manipulate the DOM:
+     - Currying can be used to manipulate the DOM:
      ```ruby
             const updateElemText = id => content => document.querySelector(`#${id}`).textContent= content;
             const updateHeaderText = updateElemText('header');
             updateHeaderText('Hello Andres!');  
      ```  
-  - Currying vs Partial Application:
-    - Partial application: a function is partially applied when it is given fewer arguments than it expects and returns a new function expecting the remaining arguments.
+   - Currying vs Partial Application:
+     - Partial application: a function is partially applied when it is given fewer arguments than it expects and returns a new function expecting the remaining arguments.
      ```ruby
         const addPartial = (x,y,z) => {
             return x + y + z; 
@@ -151,13 +153,89 @@
      ```
     > Currying and partial application are not really different; they are related, but they have different theories and applications.
 
+    > the general rule when defining curried function is the data it operates on ends up last.
+
 ***
 
 **Composition**
 
+- Es combinar funciones simples para crear funciones mas complejas.
+- En matemáticas, la composición de una función es definida como: (f ◦ g)(x) = f (g(x))
+
+```math
+    f(x) = 5x + 3
+```
+
+```math
+    g(x) = 2x - 1
+```
+
+```math
+    f(g(x)) = 5(2x - 1) + 3 
+```
+```math
+    f(g(x)) = 10x - 2
+```
+```ruby
+    const compose = (f, g) => (x) => f(g(x));
+```
+
+- Las funciones se ejecutan de derecha a izquierda según se pasen a la función compone.
+- El tipo de dato que resulta de una función, debe ser el mismo que acepta como entrada la siguiente función.
+- Para componer funciones es importante procesar datos abstractos, es decir que la funcion procesa los datos de forma generica (point free).
+  ```ruby
+    // No es point free porque esta especificando 
+    // el tipo de dato que espera
+    var snakeCase = function(word) {
+        return word.toLowerCase().replace(/\s+/ig, '_');
+    };
+
+    // Si es pointfree
+    var snakeCase = compose(replace(/\s+/ig, '_'), toLowerCase);
+  ```
+- Ejemplo de composicion
+  ```ruby
+        const compose = (f, g) => x => f(g(x));
+
+        const toUpper = str => str.toUpperCase();
+        const exclaim = str => str + '!';
+        const please = str => str + 'Please';
+
+        const shout = compose(toUpper, exclaim);
+
+        console.log(shout('here..')); // HERE..!
+
+        const shout1 = compose(shout, please);
+
+        console.log(shout1('Andres ')); // ANDRES PLEASE!
+
+  ```
+- Ejemplo de composicion con ramda
+  ```ruby
+    // Calcular el promedio de ingresos de todos los usuarios.
+    import { prop, map, reduce, add, compose } from 'ramda';
+
+    const average = (xs) => reduce(add, 0, xs) / xs.length;
+
+    const incomesAverage = compose(average, map(prop('incomes')));
+
+    incomesAverage(USERS) // 8333.333
+  ```
 ***
 
 **Functors**
+
+- An object we can map and apply a function in order to generate another object of the same type.
+- Functor laws:
+    - Identity: If you pass in an identity function into your functor's mapping interface, the final returned collection should be equivalent to your original funntor.
+    - Composition: 
+
+```ruby
+    const Functor = (value) => ({
+        map: fn => Functor(fn(value)),
+        value,
+    });
+```
 
 ***
 
