@@ -221,14 +221,38 @@
 
     incomesAverage(USERS) // 8333.333
   ```
+  > Function composition creates function pipelines that your data flows through. You put some input in the first stage of the pipeline, and some data pops out of the last stage of the pipeline, transformed. But for that to work, each stage of the pipeline must be expecting the data type that the previous stage returns.
 ***
 
 **Functors**
 
 - An object we can map and apply a function in order to generate another object of the same type.
 - Functor laws:
-    - Identity: If you pass in an identity function into your functor's mapping interface, the final returned collection should be equivalent to your original funntor.
+    - Identity: If you pass in an identity function into your functor's mapping interface, the final returned collection should be equivalent to your original functor.
     - Composition: 
+        ```ruby
+        const f = (x) => x * 2;
+        const g = (x) => x + 1;
+        const F = [1, 3, 5];
+                      
+        F.map(x => f(g(x))) == F.map(g).map(f)
+
+        console.log(F.map(x => f(g(x)))); //[4, 8, 12]
+        console.log(F.map(g).map(f)); //[4, 8, 12]
+
+        ```
+Examples:
+```ruby
+        const add1 = value => value + 1;
+        const times2 = value => value * 2;
+        const numbers = [3, 5, 7];
+
+        const nestedNumbers = numbers.map(value => add1(times2(value)));
+        console.log(nestedNumbers); // [7, 11, 15]
+
+        const chainedNumbers = numbers.map(times2).map(add1);
+        console.log(chainedNumbers); // [7, 11, 15]
+```
 
 ```ruby
     const Functor = (value) => ({
@@ -237,17 +261,28 @@
     });
 ```
 
+> las promesas usan functor cuando se encadenan diferentes metodos **then( )** consecutivos, para tranformar la data.
+```ruby
+    const promise = new Promise((resolve, reject) => {
+        resolve(1);
+    }).then(add1)
+      .then(times2);
+      
+    promise.then(console.log); // 4
+```
+
 ***
 
 **Either Monad**
+- Monads are functors that implement flatMap.
+- A monad is a way of composing functions that require context in addition to the return value.
+- Allow us to handle asynchronous code.
+  
+> the essence of software development is composition, and monads make composition easier.
 
-***
 
-**Task**
 
-***
 
-**Wrapping Up**
 
 _The End_
 
