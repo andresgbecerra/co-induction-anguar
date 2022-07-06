@@ -36,7 +36,25 @@
             });
 
 ```
+**Teroia de las categorias**
+  > Tambien conocida como las matematicas de las matematicas, fue propuesta en 1945 como una herramienta para trasladar problemas matematicos de un campo a otro.
+
+  - Una categoria esta formada por una clase de objetos junto a una clase de morfismos - `un tipo de procesos ó caminos ` - sobre esos objetos.
+    - Una categoria es un punto en el espacio. `category = dot`
+    - Un morfismo es una flecha un proceso. `morphism = arrow`
+![JS Engine](../assets/category.png)
+El requerimiento fundamental que han de cumplir las categorías es que si tenemos un morfismo de un punto(objeto) _x_ a otro _y_, y otro de _y_ a _z_, es posible componerlos y obtener un morfismo de _x_ a _z_. 
+Es decir, que si tenemos un tipo number y necesitamos transformarlo en un string, se requiere un morfismo toString.
+`toString:: number -> string`
+
+> La teoria de las categorias es basicamente una abstraccion aplicada a un problema particular.
+> un programa es también una manera de transformar una serie de datos de entrada en datos de salida y la manera más sencilla de construir programas complicados es componer programas más simples.
+
 **Functions**
+
+> first class citizens == functions as values
+> -hacer con una función todo lo que se puede hacer con un valor
+
 - A function is a process which takes some input, called arguments, and produces some output called a return value.
    - Total: For every input there is a corresponding output.
    - Deterministic: Always receive the same output for a given input.
@@ -270,7 +288,7 @@ Examples:
       
     promise.then(console.log); // 4
 ```
-
+> Un functor hace lifting sobre un valor, es decir que el valor es dejado en una caja. (content lifting)
 ***
 
 **Either Monad**
