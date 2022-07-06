@@ -42,7 +42,7 @@
   - Una categoria esta formada por una clase de objetos junto a una clase de morfismos - `un tipo de procesos ó caminos ` - sobre esos objetos.
     - Una categoria es un punto en el espacio. `category = dot`
     - Un morfismo es una flecha un proceso. `morphism = arrow`
-    ![JS Engine](../assets/category.png)
+![JS Engine](../assets/category.png)
 El requerimiento fundamental que han de cumplir las categorías es que si tenemos un morfismo de un punto(objeto) _x_ a otro _y_, y otro de _y_ a _z_, es posible componerlos y obtener un morfismo de _x_ a _z_. 
 Es decir, que si tenemos un tipo number y necesitamos transformarlo en un string, se requiere un morfismo toString.
 `toString:: number -> string`
