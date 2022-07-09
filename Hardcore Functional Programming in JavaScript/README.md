@@ -36,26 +36,46 @@
             });
 
 ```
-**Teroia de las categorias**
-  > Tambien conocida como las matematicas de las matematicas, fue propuesta en 1945 como una herramienta para trasladar problemas matematicos de un campo a otro.
+**The advantages of Functional Programming**
 
-  - Una categoria esta formada por una clase de objetos junto a una clase de morfismos - `un tipo de procesos ó caminos ` - sobre esos objetos.
-    - Una categoria es un punto en el espacio. `category = dot`
-    - Un morfismo es una flecha un proceso. `morphism = arrow`
+- Functional (in general, declarative) programming is often described as expressing what is being computed rather than how.
+- Functional Programs contain no assignment statements, so variables, once given a value, never change.
+  
+  - **No side effects:** A function, if all parameters are defined by value and no assignments are made to global variables, will have no side effects. `Functional Programs contain no side-effects of any kind.`
+  - **Lazy:** That means that unless specifically told otherwise, FP won't execute functions and calculate things until it's really forced to show you a result. That goes well with referential transparency and it allows you to think of programs as a series of transformations on data.
+  - **Statically typed:** When you compile your program, the compiler knows which piece of code is a number, which is a string and so on. That means that a lot of possible errors are caught at compile time. If you try to add together a number and a string, the compiler will whine at you.
+  - ***Elegant and concise:*** Because it uses a lot of high level concepts, programs are usually shorter than their imperative equivalents. And shorter programs are easier to maintain than longer ones and have less bugs.
+  - **Data storage:** is implicit, so operations allocate storage only when needed and then automatically release it if it becomes inaccessible.
+  - **The Functions** become first class values and will be on the same level as any other value. A function may be the value of an expression, passed as an argument and placed in a data structure.
+  `Functions are treated as first-class objects, are allowed to be recursive, higher order and polymorphic.`
+
+**The disadvantages of Functional Programming**
+- Data cannot be modified, that is, variables.
+- It is not recommended to use it for database and/or server connections. In addition, it does not have efficient access to large amounts of data.
+- It is not the best option for recursions of the same stack.
+- We can have serious errors in recursive programming.
+  
+**Theory of categories**
+  > Also known as the mathematics of mathematics, it was proposed in 1945 as a tool to transfer mathematical problems from one field to another.
+
+  - A category is formed by a class of objects together with a class of morphisms - `a type of processes or paths` - on those objects.
+
+    - A category is a point in space. `category = dot`
+    - A morphism is an arrow or a process. `morphism = arrow`
   
 ![JS Engine](../assets/category.png)
 
-El requerimiento fundamental que han de cumplir las categorías es que si tenemos un morfismo de un punto(objeto) _x_ a otro _y_, y otro de _y_ a _z_, es posible componerlos y obtener un morfismo de _x_ a _z_. 
-Es decir, que si tenemos un tipo number y necesitamos transformarlo en un string, se requiere un morfismo toString.
+The fundamental requirement to be met by the categories is that if we have a morphism from one point(object) _x_ to another _y_, and another from _y_ to _z_, it is possible to compose them and obtain a morphism from _x_ to _z_. 
+This means that if we have a **number** type and we need to transform it into a **string**, a **toString** morphism is required.
 `toString:: number -> string`
 
-> La teoria de las categorias es basicamente una abstraccion aplicada a un problema particular.
-> un programa es también una manera de transformar una serie de datos de entrada en datos de salida y la manera más sencilla de construir programas complicados es componer programas más simples.
+> The theory of categories is basically an abstraction applied to a specific problem.
+> A program is also a way of transforming a set of input data into output data, and the easiest way to build complicated programs is to compose simpler programs.
 
 **Functions**
 
 > first class citizens == functions as values
-> -hacer con una función todo lo que se puede hacer con un valor
+> -is to do with a function everything that can be done with a value
 
 - A function is a process which takes some input, called arguments, and produces some output called a return value.
    - Total: For every input there is a corresponding output.
@@ -113,7 +133,7 @@ Es decir, que si tenemos un tipo number y necesitamos transformarlo en un string
 
     console.log(result); // 3
     ```
-   - **curry:** es posible gracias al closure y es descomponer funciones en funciones mas pequeñas para que cada una reciba un argumento.
+   - **curry:** is possible thanks to closure and is to decompose functions into smaller functions so that each one receives an argument.
    - It divides your function into multiple smaller functions that can handle one responsibility. 
    - This makes your function pure and less prone to errors and side effects.
    - Currying doesn’t call a function. `It just transforms it.`
@@ -179,8 +199,8 @@ Es decir, que si tenemos un tipo number y necesitamos transformarlo en un string
 
 **Composition**
 
-- Es combinar funciones simples para crear funciones mas complejas.
-- En matemáticas, la composición de una función es definida como: (f ◦ g)(x) = f (g(x))
+- It is combining simple functions to create more complex functions.
+- In mathematics, the composition of a function is defined as: (f ◦ g)(x) = f (g(x))
 
 ```math
     f(x) = 5x + 3
@@ -200,9 +220,9 @@ Es decir, que si tenemos un tipo number y necesitamos transformarlo en un string
     const compose = (f, g) => (x) => f(g(x));
 ```
 
-- Las funciones se ejecutan de derecha a izquierda según se pasen a la función compone.
-- El tipo de dato que resulta de una función, debe ser el mismo que acepta como entrada la siguiente función.
-- Para componer funciones es importante procesar datos abstractos, es decir que la funcion procesa los datos de forma generica (point free).
+- The functions are executed from right to left as they are passed to the compose function.
+- The type of data resulting from a function must be the same as that accepted as input by the following function.
+- To compose functions it is important to process abstract data, in other words, the function processes the data in a generic way. (point free).
   ```ruby
     // No es point free porque esta especificando 
     // el tipo de dato que espera
@@ -230,7 +250,7 @@ Es decir, que si tenemos un tipo number y necesitamos transformarlo en un string
         console.log(shout1('Andres ')); // ANDRES PLEASE!
 
   ```
-- Ejemplo de composicion con ramda
+- Example of composition with ramda
   ```ruby
     // Calcular el promedio de ingresos de todos los usuarios.
     import { prop, map, reduce, add, compose } from 'ramda';
@@ -281,7 +301,7 @@ Examples:
     });
 ```
 
-> las promesas usan functor cuando se encadenan diferentes metodos **then( )** consecutivos, para tranformar la data.
+> promises use functor when chaining different consecutive **then( )** methods to transform the data.
 ```ruby
     const promise = new Promise((resolve, reject) => {
         resolve(1);
