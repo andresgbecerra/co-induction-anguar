@@ -1,7 +1,7 @@
 ## You Don’t Know JS Yet: Get Started 
 
 ### Chapter 2: Surveying JS?
-> The best way to learn JS is to start writing JS.Gracias y paciencia
+> The best way to learn JS is to start writing JS.
 ***
 >
 **Each File is a Program**
@@ -36,7 +36,7 @@ _Regardless of which code organization pattern (and loading mechanism) is used f
 
 Other value type in JS is an **Object** value and **Arrays** are a special type of object that’s comprised of an ordered and numerically indexed list of data.
 
-Objects are more general: an unordered, keyed collection of any various values. In other words, you access the element by a string location name (aka “key” or “property”) rather than by its numeric position (as with arrays). 
+**Objects** are more general: an unordered, keyed collection of any various values. In other words, you access the element by a string location name (aka “key” or “property”) rather than by its numeric position (as with arrays). 
 
 ```ruby
 // Object
@@ -144,7 +144,7 @@ _Objects & Arrays:_
 ```
 - In JS, all object values are held by **reference**, are assigned and passed by reference-copy.
 - JS does not define === as structural equality for **object** values. Instead, === uses identity equality for **object** values.
-> JS does not provide a mechanism for structural equality comparison of object values, only reference identity compar- ison. To do structural equality comparison, you’ll need to implement the checks yourself.
+> JS does not provide a mechanism for structural equality comparison of object values, only reference identity comparison. To do structural equality comparison, you’ll need to implement the checks yourself.
 
 **Coercive Comparisons**
 
@@ -171,7 +171,7 @@ Two major patterns for organizing code (data and behavior) are used broadly acro
 
 - **Classes**
   - A class in a program is a definition of a “type” of custom data structure that includes both data and behaviors that operate on that data.
-  - Classes define how such a data structure works, but classes are not themselves concrete values. To get a concrete value that you can use in the program, a class must be instantiated (with the new keyword) one or more times.
+  - Classes define how such a data structure works, but classes are not themselves concrete values. To get a concrete value that you can use in the program, a class must be instantiated (with the **new** keyword) one or more times.
   
   
 - **Class Inheritance**
@@ -254,7 +254,7 @@ forAgainstLet.print();
 // https://davidwalsh.name/for-and-against-let
 ```
 > Notice that both child class instances have a print() method, which was an override of the inherited print() method from the parent Publication class. Each of those overridden child class print() methods call super.print() to invoke the inherited version of the print() method.
-The fact that both the inherited and overridden methods can have the same name and co-exist is called polymorphism.
+The fact that both the inherited and overridden methods can have the same name and co-exist is called **polymorphism**.
 
 - **Modules**
   - The module pattern has essentially the same goal as the class pattern, which is to group data and behavior together into logical units. `modules can “include” or “access” the data and behaviors of other modules, for cooperation sake.`
@@ -263,7 +263,7 @@ The fact that both the inherited and overridden methods can have the same name a
     - Classic module has an outer function (that runs at least once), which returns an “instance” of the module with one or more functions exposed that can operate on the module instance’s internal (hidden) data.
   
   ```ruby
-  functionPublication(title,author,pubDate) {
+  function Publication(title, author, pubDate) {
       var publicAPI = {
           print() {
               console.log(`
@@ -276,7 +276,7 @@ The fact that both the inherited and overridden methods can have the same name a
     ;return publicAPI;
     }
     //------------------
-    functionBook(bookDetails) {
+    function Book(bookDetails) {
         var pub = Publication(
                         bookDetails.title,
                         bookDetails.author,
@@ -295,7 +295,7 @@ The fact that both the inherited and overridden methods can have the same name a
             return publicAPI;
             }
     //-------------------
-    functionBlogPost(title,author,pubDate,URL) {
+    function BlogPost(title,author,pubDate,URL) {
         var pub = Publication(title,author,pubDate);
 
         var publicAPI = {
@@ -349,7 +349,7 @@ The only difference here is the lack of using **new**, calling the module factor
 The file publication.js:
 
 ```ruby
-function printDetails(title,author,pubDate) { 
+function printDetails(title, author, pubDate) { 
       console.log(`
                 Title: ${ title } 
                 By: ${ author } 
@@ -357,7 +357,7 @@ function printDetails(title,author,pubDate) {
                 `);
              }
 
-export function create(title,author,pubDate) { 
+export function create(title, author, pubDate) { 
     var publicAPI = {
             print() {
                 printDetails(title,author,pubDate);
@@ -372,16 +372,16 @@ To import and use this module, from another ES module like blogpost.js:
 ```ruby
 import { create as createPub } from "publication.js";
 
-function printDetails(pub,URL) { 
+function printDetails(pub, URL) { 
     pub.print();
     console.log(URL);
 }
 
-export function create(title,author,pubDate,URL) { 
-    var pub = createPub(title,author,pubDate);
+export function create(title, author, pubDate, URL) { 
+    var pub = createPub(title, author, pubDate);
     var publicAPI = { 
         print() {
-                printDetails(pub,URL);
+                printDetails(pub, URL);
             }
         };
 return publicAPI; 
@@ -395,7 +395,8 @@ import { create as newBlogPost } from "blogpost.js";
 var forAgainstLet = new BlogPost(
     "For and against let",
     "Kyle Simpson",
-    "October 27, 2014", "https://davidwalsh.name/for-and-against-let"
+    "October 27, 2014",
+    "https://davidwalsh.name/for-and-against-let"
 );
 
 forAgainstLet.print();

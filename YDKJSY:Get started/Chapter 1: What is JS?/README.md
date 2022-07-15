@@ -26,7 +26,7 @@ JavaScript is most definitely a multi-paradigm language. You can write procedura
 ***
 
 **Backwards & Forwards**
-- Backwards compatibility means that once something is ac- cepted as valid JS, there will not be a future change to the language that causes that code to become invalid JS.
+- Backwards compatibility means that once something is accepted as valid JS, there will not be a future change to the language that causes that code to become invalid JS.
 - Forwards-compatible means that including a new addition to the language in a program would not cause that program to break if it were run in an older JS engine.
   > JS is not forwards-compatible
 
@@ -41,15 +41,15 @@ There is always the potential for a gap between code that you can write that's v
 
 **Filling the Gaps**
 
-Transpilation and polyfilling are two highly effective tech- niques for addressing that gap between code that uses the latest stable features in the language and the old environments a site or application needs to still support.
+Transpilation and polyfilling are two highly effective techniques for addressing that gap between code that uses the latest stable features in the language and the old environments a site or application needs to still support.
 
 ***
 
 **What’s in an Interpretation?**
 - The real reason it matters to have a clear picture on whether JS is interpreted or compiled relates to the nature of how errors are handled.
 - Parsed languages usually also perform code generation before execution, so it’s not that much of a stretch to say that, in spirit, they’re compiled languages. `JS source code is parsed before it is executed.`
-  1. After a program leaves a developer’s editor, it gets tran- spiled by Babel, then packed by Webpack (and perhaps half a dozen other build processes), then it gets delivered in that very different form to a JS engine.
-  2. The JS engine parses the code to an AST.
+  1. After a program leaves a developer’s editor, it gets transpiled by Babel, then packed by Webpack (and perhaps half a dozen other build processes), then it gets delivered in that very different form to a JS engine.
+  2. The JS engine parses the code to an AST `Abstract Syntax Tree`.
   3. Then the engine converts that AST to a kind-of byte
   code, a binary intermediate representation (IR), which is then refined/converted even further by the optimizing JIT compiler.
   4. Finally, the JS VM executes the program.
@@ -59,7 +59,7 @@ Transpilation and polyfilling are two highly effective tech- niques for addressi
 **Web Assembly (WASM)**
 
 - WASM is a representation format more akin to Assembly that can be processed by a JS engine by skipping the parsing/compilation that the JS engine normally does. The parsing/compilation of a WASM-targeted program happen ahead of time (AOT); what’s distributed is a binary- packed program ready for the JS engine to execute with very minimal processing.
-- An initial motivation for WASM was clearly the potential per- formance improvements. While that continues to be a focus, WASM is additionally motivated by the desire to bring more parity for non-JS languages to the web platform.
+- An initial motivation for WASM was clearly the potential performance improvements. While that continues to be a focus, WASM is additionally motivated by the desire to bring more parity for non-JS languages to the web platform.
 > WASM relieves the pressure to add features to JS that are mostly/exclusively intended to be used by transpiled programs from other languages.
 > WASM isn’t only for the web, and WASM also isn’t JS.
 
