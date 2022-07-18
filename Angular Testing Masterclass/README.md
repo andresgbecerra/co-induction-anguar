@@ -190,7 +190,7 @@
 
         loggerSpy = jasmine.createSpyObj('LoggerService', ["log"]); // mocking dependency of CalculatorService
 
-        // TestBed instead of new CalculatorService(new LoggerService());
+        // Using TestBed instead of new CalculatorService(new LoggerService());
 
         TestBed.configureTestingModule({
             providers: [
@@ -209,9 +209,164 @@
     > - Test only small unit of the application.
     > - It's very important that tha multiple tests that we write for a service to be isolated from each other.
 
+- HTTP implementation
+    - HttpClientTestingModule: this module includes a mock implementation of an Http service
+    - HttpTestingController: Controller to be injected into tests, that allows for mocking and flushing of requests.
+    ```ruby
+        let coursesService: CoursesService,
+            httpTestingController: HttpTestingController;
 
+        beforeEach(() => {
+
+            TestBed.configureTestingModule({
+                imports: [
+                    HttpClientTestingModule
+                ],
+                providers: [
+                    CoursesService
+                ]
+            });
+
+            coursesService = TestBed.get(CoursesService),
+            httpTestingController = TestBed.get(HttpTestingController);
+
+        });
+    ```
+    > Using the HttpClientTestingModule and HttpTestingController provided by Angular makes mocking out results and testing http requests simple by providing many useful methods for checking http requests and providing mock responses for each request.
+
+    ```ruby
+        it('should retrieve all courses', () => {
+
+            coursesService.findAllCourses()
+                .subscribe(courses => {
+
+                    expect(courses).toBeTruthy('No courses returned');
+
+                    expect(courses.length).toBe(12,
+                        "incorrect number of courses");
+
+                    const course = courses.find(course => course.id == 12);
+
+                    expect(course.titles.description).toBe(
+                        "Angular Testing Course");
+
+                });
+
+            const req = httpTestingController.expectOne('/api/courses');
+
+            expect(req.request.method).toEqual("GET");
+
+            req.flush({payload: Object.values(COURSES)});
+
+        });
+    ```
+    - Check Http Request
+        - It can  check the details of the http request. In this case, the **expectOne( )** method of httpTestingController also checks that only one request that uses "GET" and the url `/api/courses` was made by the call.
+    - Using.flush()
+       - The request captured by the httpTestingController, req,  has a flush method on it which takes in whatever response you would like to provide for that request as an argument.
+       ```ruby
+            req.flush(mockResponse);
+       ```
+    - Verify All Requests are Complete
+       - Once all req have been provided a response using flush, we can verify that there are no more pending requests after the test.
+       ```ruby
+                afterEach(() => {
+
+                httpTestingController.verify();
+            });
+       ```
+    - Check PUT request
+       ```ruby
+             it('should save the course data', () => {
+
+                const changes :Partial<Course> =
+                    {titles:{description: 'Testing Course'}};
+
+                coursesService.saveCourse(12, changes)
+                    .subscribe(course => {
+                        expect(course.id).toBe(12);
+                    });
+
+                const req = httpTestingController.expectOne('/api/courses/12');
+
+                expect(req.request.method).toEqual("PUT");
+
+                expect(req.request.body.titles.description) // request.body
+                    .toEqual(changes.titles.description); 
+
+                // return course updated mock
+                req.flush({
+                    ...COURSES[12],
+                    ...changes
+                })
+
+            });
+       ```
+    - Error Response
+        ```ruby
+                it('should give an error if save course fails', () => {
+
+                    const changes :Partial<Course> =
+                        {titles:{description: 'Testing Course'}};
+
+                    coursesService.saveCourse(12, changes)
+                        .subscribe(
+                            () => fail("the save course operation should have failed"),
+
+                            (error: HttpErrorResponse) => {
+                                expect(error.status).toBe(500);
+                            }
+                        );
+
+                    const req = httpTestingController.expectOne('/api/courses/12');
+
+                    expect(req.request.method).toEqual("PUT");
+
+                    // return server error mock
+                    req.flush('Save course failed', {
+                        status:500,
+                        statusText:'Internal Server Error'
+                        });
+                });
+        ```
+    - Get by ID response
+        ```ruby
+             it('should find a list of lessons', () => {
+
+                coursesService.findLessons(12)
+                    .subscribe(lessons => {
+
+                        expect(lessons).toBeTruthy();
+
+                        expect(lessons.length).toBe(3);
+
+                    });
+
+                const req = httpTestingController.expectOne(
+                    req => req.url == '/api/lessons');
+                
+                // Checking default parameters of the coursesService.findLessons 
+                expect(req.request.method).toEqual("GET");
+                expect(req.request.params.get("courseId")).toEqual("12");
+                expect(req.request.params.get("filter")).toEqual("");
+                expect(req.request.params.get("sortOrder")).toEqual("asc");
+                expect(req.request.params.get("pageNumber")).toEqual("0");
+                expect(req.request.params.get("pageSize")).toEqual("3");
+
+                // return list of lessons mock
+                req.flush({
+                    payload: findLessonsForCourse(12).slice(0,3)
+                });
+
+
+            });
+        ```
 ***
 **Section 3: Angular Component Testing**
+
+- Container component
+
+
 ***
 **Section 4: Asynchronous Angular Testing**
 >Jasmine needs to know when the asynchronous work is finished.
