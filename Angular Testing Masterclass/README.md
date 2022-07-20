@@ -757,8 +757,163 @@
    ```
 ***
 **Section 5: Angular E2E Testing with Cypress**
+
+- End-to-end testing is a technique that tests the entire software product from beginning to end to ensure the application flow behaves as expected. 
+- Cypress was originally designed to run end-to-end (E2E) tests on anything that runs in a browser. A typical E2E test visits the application in a browser and performs actions via the UI just like a real user would.
+> It's about testing how it all fits together. This mean that we are actually testing our complete Frontend application as it's going to be deployed in production.
+> - NO mocking of services involved in this type of test.
+- Installing Cypress
+    - `npm install cypress --save-dev` This will install Cypress locally as a dev dependency for your project.
+- Adding npm Scripts
+      ```       
+        {
+            "scripts": {
+                "cypress:open": "cypress open"
+                "cypress:run":  "cypress run"
+            }
+        }
+      ``` 
+    > cypress:open is using to run cypress UI 
+ - cypress.json
+   - This file contains the baseUrl, This url must be the same url where the project is deployed locally.
+     ```
+       {
+           "baseUrl": "http://localhost:4200"
+       }      
+     ```      
+ - Add a test file
+   - The test file should be create inside integration directory `cypress/integration/home.test.js`   
+   - The json files with mock data should be create inside fixture directory `cypress/fixtures/courses.json` to simulate the HTTP response.
+    > fixture: Load a fixed set of data located in a file. 
+- Basic suite test
+   -  If the application is running locally and the cypress.json baseUrl is pointing to localhost and the same port, then we can use the `cy.visit('/')` global variable to visit the route page of our application.  
+   -  cy.contains: Get the DOM element containing the text.`cy.contains("All Courses")` DOM elements can contain more than the desired text and still match.   
+   ```ruby
+     describe('Component Page', () => {            
+
+            it('should display Title', () => {
+
+                cy.visit('/');
+                cy.contains("All Courses");               
+
+            }); 
+        }); 
+
+   ``` 
+
+
+
+
+
+
+- Home component E2E test
+  - .fixture( ): Load data from file.
+  - .as( ): Assign an alias for later use.
+    - Reference the alias later within a cy.get( ) or cy.wait( ) command with an @ prefix. 
+  - .server( ): Start a server to begin routing responses to cy.route( ) and to change the behavior of network requests.
+  > cy.server( ) and cy.route( ) are deprecated in Cypress 6.0.0. In a future release, support will be removed. 
+  > -Consider using cy.intercept( ) instead. 
+  - .wait( ): Wait for a number of milliseconds or wait for an aliased resource to resolve before moving on to the next command.
+  - .get( ): Get one or more DOM elements by selector or alias.
+  - .last( ): Get the last DOM element within a set of DOM elements.
+  - .its( ): Get a property's value on the previously yielded subject.
+  - .should( ): Create an assertion. 
+  ```ruby
+        describe('Home Page', () => {
+
+            beforeEach(() => {
+
+                cy.fixture('courses.json').as("coursesJSON");
+
+                cy.server();
+
+                cy.route('/api/courses', "@coursesJSON").as("courses");
+
+                cy.visit('/');
+
+            });
+
+            it('should display a list of courses', () => {
+
+                cy.contains("All Courses");
+
+                cy.wait('@courses');
+
+                cy.get("mat-card").should("have.length", 9);
+
+            });
+
+            it('should display the advanced courses', () => {
+
+                cy.get('.mat-tab-label').should("have.length", 2);
+
+                cy.get('.mat-tab-label').last().click();
+
+                cy.get('.mat-tab-body-active .mat-card-title').its('length').should('be.gt', 1);
+
+                cy.get('.mat-tab-body-active .mat-card-title').first()
+                    .should('contain', "Angular Security Course");
+
+            });
+
+
+        });
+  ``` 
+  > Cypress is going to take care of the asynchronous aspect of the test for us.
 ***
 **Section 6: Preparing an Angular Aplication for Continuos Integration (CI)**
 
+- **Code coverage report:**
+  - The CLI can run unit tests and create code coverage reports. 
+  - Code coverage reports show you any parts of your code base that might not be properly tested by your unit tests.  
+  - To trigger the code report must be running this command: `ng test --watch=false --code-coverage`.
+  - When the tests are complete, the command creates a new `coverage` folder that it contains an index.html file with the coverage report.
+
+- **Continuous Integration** is the practice of merging in small code changes frequently - rather than merging in a large change at the end of a development cycle. 
+- The goal is to build healthier software by developing and testing in smaller increments.
+  - Travis CI supports your development process by automatically building and testing code changes, providing immediate feedback on the success of the change. 
+  - Travis CI can also automate other parts of your development process by managing deployments and notifications.  
+  - Add npm Scripts
+   ```
+        "scripts": {
+            "ng": "ng",
+            "start": "ng serve  --proxy-config ./proxy.json",
+            "server": "ts-node -P ./server/server.tsconfig.json ./server/server.ts",
+            "build": "ng build",
+            "test": "ng test",
+            "lint": "ng lint",
+            "cypress:open": "cypress open",
+            "cypress:run": "cypress run",
+            "build:prod": "ng build --prod",
+            "start:prod": "http-server ./dist -a localhost -p 4200",
+            "build-and-start:prod": "run-s build:prod start:prod",
+            "e2e": "start-server-and-test build-and-start:prod http://localhost:4200 cypress:run"
+         }, 
+   ``` 
+    > run-s is used to run in sequence.
+   - .travis.yml file configuration
+    ```
+        language: node_js
+        node_js:
+        - 12
+        addons:
+        apt:
+            packages:
+            # Ubuntu 16+ does not install this dependency by default, so we need to install it ourselves
+            - libgconf-2-4
+        cache:
+        # Caches $HOME/.npm when npm ci is default script command
+        # Caches node_modules in all other cases
+        npm: true
+        directories:
+            # we also need to cache folder with Cypress binary
+            - ~/.cache
+        install:
+        - npm ci
+        script:
+        - npm run e2e
+    ```
+    > The last line (- npm run e2e) allows Travis CI to run sequentially the scripts defined in the package.json file by e2e command.
+> To run this CI is required an account in the Travis CI platform and the application should be uploaded to the GitHub repository with the above package.json and travis.yml settings.
 
 _The End_
