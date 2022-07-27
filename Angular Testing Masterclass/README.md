@@ -17,7 +17,7 @@
 
 - **Test suite Skeleton**
 
-```ruby
+```js
     describe("A suite is just a function", function() {
     var a;
 
@@ -32,7 +32,7 @@
 - **describe( )**
   - The describe function is for grouping related specs, typically each test file has one at the top level. 
   - The string parameter is for naming the collection of specs, and will be concatenated with specs to make a spec's full name.
-    ```ruby
+    ```js
         describe("A suite", function() {      
 
             // ... spec
@@ -47,7 +47,7 @@
     - A group of specifications is called a test suite.
      - A specification(spec) is simply a functional test.
      - The **it()** function define a specification.
-    ```ruby
+    ```js
 
         describe('CalculatorService', () => {          
 
@@ -70,7 +70,7 @@
 - **Expectations**
     - Expectations are built with the function **expect( )** which takes a value, called the actual. 
     - It is chained with a Matcher function, which takes the expected value. 
-        ```ruby
+        ```js
             it("and has a positive case", function() {
                 expect(true).toBe(true);
             });
@@ -81,7 +81,7 @@
     - Jasmine will then pass or fail the spec.
   
        > Any matcher can evaluate to a negative assertion by chaining the call to expect with a **not** before calling the **matcher**.
-        ```ruby
+        ```js
           expect(something).not.toBe(true);
         ```
 
@@ -108,7 +108,7 @@
 **Section 2: Angular Service Testing**
 
 - Basic Implementation
-    ```ruby
+    ```js
         // Example 1
         it('should add two numbers', () => {
 
@@ -125,7 +125,7 @@
     ```
 - Implementing Jasmine Spy
   > Spy can keep track of the number of time that function is called.
-  ```ruby
+  ```js
    // Example 2
      it('should add two numbers', () => {
 
@@ -147,7 +147,7 @@
   ```
 - Fake Implementation
    > It can create a complete mock implementation of our dependency.
-     ```ruby
+     ```js
       // Example 3
           it('should add two numbers', () => {
           
@@ -168,7 +168,7 @@
 
   > Values can also be returned from the fake service **LoggerService( )**
 
-    ```ruby
+    ```js
             // the log() method is called 
             logger.log.and.return('...someValue');
     ```
@@ -181,7 +181,7 @@
     - It achieves that by decoupling the usage of an object from its creation.
   - TestBed:
     - It allows to provide the dependencies to our services by using **dependency injection** instead of calling constructor explicitly.
-    ```ruby
+    ```js
 
      let calculator: CalculatorService,
         loggerSpy: any;
@@ -212,7 +212,7 @@
 - HTTP implementation
     - HttpClientTestingModule: this module includes a mock implementation of an Http service
     - HttpTestingController: Controller to be injected into tests, that allows for mocking and flushing of requests.
-    ```ruby
+    ```js
         let coursesService: CoursesService,
             httpTestingController: HttpTestingController;
 
@@ -234,7 +234,7 @@
     ```
     > Using the HttpClientTestingModule and HttpTestingController provided by Angular makes mocking out results and testing http requests simple by providing many useful methods for checking http requests and providing mock responses for each request.
 
-    ```ruby
+    ```js
         it('should retrieve all courses', () => {
 
             coursesService.findAllCourses()
@@ -264,19 +264,19 @@
         - It can  check the details of the http request. In this case, the **expectOne( )** method of httpTestingController also checks that only one request that uses "GET" and the url `/api/courses` was made by the call.
     - Using.flush()
        - The request captured by the httpTestingController, req,  has a flush method on it which takes in whatever response you would like to provide for that request as an argument.
-       ```ruby
+       ```js
             req.flush(mockResponse);
        ```
     - Verify All Requests are Complete
        - Once all req have been provided a response using flush, we can verify that there are no more pending requests after the test.
-       ```ruby
+       ```js
                 afterEach(() => {
 
                 httpTestingController.verify();
             });
        ```
     - Check PUT request
-       ```ruby
+       ```js
              it('should save the course data', () => {
 
                 const changes :Partial<Course> =
@@ -303,7 +303,7 @@
             });
        ```
     - Error Response
-        ```ruby
+        ```js
                 it('should give an error if save course fails', () => {
 
                     const changes :Partial<Course> =
@@ -330,7 +330,7 @@
                 });
         ```
     - Get by ID response
-        ```ruby
+        ```js
              it('should find a list of lessons', () => {
 
                 coursesService.findLessons(12)
@@ -372,21 +372,21 @@
 - createComponent()
     - After configuring TestBed, you call its createComponent( ) method.
     - TestBed.createComponent() creates an instance of the BannerComponent, adds a corresponding element to the test-runner DOM, and returns a ComponentFixture.
-        ```ruby
+        ```js
             const fixture = TestBed.createComponent(BannerComponent);
         ```
     > Fixture is a test utility type that is going to help us to do some common test operations.
 - ComponentFixture
     - The ComponentFixture is a test harness for interacting with the created component and its corresponding element.
     - Access the component instance through the fixture and confirm it exists with a Jasmine expectation:
-    ```ruby
+    ```js
         const component = fixture.componentInstance;
         expect(component).toBeDefined();
     ```
     > The **ComponentFixture** properties and methods provide access to the component, its DOM representation, and aspects of its Angular environment.
 - beforeEach( )
     - You will add more tests as this component evolves. Rather than duplicate the TestBed configuration for each test, you refactor to pull the setup into a Jasmine beforeEach() and some supporting variables:
-    ```ruby
+    ```js
             // Example 1 - synchronous
             describe('BannerComponent (with beforeEach)', () => {
                 let component: BannerComponent;
@@ -425,7 +425,7 @@
     - Using Dependency Injections
         > You must call **compileComponents( )** within an asynchronous test function.
         - After calling **compileComponents**, the TestBed configuration is frozen for the duration of the current spec.
-    ```ruby
+    ```js
         let fixture: ComponentFixture<HomeComponent>;
         let component:HomeComponent;
         let el: DebugElement;
@@ -462,7 +462,7 @@
    - Angular relies on the **DebugElement** abstraction to work safely across all supported platforms.
    - Instead of creating an HTML element tree, Angular creates a DebugElement tree that wraps the native elements for the runtime platform. 
    - The nativeElement property unwraps the DebugElement and returns the platform-specific element object.
-   ```ruby
+   ```js
         const bannerDe: DebugElement = fixture.debugElement;
         const bannerEl: HTMLElement = bannerDe.nativeElement;
    ```
@@ -471,7 +471,7 @@
 - By.css( )
   - The **DebugElement** offers query methods that work for all supported platforms.
   - The **By.css( )** static method selects DebugElement nodes with a standard CSS selector.
-    ```ruby
+    ```js
         it('should find the <p> with fixture.debugElement.query(By.css)', () => {
             const bannerDe: DebugElement = fixture.debugElement;
             const paragraphDe = bannerDe.query(By.css('p'));
@@ -482,7 +482,7 @@
 - Container component
    - Calling fixture.detectChanges() tells Angular to run change-detection.
    - In our tests, we can make changes to the data in our component, but the component will not be re-rendered until we call fixture.detectChanges() again.
-    ```ruby
+    ```js
               it('should display the course list', () => {
 
                 component.courses = setupCourses();
@@ -508,7 +508,7 @@
   - **async/await**
       - It's a Jamine function.
       - It waits for any asynchronous operations triggered by the code block.
-        ```ruby
+        ```js
             beforeEach(async function() {
                 await someLongSetupFunction();
             });
@@ -523,7 +523,7 @@
   - **promises**
      > If you can’t use async/await or you need more control, you can explicitly return a promise instead. 
      - Jasmine considers any object with a **then( )** method to be a promise, so you can use either the Javascript runtime’s built-in Promise type or a library. 
-       ```ruby
+       ```js
              beforeEach(function() {
                 return new Promise(function(resolve, reject) {
                     // do something asynchronous
@@ -541,7 +541,7 @@
   - **callbacks**
       - This is a lower-level mechanism and tends to be more error-prone, but it can be useful for testing callback-based code or for tests that are inconvenient to express in terms of promises. 
       - It’s vital that the done callback be called exactly once, and that calling done be the last thing done by the asynchronous function or any of the functions that it calls.
-      ```ruby
+      ```js
         it('Asynchronous test example with Jasmine done()', (done: DoneFn) => {
 
             let test = false;
@@ -574,7 +574,7 @@
         - It doesn't have full control over the emptying of the tasks and micro-task queue.
         - The waitForAsync test zone is going to keep track of any asynchronous operations created by our code, and then it is going to give us a callback that is going to notify us when all those asynchronous operations are completed. `fixture.whenStable()`
           - whenStable() return a promise, and inside then() block we can put any code that we would like to run.
-          ```ruby
+          ```js
                it("should display advanced courses when tab clicked - async", waitForAsync(() => {
 
                     coursesService.findAllCourses.and.returnValue(of(setupCourses()));
@@ -602,7 +602,7 @@
             }));
           ``` 
         > This test zone is very similar to fakeAsync(), but it works in a fundamentally different way.
-        ```ruby
+        ```js
             beforeEach(waitForAsync(() => {
                     TestBed.configureTestingModule({
                         imports: [CoursesModule]
@@ -631,7 +631,7 @@
         - It's an `@angular/core/testing` function.
         - Wraps a function to be executed in the fakeAsync zone.
         - It enables us to control the flow of time and when asynchronous tasks are executed with the  methods tick() and flush().
-        ```ruby
+        ```js
             it('Asynchronous test example - setTimeout()', fakeAsync(() => {
 
                 let test = false;
@@ -665,7 +665,7 @@
         - These are two separate queues in JS runtime for asynchronous tasks.
         > When all the tasks in the micro-tasks queue are processed, then will the browser look for another macro-task to execute.
         - **Microtasks** are manually executed by calling flushMicrotasks(). 
-        ```ruby
+        ```js
            it('Asynchronous test example - plain Promise', fakeAsync(() => {
 
                 let test = false;
@@ -694,7 +694,7 @@
       ``` 
     > The difference between **flushMicrotasks** and **flush** is that the former only processes the pending micro-tasks (promise callbacks), but not the macro-tasks (scheduled callbacks), while flush processes both.
     - **Mixing micro-task & task Test**
-        ```ruby
+        ```js
                 it('Asynchronous test example - Promises + setTimeout()', fakeAsync(() => {
 
                 let counter = 0;
@@ -731,7 +731,7 @@
 - Testing Observables
   - The Observables are built internally, sometimes with promises, sometimes using operations such as setTimeout( ), setInterval( ) ..etc and many times also they are purely **synchronous** code.
   
-   ```ruby
+   ```js
         it('Asynchronous test example - Observables', fakeAsync(() => {
 
             let test = false;
@@ -788,7 +788,7 @@
 - Basic suite test
    -  If the application is running locally and the cypress.json baseUrl is pointing to localhost and the same port, then we can use the `cy.visit('/')` global variable to visit the route page of our application.  
    -  cy.contains: Get the DOM element containing the text.`cy.contains("All Courses")` DOM elements can contain more than the desired text and still match.   
-   ```ruby
+   ```js
      describe('Component Page', () => {            
 
             it('should display Title', () => {
@@ -818,7 +818,7 @@
   - .last( ): Get the last DOM element within a set of DOM elements.
   - .its( ): Get a property's value on the previously yielded subject.
   - .should( ): Create an assertion. 
-  ```ruby
+  ```js
         describe('Home Page', () => {
 
             beforeEach(() => {
@@ -890,7 +890,7 @@
             "e2e": "start-server-and-test build-and-start:prod http://localhost:4200 cypress:run"
          }, 
    ``` 
-    > run-s is used to run in sequence.
+    > run-s is used to run in sequence. Intalling this Library `yarn add npm-run-all --dev`
    - .travis.yml file configuration
     ```
         language: node_js
