@@ -1,4 +1,4 @@
-# You Don’t Know JS Yet: GetStarted
+# You Don’t Know JS Yet: Get Started
 
 ### Kyle Simpsom
 

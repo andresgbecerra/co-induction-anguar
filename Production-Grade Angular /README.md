@@ -92,6 +92,10 @@
       - Home Component: `nx g c home -m app.module.ts --style=scss`
 ***
 **Boilerplate & Components**
+
+
+
+
 ***
 **Complex Workspaces**
 ***
