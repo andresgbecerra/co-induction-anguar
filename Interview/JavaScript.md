@@ -1,9 +1,18 @@
 ## JavaScript
 ***
-
->JavaScript is a dynamically typed language. In a dynamically typed language, the type of a variable is checked during run-time in contrast to a statically typed language, where the type of a variable is checked during compile-time.
+- JavaScript is the Programming Language for the Web.
+- JavaScript can update and change both HTML and CSS.
+- JavaScript can calculate, manipulate and validate data.
+- JavaScript is a dynamically typed language.
+  > In a dynamically typed language, the type of a variable is checked during run-time in contrast to a statically typed language, where the type of a variable is checked during compile-time.
 
 **Engine**
+
+- **Just in Time - JIT**
+  - the compilation is done during execution.
+  - An Interpreter is a program, which executes the program instructions without requiring them to be precompiled into a machine-readable format.
+  - Compilation is a process of converting the program source code into machine-readable binary code, before the execution.
+  > JavaScript is an interpreted, JIT(Just In Time)
 
 **Parser** - The JavaScript source code is first converted to tokens. Tokens represent the alphabet of a language. JavaScript is fed into a Parser, which generates an Abstract Syntax Tree.
 **Interpreter** - Abstract Syntax Tree is the input for the V8 Ignition Interpreter, which generates the ByteCode
@@ -20,6 +29,7 @@
 - **Garbage collection:** is the process of finding and deleting objects which are no longer being referenced by other objects.`GC is a fundamental component of the memory management system used by JavaScript.`
 
 ***
+
 
 - **Hoisting** 
   - Hoisting is the default behaviour of javascript where all the variable and function declarations are moved on top.
