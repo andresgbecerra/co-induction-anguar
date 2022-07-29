@@ -176,6 +176,7 @@
   - Angular makes use of observables as an interface to handle a variety of common asynchronous operations. For example:
     - The HTTP module uses observables to handle AJAX requests and responses
     - The Router and Forms modules use observables to listen for and respond to user-input events
+  > The biggest difference is that Promises won’t change their value once they have been fulfilled. They can only emit (reject, resolve) a single value. On the other hand, observables can emit multiple results. The subscriber will be receiving results until the observer is completed or unsubscribed from.
 
 
 - **@Decorator** 
