@@ -88,6 +88,16 @@
 
 - **Accessing Other Components** 
    - The **@ViewChild** and **@ViewChildren** decorators provide access to the instantiated class of child components, allowing you to interact with non-private fields programmatically. 
+
+- **Service**
+  - Service is a broad category encompassing any value, function, or feature that an application needs. 
+  - A service is typically a class with a narrow, well-defined purpose. It should do something specific and do it well. 
+  - Angular distinguishes components from services to increase modularity and reusability.
+  - Services are good for tasks such as fetching data from the server, validating user input, or logging directly to the console. 
+  - By defining such processing tasks in an injectable service class, you make those tasks available to any component. 
+  - You can also make your application more adaptable by injecting different providers of the same kind of service, as appropriate in different circumstances. 
+  - Services can depend on other services.
+  - A component should use services for tasks that don't involve the view or application logic. 
   
 - **Dependency injection** 
   - Dependencies are services or objects that a class needs to perform its function. 
@@ -143,6 +153,8 @@
 
 
 - **@Decorator** 
+  - A function that modifies a class or property definition. 
+  - Angular defines decorators that attach metadata to classes or properties so that it knows what those classes or properties mean and how they should work.
   - A decorator defines which parts an element has in Angular and allows to extend the functionality of a function using another function.
   - It is an implementation of the decorator design pattern and can be:
     - class - @Component @NgModule
@@ -192,5 +204,3 @@ The Angular CLI is a command-line interface tool that you use to initialize, dev
 ***
 
 
-**AOT**
-***
