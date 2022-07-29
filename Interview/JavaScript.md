@@ -60,6 +60,7 @@
 
 
 - **primitive data types**    
+- - Primitive data types can store only a single value. 
   - A primitive is a data type that isn't composed of other data types.
   - It's only capable of displaying one value at a time. 
   - By definition, every primitive is a built-in data type (the compiler must be knowledgeable of them) nevertheless, not all built-in datasets are primitives. 
@@ -99,8 +100,7 @@
      ``` 
   
 - **Non-primitive types**
-  - Primitive data types can store only a single value. 
-  - To store multiple and complex values, non-primitive data types are used.
+  - Non-primitives can store multiple and complex values.
   - Object - Used to store collection of data. `Collection of data in key-value pairs`
   - Array - `Collection of data as an ordered list`
    > It is important to remember that any data type that is not a primitive data type, is of Object type in javascript 
@@ -257,6 +257,8 @@
    - test () and exec () are RegExp expression methods used in javascript. 
    - We'll use exec () to search a string for a specific pattern, and if it finds it, it'll return the pattern directly; else, it'll return an 'empty' result.
    - We will use a test () to find a string for a specific pattern. It will return the Boolean value 'true' on finding the given text otherwise, it will return 'false'.
+
+> **pure function** does not depend on any state, data, or change during the execution. In other words, given the same arguments, a pure function should always return the same output.
 
 - **Arrow functions** 
    - Arrow functions were introduced in the ES6 version of javascript.

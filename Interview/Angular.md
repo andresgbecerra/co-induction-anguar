@@ -28,6 +28,7 @@ Angular was written in TypeScript, a typed superset of JavaScript that implement
   - A collection of JavaScript modules are also referenced as a library. 
   - Each Angular library name begins with the @angular prefix. 
   - Install Angular libraries with the npm package manager and import parts of them with JavaScript import declarations.
+  
 - **Components**
   - Components are the most basic UI building block of an Angular application. 
   - Basically, a component is anything that is visible to the end user and which can be reused many times within an application.
@@ -36,7 +37,9 @@ Angular was written in TypeScript, a typed superset of JavaScript that implement
     - A TypeScript class that defines behavior
     - A CSS selector that defines how the component is used in a template.
     - Optionally, CSS styles applied to the template
+    - When you utilize the providers field in the Component Decorator, any services you pass into that array, will be uniquely instantiated for that particular component!
   > The core concept of any Angular application is the component. In effect, the whole application can be modeled as a tree of these components.
+
 - **Binding** 
   - A process that allows applications to display data values to a user and respond to user actions. 
   - User actions include clicks, touches, keystrokes, and so on. 
@@ -47,6 +50,7 @@ Angular was written in TypeScript, a typed superset of JavaScript that implement
     - **Attribute binding** `[attr.aria-label]="actionName"` - you can improve accessibility, style your application dynamically, and manage multiple CSS classes or styles simultaneously.
     - **Class and style binding** `[class.sale]="onSale"` - to add and remove CSS class names from an element's class attribute and to set styles dynamically.
     - **Two-way data binding with ngModel** - to listen for events and update values simultaneously between parent and child components.
+
 - **Directive**
    - A class that can modify the structure of the DOM `Document Object Model` or modify attributes in the DOM and component data model.
    - There are three main types of directives in Angular:
@@ -54,6 +58,7 @@ Angular was written in TypeScript, a typed superset of JavaScript that implement
      - **Attribute directives** - directives that change the behavior of a component or element but _don't affect_ the template. `ngStyle, ngClass`
      - **Structural directives** - directives that change the behavior of a component or element by _affecting_ how the template is rendered. `ngFor, ngIf, ngSwitch`
 >  In fact, Angular components are in large part directives with templates. 
+
 - **Life cycle Hooks** 
    - Here is the complete lifecycle hook interface inventory:
      - ngOnChanges - called when an input binding value changes
@@ -64,28 +69,74 @@ Angular was written in TypeScript, a typed superset of JavaScript that implement
      - ngAfterViewInit - after component's view(s) are initialized
      - ngAfterViewChecked - after every check of a component's view(s)
      - ngOnDestroy - just before the component is destroyed 
+  
 - **Accessing Other Components** 
    - The **@ViewChild** and **@ViewChildren** decorators provide access to the instantiated class of child components, allowing you to interact with non-private fields programmatically. 
+  
 - **Dependency injection** 
-- **Async Pipe**
+  - Dependencies are services or objects that a class needs to perform its function. 
+  - Dependency injection, or DI, is a design pattern in which a class requests dependencies from external sources rather than creating them.
+  - The **@Injectable()** decorator specifies that Angular can use this class in the DI system. 
+  - The metadata, `providedIn: 'root'`, means that the HeroService is visible throughout the application.
+
+- **Pipes**
+  - Pipes are a way to transform the format of output data for display 
+  - Pipes are simple functions that accept an input and return a transformed value in a more technical understanding. 
+  -  In Angular, Pipes are of two types.
+    - Pure Pipes
+    - Impure Pipes
+
+- **Pure Pipe**
+  - Pure pipes in angular are the pipes that execute when it detects a pure change in the input value.
+  - A pure change is when the change detection cycle detects a change to either a primitive input value (such as String, Number, Boolean, or Symbol) or object reference (such as Date, Array, Function, or Object).
+  - A pure function does not depend on any state, data, or change during the execution. In other words, given the same arguments, a pure function should always return the same output.
+  > By default, pipes in angular are pure pipes. Custom pipes can be defined as pure pipes by turning the pure flag to true of the @Pipe decorator.
+  ```js
+    @Pipe({
+    name: 'purePipe',
+    pure: true	
+    })
+    export class PurePipe {}
+
+  ```
+  
+- **Impure Pipe**
+  - Impure pipes in angular are the pipes that execute when it detects an impure change in the input value. 
+  - An impure change is when the change detection cycle detects a change to composite objects, such as adding an element to the existing array. 
+  - Impure pipes execute every time angular detects any changes regardless of the change in the input value.
+  - An **impure function** depends on any state, data, or change during the execution and may not return the same result if the same inputs are passed into the respective function.
+> Async pipe is an example of an Impure pipe.
+
+- **Async Pipe | async**
+  - The async pipe is an impure pipe that saves boilerplate code in your component to maintain the subscription and keep delivering values from that observable as they arrive. 
+  - The async pipe subscribes to an Observable or Promise and returns the latest value it has emitted. 
+  - When a new value is emitted, the async pipe marks the component to be checked for changes. 
+  - When the component gets destroyed, the async pipe unsubscribes automatically to avoid potential memory leaks. 
+
+- **Observables**
+  - Observables are recommended for event handling, asynchronous programming, and handling multiple values. 
+  - Observables can deliver single or multiple values of any type, either **synchronously** (as a function delivers a value to its caller) or **asynchronously** on a schedule. 
+
+
 - **@Decorator** 
+
+
 - **First-party libraries**
    These libraries are only required if and when they can help you add functionality to your applications or solve a particular problem.
    ![angular cli](../assets/angular-libraries.png)
-**JIT**
+
+
+- **HttpClient**
+  - To communicate with backend services using HTTP, the HttpClient service uses observables and offers the HttpClient.get() method to fetch data from a server. 
+  - The asynchronous method sends an HTTP request, and returns an observable that emits the requested data for the response.
+
+
 ***
 **Angular CLI**
 The Angular CLI is a command-line interface tool that you use to initialize, develop, and maintain Angular applications directly from a command shell.
 ![angular cli](../assets/angular-cli.png)
 ***
-- **Module**
+
 
 **AOT**
-***
-**AOT**
-***
-**AOT**
-***
-****
-***
 ***
