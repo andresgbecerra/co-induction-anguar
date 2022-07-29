@@ -55,13 +55,14 @@
   - By definition, every primitive is a built-in data type (the compiler must be knowledgeable of them) nevertheless, not all built-in datasets are primitives. 
   - In JavaScript, there are 5 different forms of basic data. 
     - The following values are available:
-      - Boolean - It represents a logical entity and can have only two values : true or false. Booleans are generally used for conditional testing.
-      - Undefined - When a variable is declared but not assigned, it has the value of undefined and it’s type is also undefined.
-      - Null - It represents a non-existent or a invalid value.
-      - Number - It represents a number and can be written with or without decimals.
-      - String - It represents a series of characters and is written with quotes. A string can be represented using a single or a double quote.
-      > -BigInt - This data type is used to store numbers which are above the limitation of the Number data type. It can store large integers and is represented by adding “n” to an integer literal.
-      > -Symbol - It is a new data type introduced in the ES6 version of javascript. It is used to store an anonymous and unique value.
+      - **Boolean** - It represents a logical entity and can have only two values : true or false. Booleans are generally used for conditional testing.
+      - **Undefined** - When a variable is declared but not assigned, it has the value of undefined and it’s type is also undefined.
+      - **Null** - It represents a non-existent or a invalid value.
+      - **Number** - It represents a number and can be written with or without decimals.
+      - **String** - It represents a series of characters and is written with quotes. A string can be represented using a single or a double quote.
+      > -**BigInt** - This data type is used to store numbers which are above the limitation of the Number data type. It can store large integers and is represented by adding “n” to an integer literal.
+
+      > -**Symbol** - It is a new data type introduced in the ES6 version of javascript. It is used to store an anonymous and unique value.
 
   - **typeof** of primitive types : return the type of value
     ```js
