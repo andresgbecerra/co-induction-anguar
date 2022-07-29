@@ -69,7 +69,16 @@
      - ngAfterViewInit - after component's view(s) are initialized
      - ngAfterViewChecked - after every check of a component's view(s)
      - ngOnDestroy - just before the component is destroyed 
-  
+
+- ***Router***
+  - A service that provides navigation among views and URL manipulation capabilities. 
+  - Router.events provides events as observables. 
+  - You can use the filter() operator from RxJS to look for events of interest, and subscribe to them in order to make decisions based on the sequence of events in the navigation process.
+
+- **Router outlet**
+  - The RouterOutlet is a directive from the router library that is used like a component. 
+  - It acts as a placeholder that marks the spot in the template where the router should display the components for that outlet.
+
 - **Accessing Other Components** 
    - The **@ViewChild** and **@ViewChildren** decorators provide access to the instantiated class of child components, allowing you to interact with non-private fields programmatically. 
   
@@ -121,6 +130,9 @@
 - **Observables**
   - Observables are recommended for event handling, asynchronous programming, and handling multiple values. 
   - Observables can deliver single or multiple values of any type, either **synchronously** (as a function delivers a value to its caller) or **asynchronously** on a schedule. 
+  - Angular makes use of observables as an interface to handle a variety of common asynchronous operations. For example:
+    - The HTTP module uses observables to handle AJAX requests and responses
+    - The Router and Forms modules use observables to listen for and respond to user-input events
 
 
 - **@Decorator** 
@@ -148,6 +160,13 @@
 - **First-party libraries**
    These libraries are only required if and when they can help you add functionality to your applications or solve a particular problem.
    ![angular cli](../assets/angular-libraries.png)
+
+- **HTPP**
+  - Angular's HttpClient returns observables from HTTP method calls. For instance, http.get('/api') returns an observable. This provides several advantages over promise-based HTTP APIs:
+    - Observables do not mutate the server response (as can occur through chained .then() calls on promises). Instead, you can use a series of operators to transform values as needed.
+    - HTTP requests are cancellable through the unsubscribe() method
+    - Requests can be configured to get progress event updates
+    - Failed requests can be retried easily
 
 
 - **HttpClient**
