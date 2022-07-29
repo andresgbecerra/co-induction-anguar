@@ -48,7 +48,7 @@ Angular was written in TypeScript, a typed superset of JavaScript that implement
     - **Class and style binding** `[class.sale]="onSale"` - to add and remove CSS class names from an element's class attribute and to set styles dynamically.
     - **Two-way data binding with ngModel** - to listen for events and update values simultaneously between parent and child components.
 - **Directive**
-   - A class that can modify the structure of the DOM or modify attributes in the DOM and component data model.
+   - A class that can modify the structure of the DOM `Document Object Model` or modify attributes in the DOM and component data model.
    - There are three main types of directives in Angular:
      - **Component** - directive with a template.
      - **Attribute directives** - directives that change the behavior of a component or element but _don't affect_ the template. `ngStyle, ngClass`

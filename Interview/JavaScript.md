@@ -376,10 +376,10 @@
       - **Logical error:** Reasoning mistakes occur when the syntax is proper but the logic or program is incorrect. The application executes without problems in this case. However, the output findings are inaccurate. These are sometimes more difficult to correct than syntax issues since these applications do not display error signals for logic faults.
 
 
-- **Even bubbling:**
+- **Even bubbling & Event capturing** 
   -  indicates whether the event bubbles up through the DOM tree or not.
+  -  Bubbling and Capturing are two models that DOM events use to propagate.
 
-- **Event capturing** 
 
 - **pass-by-reference or pass-by-value**
   - In JavaScript, primitive data types are passed by value and non-primitive data types are passed by reference. 
