@@ -8,6 +8,13 @@
 
 **Definitions**
 
+- **ahead-of-time AOT**
+  - The Angular ahead-of-time (AOT) compiler converts your Angular HTML and TypeScript code into efficient JavaScript code during the build phase before the browser downloads and runs that code. 
+  - Compiling your application during the build process provides a faster rendering in the browser. 
+  - **Ahead-of-Time (AOT)** -	Compiles your application and libraries at build time. This is the default starting in Angular 9.
+  - **Just-in-Time (JIT)** - Compiles your application in the browser at runtime. This was the default until Angular 8.
+  > When you run the ng build (build only) or ng serve (build and serve locally) CLI commands, the type of compilation (JIT or AOT) depends on the value of the aot property in your build configuration specified in angular.json. By default, aot is set to true for new CLI applications.
+
 - **Module**
   - In general, a module collects a block of code dedicated to a single purpose. 
   - Angular uses standard JavaScript modules and also defines an Angular module, `NgModule`.
@@ -70,7 +77,7 @@
      - ngAfterViewChecked - after every check of a component's view(s)
      - ngOnDestroy - just before the component is destroyed 
 
-- ***Router***
+- **Router**
   - A service that provides navigation among views and URL manipulation capabilities. 
   - Router.events provides events as observables. 
   - You can use the filter() operator from RxJS to look for events of interest, and subscribe to them in order to make decisions based on the sequence of events in the navigation process.
@@ -143,13 +150,13 @@
     - methods - @Hostlistener
     - parameter - @Inject() In the constructor  
 
-- **<ng-template>** 
+- **ng-template** 
   - ng-template is a virtual element and its contents are displayed only when needed (based on conditions).
   - ng-template should be used along with structural directives like [ngIf],[ngFor],[NgSwitch] or custom structural directives.That is why in the above example the contents of ng-template are not displayed. 
   - With <ng-template>, you can define template content that is only being rendered by Angular when you, whether directly or indirectly, specifically instruct it to do so, allowing you to have full control over how and when the content is displayed.
   - ng-template never meant to be used like other HTML elements. It’s an internal implementation of Angular’s structural directives.
 
-- **<ng-container>** 
+- **ng-container** 
   - ng-container allows us to create a division or section in a template without introducing a new HTML element.
   - ng-container is not a directive, component, class, or interface, but just a syntax element. 
   - The <ng-container> allows us to use structural directives without any extra element, making sure that the only DOM changes being applied are those dictated by the directives themselves.
