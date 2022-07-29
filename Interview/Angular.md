@@ -216,3 +216,8 @@ The Angular CLI is a command-line interface tool that you use to initialize, dev
 
 - **lazy loading**
   - A process that speeds up application load time by splitting the application into multiple bundles and loading them on demand.
+
+- **Standalone Components**
+  - The term “standalone” refers to components, directives, or pipes that can be used independently of NgModule. 
+  - It create an application without NgModules 
+  - Angular 14 introduces the standalone component — a component not part of any ngModule that can be used with either other standalone or module-based components.
