@@ -83,9 +83,20 @@
      - ngOnDestroy - just before the component is destroyed 
 
 - **Router**
+  - It helps visitors navigate from one view to another by looking up the URL of the browser and changing the view accordingly. 
   - A service that provides navigation among views and URL manipulation capabilities. 
   - Router.events provides events as observables. 
   - You can use the filter() operator from RxJS to look for events of interest, and subscribe to them in order to make decisions based on the sequence of events in the navigation process.
+  - Passing data:
+    - URL or route parameters
+    - Query parameters using router. navigate
+    - Query parameters using queryParamsHandling
+    - Query parameters using RouterLink
+    - URL fragment
+    - Data property
+    - RouterLink for dynamic data
+    - Dynamic data using navigateByURL
+    - Wildcard routes - The double asterisk sign (**) sets up a wildcard route in Angular. Wildcard routes are essential to handle users navigating to a path not defined in the routes. 
 
 - **RouterState**
   - Represents the state of the router as a tree of activated routes. 
