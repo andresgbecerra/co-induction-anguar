@@ -90,6 +90,7 @@
    - The **@ViewChild** and **@ViewChildren** decorators provide access to the instantiated class of child components, allowing you to interact with non-private fields programmatically. 
 
 - **Service**
+  - In Angular, a class with the @Injectable() decorator that encapsulates non-UI logic and code that can be reused across an application. Angular distinguishes components from services to increase modularity and reusability. 
   - Service is a broad category encompassing any value, function, or feature that an application needs. 
   - A service is typically a class with a narrow, well-defined purpose. It should do something specific and do it well. 
   - Angular distinguishes components from services to increase modularity and reusability.
@@ -98,13 +99,19 @@
   - You can also make your application more adaptable by injecting different providers of the same kind of service, as appropriate in different circumstances. 
   - Services can depend on other services.
   - A component should use services for tasks that don't involve the view or application logic. 
-  
+  - The injectable class is instantiated by a provider. 
+  - Injectors maintain lists of providers and use them to provide service instances when they are required by components or other services.
+  > The @Injectable() metadata allows the service class to be used with the dependency injection mechanism.
+
 - **Dependency injection** 
   - Dependencies are services or objects that a class needs to perform its function. 
   - Dependency injection, or DI, is a design pattern in which a class requests dependencies from external sources rather than creating them.
   - The **@Injectable()** decorator specifies that Angular can use this class in the DI system. 
   - The metadata, `providedIn: 'root'`, means that the HeroService is visible throughout the application.
   
+- **injector**
+  - An object in the Angular dependency-injection system that can find a named dependency in its cache or create a dependency using a configured provider.  
+  - An injector provides a singleton instance of a dependency, and can inject this same instance in multiple components. 
 - **EventEmitter**
   - EventEmitter is responsible for raising the event. 
   - The @output property normally is of type EventEmitter. 
@@ -153,6 +160,7 @@
 
 
 - **@Decorator** 
+  - A decorator that appears immediately before a class definition, which declares the class to be of the given type, and provides metadata suitable to the type.
   - A function that modifies a class or property definition. 
   - Angular defines decorators that attach metadata to classes or properties so that it knows what those classes or properties mean and how they should work.
   - A decorator defines which parts an element has in Angular and allows to extend the functionality of a function using another function.
@@ -203,4 +211,8 @@ The Angular CLI is a command-line interface tool that you use to initialize, dev
 ![angular cli](../assets/angular-cli.png)
 ***
 
+- **polyfill**
+  - An npm package that plugs gaps in the JavaScript implementation of a browser. See Browser Support for polyfills that support particular functionality for particular platforms.
 
+- **lazy loading**
+  - A process that speeds up application load time by splitting the application into multiple bundles and loading them on demand.
