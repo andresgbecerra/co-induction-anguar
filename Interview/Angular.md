@@ -3,7 +3,7 @@
 >Angular is an application design framework and development platform for creating efficient and sophisticated single-page apps.
 ***
 **TypeScript**
-Angular was written in TypeScript, a typed superset of JavaScript that implements many modern EcmaScript features.
+- Angular was written in TypeScript, a typed superset of JavaScript that implements many modern EcmaScript features.
 > ES6 is the current version of JavaScript. TypeScript is a superset of ES6, which means all ES6 features are part of TypeScript, but not all TypeScript features are part of ES6. Consequently, TypeScript must be transpiled into ES5/ES6 to run in most browsers.
 
 **Definitions**
@@ -78,6 +78,11 @@ Angular was written in TypeScript, a typed superset of JavaScript that implement
   - Dependency injection, or DI, is a design pattern in which a class requests dependencies from external sources rather than creating them.
   - The **@Injectable()** decorator specifies that Angular can use this class in the DI system. 
   - The metadata, `providedIn: 'root'`, means that the HeroService is visible throughout the application.
+  
+- **EventEmitter**
+  - EventEmitter is responsible for raising the event. 
+  - The @output property normally is of type EventEmitter. 
+  - The child component will use the emit() method to emit an event along with the data.
 
 - **Pipes**
   - Pipes are a way to transform the format of output data for display 
@@ -119,6 +124,25 @@ Angular was written in TypeScript, a typed superset of JavaScript that implement
 
 
 - **@Decorator** 
+  - A decorator defines which parts an element has in Angular and allows to extend the functionality of a function using another function.
+  - It is an implementation of the decorator design pattern and can be:
+    - class - @Component @NgModule
+    - property - @Input @Output
+    - methods - @Hostlistener
+    - parameter - @Inject() In the constructor  
+
+- **<ng-template>** 
+  - ng-template is a virtual element and its contents are displayed only when needed (based on conditions).
+  - ng-template should be used along with structural directives like [ngIf],[ngFor],[NgSwitch] or custom structural directives.That is why in the above example the contents of ng-template are not displayed. 
+  - With <ng-template>, you can define template content that is only being rendered by Angular when you, whether directly or indirectly, specifically instruct it to do so, allowing you to have full control over how and when the content is displayed.
+  - ng-template never meant to be used like other HTML elements. It’s an internal implementation of Angular’s structural directives.
+
+- **<ng-container>** 
+  - ng-container allows us to create a division or section in a template without introducing a new HTML element.
+  - ng-container is not a directive, component, class, or interface, but just a syntax element. 
+  - The <ng-container> allows us to use structural directives without any extra element, making sure that the only DOM changes being applied are those dictated by the directives themselves.
+  - This not only increases performance (even so slightly) since the browser ends up rendering less elements but can also be a valuable asset in having cleaner DOMs and styles alike.
+  - It can for example enable us to use structural directives without breaking styling dependent on a precise DOM structure (as for example the ones we get when using flex containers, margins, the child combinator selector, etc.).
 
 
 - **First-party libraries**
@@ -129,6 +153,10 @@ Angular was written in TypeScript, a typed superset of JavaScript that implement
 - **HttpClient**
   - To communicate with backend services using HTTP, the HttpClient service uses observables and offers the HttpClient.get() method to fetch data from a server. 
   - The asynchronous method sends an HTTP request, and returns an observable that emits the requested data for the response.
+  - To use HttpClient in Angular applications follow the below steps:
+    - import HttpClientModule from @angular/common/http in Angular’s app.module.ts file.
+    - Add HttpClientModule to the imports array of NgModule.
+    - Finally inject the HttpClient service in application class or service as a dependency.
 
 
 ***
