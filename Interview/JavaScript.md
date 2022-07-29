@@ -4,11 +4,19 @@
 >JavaScript is a dynamically typed language. In a dynamically typed language, the type of a variable is checked during run-time in contrast to a statically typed language, where the type of a variable is checked during compile-time.
 
 **Engine**
+
+**Parser** - The JavaScript source code is first converted to tokens. Tokens represent the alphabet of a language. JavaScript is fed into a Parser, which generates an Abstract Syntax Tree.
+**Interpreter** - Abstract Syntax Tree is the input for the V8 Ignition Interpreter, which generates the ByteCode
+**Compiler** - The Turbofan Compiler of the V8 Engine takes in the ByteCode and generates machine code
+**Optimizing Compiler**- It takes ByteCode and some profiling data as the input and generates optimized machine code
+
 - **Heap:** This refers to the physical space in memory used to store variables, functions and Objects.
 - **Stack:** This is the stack where functions and API calls are stored (Web API in browsers and C/C++ API on local machines via NodeJs). This stack behaves as a last-in-first-out (LIFO) structure.
 - **API's (Web or C/C++):** This is where the actual functionality of built-in functions such as setTimeout() and fetch() are found.
 - **Callback queue:** Some API functions require a callback function to be provided to know what to do after the API function has been executed. These callback functions are stored in this queue and behave as a first-in-first-out (FIFO) structure. 
 - **Event loop:** It is an algorithm that is constantly monitoring the Stack. When the stack is empty, the first function located in the callback queue is entered into the stack to complete its execution and then the next one until the callback queue is empty.
+  
+  
 - **Garbage collection:** is the process of finding and deleting objects which are no longer being referenced by other objects.`GC is a fundamental component of the memory management system used by JavaScript.`
 
 ***
@@ -254,6 +262,7 @@
     > Functions that are used as an argument to another function are called callback functions.If the same parameter is used again while invoking the function, instead of computing the result, we directly return the stored (cached) value. 
 
 - **Promises**   
+  - Promises are basically objects that may or may not resolve (essentially return) a value in the future, but which will notify the calling function via callbacks whether it is successful or not. 
   - Promises are used to handle asynchronous operations in javascript.
   - A promise is created using the Promise constructor which takes in a callback function with two parameters, resolve and reject respectively.
   - Pending - Initial state of promise. This state represents that the promise has neither been fulfilled nor been rejected, it is in the pending state.
