@@ -8,11 +8,16 @@
 
 **Definitions**
 
-- **ahead-of-time AOT**
+- **ahead-of-time - AOT**
   - The Angular ahead-of-time (AOT) compiler converts your Angular HTML and TypeScript code into efficient JavaScript code during the build phase before the browser downloads and runs that code. 
   - Compiling your application during the build process provides a faster rendering in the browser. 
   - **Ahead-of-Time (AOT)** -	Compiles your application and libraries at build time. This is the default starting in Angular 9.
   - **Just-in-Time (JIT)** - Compiles your application in the browser at runtime. This was the default until Angular 8.
+  - **No arrow functions**
+    - The AOT compiler does not support function expressions and arrow functions, also called lambda functions.
+  - The compiler can only create instances of certain classes, supports only core decorators, and only supports calls to **macros** (functions or static methods) that return expressions.
+
+
   > When you run the ng build (build only) or ng serve (build and serve locally) CLI commands, the type of compilation (JIT or AOT) depends on the value of the aot property in your build configuration specified in angular.json. By default, aot is set to true for new CLI applications.
 
 - **Module**
@@ -81,6 +86,9 @@
   - A service that provides navigation among views and URL manipulation capabilities. 
   - Router.events provides events as observables. 
   - You can use the filter() operator from RxJS to look for events of interest, and subscribe to them in order to make decisions based on the sequence of events in the navigation process.
+
+- **RouterState**
+  - Represents the state of the router as a tree of activated routes. 
 
 - **Router outlet**
   - The RouterOutlet is a directive from the router library that is used like a component. 
@@ -221,3 +229,11 @@ The Angular CLI is a command-line interface tool that you use to initialize, dev
   - The term “standalone” refers to components, directives, or pipes that can be used independently of NgModule. 
   - It create an application without NgModules 
   - Angular 14 introduces the standalone component — a component not part of any ngModule that can be used with either other standalone or module-based components.
+
+
+
+
+
+- **dynamic components**
+  - Dynamic means, that the components location in the application is not defined at buildtime. That means, that it is not used in any angular template.
+  - Instead, the component is instantiated and placed in the application at runtime. 
