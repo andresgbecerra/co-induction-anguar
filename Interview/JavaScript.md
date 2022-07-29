@@ -14,10 +14,10 @@
   - Compilation is a process of converting the program source code into machine-readable binary code, before the execution.
   > JavaScript is an interpreted, JIT(Just In Time)
 
-**Parser** - The JavaScript source code is first converted to tokens. Tokens represent the alphabet of a language. JavaScript is fed into a Parser, which generates an Abstract Syntax Tree.
-**Interpreter** - Abstract Syntax Tree is the input for the V8 Ignition Interpreter, which generates the ByteCode
-**Compiler** - The Turbofan Compiler of the V8 Engine takes in the ByteCode and generates machine code
-**Optimizing Compiler**- It takes ByteCode and some profiling data as the input and generates optimized machine code
+- **Parser** - The JavaScript source code is first converted to tokens. Tokens represent the alphabet of a language. JavaScript is fed into a Parser, which generates an Abstract Syntax Tree.
+- **Interpreter** - Abstract Syntax Tree is the input for the V8 Ignition Interpreter, which generates the ByteCode
+- **Compiler** - The Turbofan Compiler of the V8 Engine takes in the ByteCode and generates machine code
+- **Optimizing Compiler**- It takes ByteCode and some profiling data as the input and generates optimized machine code
 
 - **Heap:** This refers to the physical space in memory used to store variables, functions and Objects.
 - **Stack:** This is the stack where functions and API calls are stored (Web API in browsers and C/C++ API on local machines via NodeJs). This stack behaves as a last-in-first-out (LIFO) structure.
