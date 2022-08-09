@@ -92,12 +92,126 @@
       - Home Component: `nx g c home -m app.module.ts --style=scss`
 ***
 **Boilerplate & Components**
+ - for runing entire workspace excute `npm run serve:all` command
+ - Typical code to edit or create a new record:
+  ```js
+      saveData(model: Model) {
+          if(model.id){
+            this.updatedData(model);
+          } else {
+            this.createData(model);
+          }
 
+      }
+  ```
+  - Adding JSON Server: `yarn add json-server --save-dev` 
+    - [json-server tutorial](https://jsonplaceholder.typicode.com/)
+    - [json-server references](https://github.com/typicode/json-server)
+  - Creating server folder & db json file: `mkdir server && touch server/db.json` with mock data.
+    ```js
+          {
+          "widgets": [{
+                  "id": "1",
+                  "title": "Remote widget 01",
+                  "description": "Pending..."
+              },
+              {
+                  "id": "2",
+                  "title": "Remote widget 02",
+                  "description": "Pending..."
+              },
+              {
+                  "id": "3",
+                  "title": "Remote widget 03",
+                  "description": "Pending..."
+              }
+          ]
+        }
+    ```
+  - Adding new package.json script: 
+     ```js
+      {
+        ...
+        "serve:json": "json-server server/db.json",
+        ...
+      }
+     ```
+     - running above command we get data from `http://localhost:3000/widgets`
+ - Creating the service to start consuming the mock data defined in db.json
+    - command to create service in workspace: `nx g s services/widgets/widgets --project=core-data -d` -d dry-run 
+      ```js
 
+        const API_ENDPOINT = 'http://localhost:3000'; 
+        @Injectable({
+          providedIn: 'root'
+        })
+        export class WidgetsService {
+
+          model = 'widgets';
+
+          constructor(private http: HttpClient) { }
+
+        private getUrl(): string{
+          return `${API_ENDPOINT}/${this.model}`;
+        }
+
+        private getUrlWithId(id): string {
+          return `${this.getUrl()}/${id}`;
+        }
+
+        all(): Observable<Widget[]> {
+          return this.http.get<Widget[]>(this.getUrl());
+        }
+
+        find(id: string): Observable<Widget> {
+          return this.http.get<Widget>(this.getUrlWithId(id));
+        }
+
+        create(widget: Widget): Observable<Widget> {
+          return this.http.post<Widget>(this.getUrl(), widget);
+        }
+
+        update(widget: Widget): Observable<Widget> {
+          return this.http.put<Widget>(this.getUrlWithId(widget.id), widget);
+        }
+
+        delete(widget: Widget): Observable<Widget> {
+          return this.http.delete<Widget>(this.getUrlWithId(widget.id));
+        }
+
+        }
+      ```
+    - command to create service in workspace: `nx g s services/items/items --project=core-data -d` -d dry-run 
+    - Every time we implement a new service we will use the same methods to fetch data, Now we have two services that contain the same functions, then We should abstract the things that change away from the things that do not change to improve the performance and reusing code.`This is how we can reduce coupling in large scale apps`
+ > The business logic around the entities change but the mechanisms to fecht that from REST endpoint doesn't change.
+- **Errors Handling:** the best place to catch an error is at the point of origin and some other considerations are what the nature of the error is and whether it requires human intervention. In the context of an Angular application using NgRx errors should be handled at the effects layer.
 
 
 ***
 **Complex Workspaces**
+
+- **Multiple Apps with Nx Workspace:**
+  - Creating new App called client - `nx g app client --linter=tslint --style=scss --routing=false -d` -d run-dry, and then to run we excute `nx run client:serve` command that it raise up the localhost:4200  
+  - Adding new script: now the workapace has two applications dashboard and client
+  ```js
+      {
+        ...
+      "serve:client": "nx run client:serve --port=4400 --open",
+        ...
+      }
+      > npm run serve:client
+  ```
+  - Now we can handle two frontend apps (dashboard & client) and also two backend implementations (api & json-server), then we could share live data form json-server to both frontend apps by the service implemented in core-data project.
+  > The component layer doesn't need to know the implementation details of where the data is coming from. All it needs to know is that whatever it received it should be renderer.
+
+- **Sharing components throgh a Lib:**
+- The first step is to implement new lib, where we can share the component for all workspace apps.
+  - Creating new Lib: `nx g lib ui-toolbar --style=scss -d` 
+- And then, Creating new component defined as a toolbar in Lib folder(ui-toolbar project): `nx g c toolbar/toolbar --project=ui-toolbar --style=scss -d` 
+
+- Finally, we could refactor the toolbar component in the dashboard, the idea is to implement a new toolbar in the ui-toolbar project and it renderer on both apps (dashboard & client apps).
+
+
 ***
 **Mock APIs**
 ***
