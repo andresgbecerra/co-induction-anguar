@@ -92,7 +92,7 @@
       - Home Component: `nx g c home -m app.module.ts --style=scss`
 ***
 **Boilerplate & Components**
- - for runing entire workspace excute `npm run serve:all` command
+ - for running entire workspace excute `npm run serve:all` command
  - Typical code to edit or create a new record:
   ```js
       saveData(model: Model) {
@@ -204,7 +204,7 @@
   - Now we can handle two frontend apps (dashboard & client) and also two backend implementations (api & json-server), then we could share live data form json-server to both frontend apps by the service implemented in core-data project.
   > The component layer doesn't need to know the implementation details of where the data is coming from. All it needs to know is that whatever it received it should be renderer.
 
-- **Sharing components throgh a Lib:**
+- **Sharing components through a Lib:**
 - The first step is to implement new lib, where we can share the component for all workspace apps.
   - Creating new Lib: `nx g lib ui-toolbar --style=scss -d` 
 - And then, Creating new component defined as a toolbar in Lib folder(ui-toolbar project): `nx g c toolbar/toolbar --project=ui-toolbar --style=scss -d` 
@@ -214,6 +214,76 @@
 
 ***
 **Mock APIs**
+
+- Nest provides:
+  - architecture
+  - highly testable
+  - scalable
+  - loosely coupled
+  - easily maintainable
+
+- practice:
+  - Adding uuid: `yarn add uuid` 
+  - Adding nest mapped types: `yarn add @nestjs/mapped-types` 
+    - As you build out features, it's often useful to construct variants on a base entity type. A good example of such a variant is a Data Transfer Object (DTO). A Data Transfer Object is an object that is used to encapsulate data, and send it from one part of your application to another. DTO’s help us define the input and output interfaces of our system.
+  - Generating schematics: `nx g @nestjs/schematics:resource widgets --type rest --crud true --source-root apps/api/src -d`
+    - the above command generate the REST api.
+    - Import the module `WidgetsModule` in app.module.ts file from backend app (api).
+    - Finally add this line `app.enableCors();` in main.ts file from api directory to enable CORS validations.
+      ```js
+        import { Logger } from '@nestjs/common';
+        import { NestFactory } from '@nestjs/core';
+
+        import { AppModule } from './app/app.module';
+
+        async function bootstrap() {
+          const app = await NestFactory.create(AppModule);
+          const globalPrefix = 'api';
+          app.enableCors();
+          app.setGlobalPrefix(globalPrefix);
+          const port = process.env.PORT || 3333;
+          await app.listen(port, () => {
+            Logger.log('Listening at http://localhost:' + port + '/' + globalPrefix);
+          });
+        }
+
+        bootstrap();
+      ```
+- **Adding Swagger**
+  
+  - The OpenAPI specification is a language-agnostic definition format used to describe RESTful APIs. Nest provides a dedicated module which allows generating such a specification by leveraging decorators. 
+  - Installation: To begin using it, we first install the required dependency.
+    - execute command: `yarn add @nestjs/swagger swagger-ui-express` 
+  - Bootstrap: Once the installation process is complete, open the main.ts file and initialize Swagger using the SwaggerModule class: 
+  - If you're using `@nestjs/swagger@5`, then you should upgrade `@nestjs/common` and `@nestjs/core` up on version 8.
+  ```js
+    ...
+    const configureSwagger  = (app) => {
+        const options = new DocumentBuilder()
+         .setTitle('Production Angular API')
+        .setDescription('REST API for the production Angular course')
+        .setVersion('1.0')
+        .addTag('..Tags')
+        .build();
+      const document = SwaggerModule.createDocument(app, options);
+      SwaggerModule.setup('api', app, document);
+    }
+    async function bootstrap() {
+      const app = await NestFactory.create(AppModule);
+      const globalPrefix = 'api';
+      app.enableCors();
+      app.setGlobalPrefix(globalPrefix);
+      configureSwagger(app); // call swagger config
+      const port = process.env.PORT || 3333;
+      await app.listen(port, () => {
+        Logger.log('Listening at http://localhost:' + port + '/' + globalPrefix);
+      });
+    }
+
+  ```
+  ![Swagger](../assets/swagger-home.png)
+> The OpenAPI Specification (OAS) defines a standard, language-agnostic interface to RESTful APIs which allows both humans and computers to discover and understand the capabilities of the service without access to source code, documentation, or through network traffic inspection. When properly defined, a consumer can understand and interact with the remote service with a minimal amount of implementation logic.
+
 ***
 **Reactive Angular & State Management**
 ***
