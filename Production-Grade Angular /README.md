@@ -77,7 +77,8 @@
 - Nx Workspace
     - Nx is a smart, fast and extensible build system with first class monorepo support and powerful integrations.
     - Creating Workspace: `npx create-nx-workspace@latest`   
-      - Workspace contains the apps directory with Angular and Nest projects.    
+      - Workspace contains the apps directory with Angular and Nest projects. 
+        ```   
          myproject/
            ├── apps/
            ├── libs/
@@ -86,7 +87,7 @@
            ├── nx.json
            ├── package.json
            └── tsconfig.base.json
-
+        ```
     - Scripst setting up - package.json
         ```js
           "scripts": {
