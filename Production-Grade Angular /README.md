@@ -535,7 +535,7 @@
     ![NgRx Event flow](../assets/ngrx-event-flow-up.png)
 - **NGRX state management Lifecycle**  
   ![NgRx State Management](../assets/ngrx-state-management.png)
-  - We have the Store that surfaces data to the component via SELECTOR.
+  - We have the STORE that surfaces data to the component via SELECTOR.
   - A component communicate the event via ACTIONS into the REDUCER, which then modify the state in the STORE.
   - If we need an asynchronous event, it call a SERVICE, then that same object can go to an EFFECT to service, change something and come back.
   > The STORE is ***the single source of truth***.
@@ -544,7 +544,7 @@
 **NGRX implemeted with Facade**
 
 - **Actions:** 
-  - Is nothing more than an Object that has a type and a payload
+  - Is nothing more than an Object that has a type and a payload.
   - It doesn't have a Test, because there's nothing to them. 
   - They are data structure.
 - **Reducer:**  
@@ -559,21 +559,414 @@
   - They use streams to provide new sources of actions to reduce state based on external interactions such as:
     - network requests
     - web socket messages
-    - time-based events.
+    - time-based events
 - **Facades:** Do two things
   1. Dispatches *Actions*.
-  2. Allow to select data from the *Store* 
+  2. Allow to select data from the *Store*. 
 - **Adapter:**
   - The adapter is handling the underlying collection.
   - It is implemented in the reducer.
 
 
-
-
-
 ***
->Make it Right
+> Make it Right
+
 **Testing**
+
+> It is impossible to write good test for bad code.
+
+- We test only what that function does.
+- If we want to get good at testing, focus on writing good code:
+  - Very small.
+  - Granular.
+  - Single purpose functions.
+  - Only test what that method does.
+
+- The Reactive Component file:
+  ```js
+
+      // ...imports
+
+      @Component({
+        selector: 'fem-widgets',
+        templateUrl: './widgets.component.html',
+        styleUrls: ['./widgets.component.scss'],
+      })
+      export class WidgetsComponent implements OnInit {
+        allWidgets$: Observable<Widget[]> = this.widgetsFacade.allWidgets$;
+        selectedWidget$: Observable<Widget> = this.widgetsFacade.selectedWidget$;
+
+        constructor(private widgetsFacade: WidgetsFacade) {}
+
+        ngOnInit(): void {
+          this.reset();
+          this.widgetsFacade.mutations$.subscribe((_) => this.reset())
+        }
+
+        reset() {
+          this.loadWidgets();
+          this.selectWidget(null);
+        }
+
+        resetForm() {
+          this.selectWidget(null);
+        }
+
+        selectWidget(widget: Widget) {
+          this.widgetsFacade.selectWidget(widget?.id);
+        }
+
+        loadWidgets() {
+          this.widgetsFacade.loadWidgets();
+        }
+
+        saveWidget(widget: Widget) {
+          this.widgetsFacade.saveWidget(widget);
+        }
+
+        deleteWidget(widget: Widget) {
+          this.widgetsFacade.deleteWidget(widget);
+        }
+      }
+  ```
+- The Reactive Component test file:
+```js
+
+    // ...imports
+
+    describe('WidgetsComponent', () => {
+      let component: WidgetsComponent;
+      let fixture: ComponentFixture<WidgetsComponent>;
+      let de: DebugElement;
+      let widgetsFacade: WidgetsFacade;
+
+      beforeEach(async () => {
+        await TestBed.configureTestingModule({
+          declarations: [
+            WidgetsComponent,
+            WidgetDetailsComponent,
+            WidgetsListComponent,
+          ],
+          imports: [
+            CoreDataModule,
+            CoreStateModule,
+            FormsModule,
+            MaterialModule,
+            HttpClientTestingModule,
+            NoopAnimationsModule,
+            RouterTestingModule,
+          ],
+          providers: [
+            { provide: WidgetsFacade, useValue: mockWidgetsFacade },
+          ]
+        })
+        .compileComponents();
+      });
+
+      beforeEach(() => {
+        fixture = TestBed.createComponent(WidgetsComponent);
+        component = fixture.componentInstance;
+        de = fixture.debugElement;
+        widgetsFacade = TestBed.inject(WidgetsFacade);
+        fixture.detectChanges();
+      });
+
+      it('should create', () => {
+        expect(component).toBeTruthy();
+      });
+
+      it('should on select call widgetsFacade selectWidget', () => {
+        const spy = jest.spyOn(widgetsFacade, 'selectWidget');
+
+        component.selectWidget(mockWidget);
+
+        expect(spy).toHaveBeenCalledWith(mockWidget.id);
+      });
+
+      describe('should on save call widgetsFacade', () => {
+        it('updateWidget', () => {
+          const spy = jest.spyOn(widgetsFacade, 'saveWidget');
+
+          component.saveWidget(mockWidget);
+
+          expect(spy).toHaveBeenCalledWith(mockWidget);
+        });
+
+        it('createWidget', () => {
+          const spy = jest.spyOn(widgetsFacade, 'saveWidget');
+
+          component.saveWidget(mockEmptyWidget);
+
+          expect(spy).toHaveBeenCalledWith(mockEmptyWidget);
+        });
+      });
+
+      it('should on delete call widgetsFacade deleteWidget', () => {
+        const spy = jest.spyOn(widgetsFacade, 'deleteWidget');
+
+        component.deleteWidget(mockWidget);
+
+        expect(spy).toHaveBeenCalledWith(mockWidget);
+      });
+    });
+
+```
+
+- **Code Coverage**
+  - For running test in a specific app into monorepo: `nx run dashborad:test`, this command runs the tests for the dashboard app. 
+  - For running test with code coverage info: `nx run dashborad:test --code-coverage`. 
+  - For getting a quick CLI test result, we could add this line `coverageReporters: ['text']` into the jest.config.js file from each root app folder.
+
+- **End to End**
+  - The e2e tests are the most underrated most high-value activities that organizations can do.
+  - **Cypress**: 
+    - Cypress was originally designed to run end-to-end (E2E) tests on anything that runs in a browser. A typical E2E test visits the application in a browser and performs actions via the UI just like a real user would. 
+    - Running cypress in Nx monorepo: `nx run dashboard-e2e:e2e --watch` 
+    - The image below shows the scaffolding of a cypress project y the file where the mock data could be built.
+     ![Cypress Folder](../assets/cypress-data.png)
+
+    - **Structuring the test:** 
+      ![Test Structure](../assets/test-structure.png)
+      - ***Specs:*** 
+        - What we expect to happen broken down into individuals tests.
+      - ***Page Objects:*** 
+        - They are responsible for managing and sequencing the interaction of elements on the page.
+        - A simple key value object that helps locate elements on the page.
+      - ***HTML Templates:*** 
+        - We instrument our HTML templates with data test IDs fro easys selection.
+        - This is what we use to allow Cypress to then query our application an get access to it.
+
+    - Test suite widget.spec.ts file: 
+  ```js
+      import {
+      clearForm,
+      createWidget,
+      deleteWidget,
+      getWidgetDetailsTitle,
+      getWidgetItem,
+      getWidgets,
+      selectWidget,
+      state,
+      updateWidget
+    } from '../support/pages/widgets.po';
+
+    describe('Widgets', () => {
+      const model = 'widgets';
+      let widgets = null;
+
+      before(() => {
+        cy.fixture('widgets').then((json) => (widgets = json));
+        cy.loadData(['widgets']);
+        cy.visit(state.route);
+      });
+
+      it('should be on the widgets page', () => {
+        cy.checkLocation(state.route);
+      });
+
+      it('should list all widgets', () => {
+        getWidgets().should('have.length', widgets.length);
+      });
+
+      it('should create a widget', () => {
+        createWidget(model, state.newMockWidget);
+        getWidgetItem(state.newMockWidget).should('exist');
+      });
+
+      it('should display a selected widget details', () => {
+        clearForm();
+        selectWidget(state.newMockWidget);
+        getWidgetDetailsTitle().should('contain.text', `Editing ${state.newMockWidget.title}`);
+      });
+
+      it('should clear widget details the form on cancel', () => {
+        selectWidget(state.newMockWidget);
+        clearForm();
+        getWidgetDetailsTitle().should('contain.text', `Select Widget`);
+      });
+
+      it('should update a widget', () => {
+        selectWidget(state.updatedMockWidget);
+        updateWidget(model, state.updatedMockWidget);
+        getWidgetItem(state.updatedMockWidget).should('exist');
+      });
+
+      it('should delete a widget', () => {
+        deleteWidget(model, state.updatedMockWidget);
+        getWidgetItem(state.updatedMockWidget).should('not.exist');
+        getWidgets().should('have.length', widgets.length);
+      });
+    });
+
+  ```
+
+- ***Commands Folder:***
+  - Cypress comes with its own API for creating custom commands and overwriting existing commands. 
+  - The functions implemented in `commands.ts`(path: src/supports/commands/commands.ts) make it possible to consume the API enpoints. 
+  ```js
+    declare namespace Cypress {
+      interface Chainable<Subject> {
+        loadData(models: string[]): void;
+        checkLocation(path: string): void;
+        getEntities(model: string): void;
+        createEntity(model: string, mock: any): void;
+        updateEntity(model: string, mock: any): void;
+        deleteEntity(model: string, mock: any): void;
+        addEntity(model: string, mock: any): void;
+      }
+    }
+
+    const API_URL = Cypress.env('apiUrl') ;
+
+    Cypress.Commands.add('checkLocation', (route) => {
+      cy.location('pathname').should('equal', route);
+    });
+
+    Cypress.Commands.add('loadData', (models: string[]) => {
+      models.forEach(model =>  cy.getEntities(model));
+    });
+
+    Cypress.Commands.add('getEntities', (model) => {
+      cy.server();
+      cy.route('GET', `${API_URL}/${model}`, `fixture:${model}`);
+    });
+
+    Cypress.Commands.add('createEntity', (model, entity) => {
+      cy.server();
+      cy.route('POST', `${API_URL}/${model}`, { entity });
+      cy.addEntity(model, entity);
+    });
+
+    Cypress.Commands.add('updateEntity', (model, entity) => {
+      cy.server();
+      cy.route('PUT', `${API_URL}/${model}/${entity.id}`, { entity });
+      cy.addEntity(model, entity);
+    });
+
+    Cypress.Commands.add('deleteEntity', (model, entity) => {
+      cy.server();
+      cy.route('DELETE', `${API_URL}/${model}/${entity.id}`, { entity });
+      cy.getEntities(model);
+    });
+
+    Cypress.Commands.add('addEntity', (model, mock) => {
+      cy.server();
+      cy.fixture(model).then((collection)  => {
+        cy.route('GET', `${API_URL}/${model}`, [...collection, mock]).as(model);
+      });
+    });
+
+  ```
+- ***Pages Folder:***
+  - The contanst implemented in `widget.po.ts`(path: src/supports/pages/widget.po.ts) allow to easily identify and select DOM elements, they must have the following property implemented: 
+  - For instance, in this widget-list.component.html file some elements have this property `data-cy="widgets-list"`, so it is necessary that cypress build identify this selector.
+  - Events can also be triggered .
+  ```html
+    <mat-card>
+    <mat-card-title>
+      Widgets
+    </mat-card-title>
+    <mat-card-content>
+      <mat-list data-cy="widgets-list">
+        <mat-list-item *ngFor="let widget of widgets"
+          attr.data-cy="widget-{{ widget.id }}-item"
+          class="mat-list-option"
+          (click)="selected.emit(widget)">
+          <span matLine attr.data-cy="widget-{{ widget.id }}-item-title">{{ widget.title }}</span>
+          <button *ngIf="!readonly"
+            attr.data-cy="delete-widget-{{ widget.id }}-btn"
+            mat-icon-button
+            type="button"
+            color="warn"
+            (click)="deleted.emit(widget); $event.stopImmediatePropagation()">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+  ```
+
+  ```js
+    //**************************************
+    // This file instantiates the DOM selectors that have an 
+    // identifier defined by means of the property data-cy 
+    // into HTML component file.
+    // Events can also be triggered 
+    //************************************** 
+    export const state = {
+      route: '/widgets',
+      homeRoute: '/',
+      newMockWidget: {
+        id: 'E2E_WIDGET_ID',
+        title: 'E2E Mock Widget',
+        description: 'E2E Mock Description',
+      },
+      updatedMockWidget: {
+        id: 'E2E_WIDGET_ID',
+        title: 'E2E Mock Widget!!',
+        description: 'E2E Mock Description Updated',
+      }
+    };
+
+    export const getWidgetsList = () => cy.get('[data-cy=widgets-list]');
+
+    export const getWidgets = () => cy.get('[data-cy=widgets-list]>mat-list-item');
+
+    export const getWidgetItem = (widget) => cy.get(`[data-cy=widget-${widget.id}-item]`);
+
+    export const getWidgetTitle = (widget) => cy.get(`[data-cy=widget-${widget.id}-item-title]`);
+
+    export const getWidgetDeleteBtn = (widget) => cy.get(`[data-cy=delete-widget-${widget.id}-btn]`);
+
+    export const getWidgetDetailsTitle = () => cy.get('[data-cy=widget-details-title]');
+
+    export const selectWidget = (widget) => getWidgetItem(widget).click();
+
+    export const clearForm = () => cy.get('[data-cy=widget-form-cancel]').click();
+
+    export const completeNewWidgetForm = (widget) => {
+      cy.get(`[data-cy=widget-form-title]`).type(widget.title, { delay: 20});
+      cy.get(`[data-cy=widget-form-description]`).type(widget.description, { delay: 20});
+      cy.get('[data-cy=widget-form-save]').click();
+    };
+
+    export const completeUpdateWidgetForm = (widget) => {
+      cy.get(`[data-cy=widget-form-title]`).clear().type(`${widget.title}!!`, { delay: 20});
+      cy.get(`[data-cy=widget-form-description]`).clear().type(`${widget.description} updated`, { delay: 20});
+      cy.get('[data-cy=widget-form-save]').click();
+    };
+
+    export const createWidget = (model, widget) => {
+      cy.createEntity(model, widget);
+      completeNewWidgetForm(widget);
+    };
+
+    export const updateWidget = (model, widget) => {
+      cy.updateEntity(model, widget);
+      completeUpdateWidgetForm(widget);
+    };
+
+    export const deleteWidget = (model, widget) => {
+      cy.deleteEntity(model, widget);
+      getWidgetDeleteBtn(widget).click();
+    };
+
+    export const checkWidgetDetailsTitle = (title) => {
+      getWidgetDetailsTitle().should('contain.text', title);
+    };
+
+    export const checkWidgetsLength = (widgets) => {
+      getWidgets().should('have.length', widgets.length);
+    };
+
+    export const checkWidget = (widget, exists = true) => {
+      const condition = exists ? 'exist' : 'not.exist';
+      getWidgetItem(widget).should(condition);
+    };
+
+  ```
 ***
->Make it Fast
+> Make it Fast
+
 **Build & Deploy**
