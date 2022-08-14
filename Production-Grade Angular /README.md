@@ -5,21 +5,21 @@
 
 ### Content
 
-- [Managing Complexity](#Managing)
-- [CLI & Nx Workspaces](#CLI)
-- Boilerplate & Components
-- Complex Workspace
-- Mock APIs
-- Reactive Angular & State Management
-- Facades
-- NgRx
-- Testing
-- Build & Deploy
+- [Managing Complexity](#managing-complexity)
+- [CLI and Nx Workspaces](#cli-and-nx-workspaces)
+- [Boilerplate and Component](#boilerplate-and-component)
+- [Complex Workspaces](#complex-workspaces)
+- [Mock APIs](#mock-apis)
+- [Reactive Angular and State Management](#reactive-angular-and-state-management)
+- [Facades](#facades)
+- [NGRX](#ngrx)
+- [Testing](#testing)
+- [Build and Deploy](#build-and-deploy)
 
 
 ***
 
-#Managing Complexity
+# Managing Complexity
 
 - **Tips on Managig complexity**
  > MC is the hardest thing about developing software
@@ -72,7 +72,7 @@
 ***
 > Make it Work
 
-#CLI & Nx Workspaces
+# CLI and Nx Workspaces
 
 - Nx Workspace
     - Nx is a smart, fast and extensible build system with first class monorepo support and powerful integrations.
@@ -118,7 +118,9 @@
       - Flashcard Components `nx g c flashcards -m app.module.ts --style=scss && nx g c flashcards/flashcards-list -m app.module.ts --style=scss && nx g c flashcards/flashcards-details -m app.module.ts --style=scss`
       - Home Component: `nx g c home -m app.module.ts --style=scss`
 ***
-**Boilerplate & Components**
+
+
+# Boilerplate and Component
  - for running entire workspace excute `npm run serve:all` command
  - Typical code to edit or create a new record:
   ```js
@@ -215,7 +217,8 @@
 
 
 ***
-**Complex Workspaces**
+
+# Complex Workspaces
 
 - **Multiple Apps with Nx Workspace:**
   - Creating new App called client - `nx g app client --linter=tslint --style=scss --routing=false -d` -d run-dry, and then to run we excute `nx run client:serve` command that it raise up the localhost:4200  
@@ -240,7 +243,8 @@
 
 
 ***
-**Mock APIs**
+
+# Mock APIs
 
 - Nest provides:
   - architecture
@@ -312,7 +316,8 @@
 > The OpenAPI Specification (OAS) defines a standard, language-agnostic interface to RESTful APIs which allows both humans and computers to discover and understand the capabilities of the service without access to source code, documentation, or through network traffic inspection. When properly defined, a consumer can understand and interact with the remote service with a minimal amount of implementation logic.
 
 ***
-**Reactive Angular & State Management**
+
+# Reactive Angular and State Management
 
 > There are two transitional patterns (The Facade Pattern & a service with a Subject) very useful and they set the stage for doing proper state management in Angular application.
   
@@ -337,7 +342,7 @@
   > Complexity is state management, control flow, and code volume.
 ***
 
-**Facades**
+# Facades
 
 - **Creating a Facade:**
   - creating facade command: `nx g @nrwl/angular:ngrx widgets --module=libs/core-state/src/lib/core-state.module.ts --directory widgets --defaults --facade`, this command create a  DEFAULT FACADE from ngrx library into core-data folder.
@@ -524,7 +529,9 @@
 
   ```
 ***
-**NGRX**
+
+# NGRX
+
 - **Introduction**
   - ***Data Binding***
     - we pass data from the class (component.ts file) to the template (component.html file) via **property binding**.
@@ -598,7 +605,7 @@
 ***
 > Make it Right
 
-**Testing**
+# Testing
 
 > It is impossible to write good test for bad code.
 
@@ -996,7 +1003,7 @@
 ***
 > Make it Fast
 
-**Build & Deploy**
+# Build and Deploy
 - Techniques use for analyzing:
   1. Footpring our application with **Bundle Analyzer** 
     - Install `yarn add webpack-bundle-analyzer --save-dev`
