@@ -286,8 +286,35 @@
 
 ***
 **Reactive Angular & State Management**
+
+> There are two transitional patterns (The Facade Pattern & a service with a Subject) very useful and they set the stage for doing proper state management in Angular application.
+  
+  - **The Facade Pattern**
+    -  Facades are controversial and can be misused.
+    -  Facades are a pure delegation layer and shuold NOT handle business logic.
+    -  Facades provide a clean separation between components and te rest of the application.
+    -  Just as Input and Output provide an API for your components, Facades provide an API for you application.
+    -  Facades are an excellent way to incrementally integrate NgRx.
+    -  Facades are great for mocking out a business logic layer.
+
+  - **Reactive Angular, the Facade Pattern, & Subject Pattern**
+  - The problem is that the component usually has some knowledge of where the data is coming from and how it's being fetched. so the implementation details are still leaking into the component.
+     - The typical component that is injecting a service and it's pulling data, basically it's calling the server into the service into the component. 
+     - Being that we have essentially coupled this component to the service. 
+     > Intoduce a **Facades** to decouple the component from the implementation details. 
+     > - Now we are decoupling or creating abstracting the implementation details from the component
+     > - Now we can expose state from the facade directly into the component.
+  - Observable stream typically has three events: next(), error, complete()
+    - An Observable stream, when we have a subject and we expose the portion that's the observable stream and we call next() on the subject it is going to take that data and it's going to emit it to any subscriber that is subscribed to that stream.
+    - Observable stream are very powerful for communicating state or data for one place to another in conjunction with the event that caused it.    
+  > Complexity is state management, control flow, and code volume.
 ***
+
 **Facades**
+
+- **Creating a Facade:**
+
+
 ***
 **ngrx**
 ***
