@@ -345,6 +345,8 @@
 
 # Facades
 
+> Facade is a structural *design pattern* that provides a simplified interface to a library, framework or any other complex group of classes.
+
 - **Creating a Facade:**
   - creating facade command: `nx g @nrwl/angular:ngrx widgets --module=libs/core-state/src/lib/core-state.module.ts --directory widgets --defaults --facade`, this command create a  DEFAULT FACADE from ngrx library into core-data folder.
   - > Notice the comments here we have segmented facade state about the data flow. In NgRx state flows down & events(actions) flows up.
