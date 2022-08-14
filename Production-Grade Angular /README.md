@@ -1,7 +1,25 @@
 ## Production-Grade Angular 
 > Frontend Masters: Lukas Ruebbelke
 
-**Managing Complexity**
+***
+
+### Content
+
+- [Managing Complexity](#Managing)
+- [CLI & Nx Workspaces](#CLI)
+- Boilerplate & Components
+- Complex Workspace
+- Mock APIs
+- Reactive Angular & State Management
+- Facades
+- NgRx
+- Testing
+- Build & Deploy
+
+
+***
+
+#Managing Complexity
 
 - **Tips on Managig complexity**
  > MC is the hardest thing about developing software
@@ -53,13 +71,22 @@
 
 ***
 > Make it Work
-> 
-**CLI & Nx Workspaces**
+
+#CLI & Nx Workspaces
 
 - Nx Workspace
     - Nx is a smart, fast and extensible build system with first class monorepo support and powerful integrations.
     - Creating Workspace: `npx create-nx-workspace@latest`   
       - Workspace contains the apps directory with Angular and Nest projects.    
+         myproject/
+           ├── apps/
+           ├── libs/
+           ├── tools/
+           ├── workspace.json
+           ├── nx.json
+           ├── package.json
+           └── tsconfig.base.json
+
     - Scripst setting up - package.json
         ```js
           "scripts": {
@@ -315,7 +342,7 @@
 - **Creating a Facade:**
   - creating facade command: `nx g @nrwl/angular:ngrx widgets --module=libs/core-state/src/lib/core-state.module.ts --directory widgets --defaults --facade`, this command create a  DEFAULT FACADE from ngrx library into core-data folder.
   - > Notice the comments here we have segmented facade state about the data flow. In NgRx state flows down & events(actions) flows up.
-  - ![Swagger](../assets/facade-code-data.png)
+  ![Swagger](../assets/facade-code-data.png)
 - **Refactoring Default Facade:**
   - We are going to refactor this default facade to implement a service with Subjects: 
     - The subjects have the ability to control flow within observable stream, so if we have any reference to the subject, we can call next() on that subject. 
@@ -970,3 +997,41 @@
 > Make it Fast
 
 **Build & Deploy**
+- Techniques use for analyzing:
+  1. Footpring our application with **Bundle Analyzer** 
+    - Install `yarn add webpack-bundle-analyzer --save-dev`
+    - Add Scripts into package.json file:
+      ```js
+        "builds:stats": "ng duild --stats-json",
+        "analyze": "webpack-bundle-analyzer dist/apps/dashboards/stats.json",
+      ```
+    - The first script export a JSON file with the stats about the build, and the second one runs the analyzer to point to the stats JSON file.
+    - Executing scripts: 
+      - `npm run build:stats` once this command was run make sure that the stats.json file was created in the root app folder.
+      - `npm run analyze` when this has done, the Webpack Bundle Analizer is started at http://localhost:8888 and generate this particular view: 
+      ![Bundle Analyzer view](../assets/bundle-analyzer.png)
+
+      > This analyzer shows the chunk's weight of the entire application, also we can get a wide view of angular material components, so we could consider which of them are not using.
+    2. Graph Analyze:
+      - Running `nx dep-graph --file=output.html`, once this command was run, it created some files into the root of app:
+        - output.html
+        - dep-graph.css
+        - dep-graph.js
+        - vendor.js
+      - Open the Graph (output.html), this allows to visualize the independency graph that exists within our monorepo project.
+    - 
+      ![Graph Analizer](../assets/dep-graph.png)
+
+
+      > The graph is a really good way to start to analyze dependencies and how everything is connected.
+
+- Technique to reduce app weight:   
+  - Running this command: `nx run dashboard:build --prod` or `ng build --prod` in an Angular application reduces significantly the weight of production files.
+  - The use of this flag `--prod` may throw an error if the environment files are not properly configured.
+    
+- Deploy tools:
+  - ***Vercel:*** Vercel is a platform for frontend frameworks and static sites, built to integrate with your headless content, commerce, or database. [vercel.com](https://vercel.com/).
+  - ***Docker:*** Docker is an open platform for developing, shipping, and running applications. Docker enables you to separate your applications from your infrastructure so you can deliver software quickly.  [docker.com](https://www.docker.com/).
+
+
+_The End_
