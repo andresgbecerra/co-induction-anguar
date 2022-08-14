@@ -313,8 +313,185 @@
 **Facades**
 
 - **Creating a Facade:**
+  - creating facade command: `nx g @nrwl/angular:ngrx widgets --module=libs/core-state/src/lib/core-state.module.ts --directory widgets --defaults --facade`, this command create a  DEFAULT FACADE from ngrx library into core-data folder.
+  - > Notice the comments here we have segmented facade state about the data flow. In NgRx state flows down & events(actions) flows up.
+  - ![Swagger](../assets/facade-code-data.png)
+- **Refactoring Default Facade:**
+  - We are going to refactor this default facade to implement a service with Subjects: 
+    - The subjects have the ability to control flow within observable stream, so if we have any reference to the subject, we can call next() on that subject. 
+      1. Define private the subjects. 
+      2. Expose the observables. 
+    > Segment the subject which is responsible for propagating data from the stream itself. 
+    ```js
+      
+      // imports ...
+      
+      @Injectable()
+      export class WidgetsFacade {
+
+        private allWidgets = new Subject<Widget[]>();
+        private selectedWidget = new Subject<Widget>();
+        private mutations = new Subject();
+
+        allWidgets$ = this.allWidgets.asObservable();
+        selectedWidget$ = this.selectedWidget.asObservable();
+        mutations$ = this.mutations.asObservable();
+
+        constructor(private widgetsService: WidgetsService){}
+
+        loadWidgets(){
+          this.widgetsService
+                    .all()
+                    .subscribe((widgets: Widget[]) => this.allWidgets.next(widgets));
+        }
+
+        selectWidget(widget: Widget){
+          this.selectedWidget.next(widget);
+        }
 
 
+      }  
+    ```  
+
+
+
+- This is **The typical Component** that is **injecting a service**:
+  - > Here we are calling the widgetService, and we are taking that result, and assigning it in a single transaction.
+  - > This component is coupled to the implementation details.
+
+  ```js
+
+    // imports ...
+
+    const emptyWidget: Widget = {
+        id: null,
+        title: '',
+        description: '',
+      };
+
+      @Component({
+        selector: 'fem-widgets',
+        templateUrl: './widgets.component.html',
+        styleUrls: ['./widgets.component.scss'],
+      })
+      export class WidgetsComponent implements OnInit {
+        widgets$: Observable<Widget[]>;
+        selectedWidget: Widget;
+
+        constructor(private widgetsService: WidgetsService) {}
+
+        ngOnInit(): void {
+          this.reset();
+        }
+
+        reset() {
+          this.loadWidgets();
+          this.selectWidget(null);
+        }
+
+        resetForm() {
+          this.selectedWidget = emptyWidget;
+        }
+
+        selectWidget(widget: Widget) {
+          this.selectedWidget = widget;
+        }
+
+        loadWidgets() {
+          this.widgets$ = this.widgetsService.all();
+        }
+
+        saveWidget(widget: Widget) {
+          if (widget.id) {
+            this.updateWidget(widget);
+          } else {
+            this.createWidget(widget);
+          }
+        }
+
+        createWidget(widget: Widget) {
+          this.widgetsService.create(widget).subscribe((result) => this.reset());
+        }
+
+        updateWidget(widget: Widget) {
+          this.widgetsService.update(widget).subscribe((result) => this.reset());
+        }
+
+        deleteWidget(widget: Widget) {
+          this.widgetsService.delete(widget).subscribe((result) => this.reset());
+        }
+      }
+
+  ```
+- This is **The Reactive Component** with **the FACADE pattern injected**:
+  - > Now we have removed all the implementation details around state management out of the component.
+  ```js
+      // imports ...
+
+    const emptyWidget: Widget = {
+      id: null,
+      title: '',
+      description: '',
+    };
+
+    @Component({
+      selector: 'fem-widgets',
+      templateUrl: './widgets.component.html',
+      styleUrls: ['./widgets.component.scss'],
+    })
+    export class WidgetsComponent implements OnInit {
+
+      // Instantiating the observables defined in the facade
+      // ... and these Obs$ are redered in the component by Async PIPE
+      widgets$: Observable<Widget[]> = this.widgetsFacade.allWidgets$;
+      selectedWidget$: Observable<Widget> = this.widgetsFacade.selectedWidget$;
+
+      // Injected Facade service
+      constructor(private widgetsFacade: WidgetsFacade) {}
+
+      ngOnInit(): void {
+        this.reset();
+      }
+
+      reset() {
+        this.loadWidgets();
+        this.selectWidget(null);
+      }
+
+      resetForm() {
+        this.selectWidget(emptyWidget);
+      }
+
+      selectWidget(widget: Widget) {
+        this.widgetsFacade.selectWidget(widget);
+      }
+
+      loadWidgets() {
+        this.widgetsFacade.loadWidgets();
+      }
+
+      saveWidget(widget: Widget) {
+        if (widget.id) {
+          this.updateWidget(widget);
+        } else {
+          this.createWidget(widget);
+        }
+      }
+
+      createWidget(widget: Widget) {
+        //this.widgetsService.create(widget).subscribe((result) => this.reset());
+      }
+
+      updateWidget(widget: Widget) {
+        //this.widgetsService.update(widget).subscribe((result) => this.reset());
+      }
+
+      deleteWidget(widget: Widget) {
+        //this.widgetsService.delete(widget).subscribe((result) => this.reset());
+      }
+    }
+
+  ```
 ***
 **ngrx**
 ***
