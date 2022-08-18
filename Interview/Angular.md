@@ -109,10 +109,10 @@
    - The **@ViewChild** and **@ViewChildren** decorators provide access to the instantiated class of child components, allowing you to interact with non-private fields programmatically. 
 
 - **Service**
-  - In Angular, a class with the @Injectable() decorator that encapsulates non-UI logic and code that can be reused across an application. Angular distinguishes components from services to increase modularity and reusability. 
+  - In Angular, a class with the @Injectable() decorator that encapsulates non-UI logic and code that can be reused across an application. 
+  - Angular distinguishes components from services to increase modularity and reusability. 
   - Service is a broad category encompassing any value, function, or feature that an application needs. 
   - A service is typically a class with a narrow, well-defined purpose. It should do something specific and do it well. 
-  - Angular distinguishes components from services to increase modularity and reusability.
   - Services are good for tasks such as fetching data from the server, validating user input, or logging directly to the console. 
   - By defining such processing tasks in an injectable service class, you make those tasks available to any component. 
   - You can also make your application more adaptable by injecting different providers of the same kind of service, as appropriate in different circumstances. 
@@ -126,7 +126,7 @@
   - Dependencies are services or objects that a class needs to perform its function. 
   - Dependency injection, or DI, is a design pattern in which a class requests dependencies from external sources rather than creating them.
   - The **@Injectable()** decorator specifies that Angular can use this class in the DI system. 
-  - The metadata, `providedIn: 'root'`, means that the HeroService is visible throughout the application.
+  - The metadata, `providedIn: 'root'`, means that the Service is visible throughout the application.
   
 - **injector**
   - An object in the Angular dependency-injection system that can find a named dependency in its cache or create a dependency using a configured provider.  
@@ -139,14 +139,14 @@
 - **Pipes**
   - Pipes are a way to transform the format of output data for display 
   - Pipes are simple functions that accept an input and return a transformed value in a more technical understanding. 
-  -  In Angular, Pipes are of two types.
+  -  In Angular, There are two types of pipes:
     - Pure Pipes
     - Impure Pipes
 
 - **Pure Pipe**
   - Pure pipes in angular are the pipes that execute when it detects a pure change in the input value.
   - A pure change is when the change detection cycle detects a change to either a primitive input value (such as String, Number, Boolean, or Symbol) or object reference (such as Date, Array, Function, or Object).
-  - A pure function does not depend on any state, data, or change during the execution. In other words, given the same arguments, a pure function should always return the same output.
+  - A **pure function** does not depend on any state, data, or change during the execution. In other words, given the same arguments, a pure function should always return the same output.
   > By default, pipes in angular are pure pipes. Custom pipes can be defined as pure pipes by turning the pure flag to true of the @Pipe decorator.
   ```js
     @Pipe({
@@ -176,7 +176,7 @@
   - Angular makes use of observables as an interface to handle a variety of common asynchronous operations. For example:
     - The HTTP module uses observables to handle AJAX requests and responses
     - The Router and Forms modules use observables to listen for and respond to user-input events
-  > The biggest difference is that Promises won’t change their value once they have been fulfilled. They can only emit (reject, resolve) a single value. On the other hand, observables can emit multiple results. The subscriber will be receiving results until the observer is completed or unsubscribed from.
+  > **Observable Vs Promise:** The biggest difference is that Promises won’t change their value once they have been fulfilled. They can only emit (reject, resolve) a single value. On the other hand, observables can emit multiple results. The subscriber will be receiving results until the observer is completed or unsubscribed from.
 
 
 - **@Decorator** 
