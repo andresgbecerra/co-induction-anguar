@@ -16,8 +16,12 @@
 
 # Tell me about yourself
 
-I'm a Frontend developer with 4 years of experience developing web applications using Angular, Nodejs, and REST services with a focus on details and transforming business requirements into highly scalable code. I have also been part of Scrum teams implementing new features, improving UX and system performance, as well as bug fixing, testing, documenting, and deploying solutions using AWS, Azure & GC platforms. I consider myself a learning enthusiast - there has never been an excuse to learn something new. 
-I'm a person who thrives in a fast-paced environment, so right now, I'm looking for an opportunity to apply my technology expertise along with my creative problem-solving skills at an innovative software company. 
+- I'm a Frontend developer with 4 years of experience developing web applications using Angular, Nodejs, and REST services with a focus on details and transforming business requirements into highly scalable code. 
+- I have also been part of Scrum teams implementing new features, improving UX and system performance, as well as bug fixing, testing, documenting, and deploying solutions using AWS, Azure & GC platforms. 
+- I consider myself a learning enthusiast - there has never been an excuse to learn something new. 
+- I'm a person who thrives in a fast-paced environment, so right now, 
+- I'm looking for an opportunity to apply my technology expertise along with my creative problem-solving skills at an innovative software company. 
+
 
 - **Who you are Professionally?**
   - I'm a frontend developer with a strong background in good code practices and a focus on details.
