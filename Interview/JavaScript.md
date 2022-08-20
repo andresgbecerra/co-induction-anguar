@@ -106,8 +106,8 @@
 
 # Data Type
 
-- **primitive data types**    
-- - Primitive data types can store only a single value. 
+- **Primitive data types**    
+  - Primitive data types can store only a single value. 
   - A primitive is a data type that isn't composed of other data types.
   - It's only capable of displaying one value at a time. 
   - By definition, every primitive is a built-in data type (the compiler must be knowledgeable of them) nevertheless, not all built-in datasets are primitives. 
