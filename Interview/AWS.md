@@ -6,7 +6,7 @@
   - Elastic Beanstalk reduces management complexity without restricting choice or control. You simply upload your application, and Elastic Beanstalk automatically handles the details of capacity provisioning, load balancing, scaling, and application health monitoring.
 
   - Elastic Beanstalk supports applications developed in Go, Java, .NET, Node.js, PHP, Python, and Ruby.
-  - 
+  
   - When you create the example application, Elastic Beanstalk creates the following AWS resources:
 
     - **EC2 instance** – An Amazon EC2 virtual machine configured to run web apps on the platform you choose.

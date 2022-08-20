@@ -5,10 +5,10 @@
 
 - Introduction
   - [MySelf](https://github.com/andresgbecerra/co-induction-angular/blob/main/Interview/MySelf.md)
-  - 
+  
 - Tools
   - [Scrum](https://github.com/andresgbecerra/co-induction-angular/blob/main/Interview/Scrum.md)
-  - [Git](https://github.com/andresgbecerra/co-induction-angular/blob/main/Interview/git.md)
+  - [Git](https://github.com/andresgbecerra/co-induction-angular/blob/main/Interview/Git.md)
   
 - Programming Leguage
     - [JavaScript](https://github.com/andresgbecerra/co-induction-angular/blob/main/Interview/JavaScript.md)

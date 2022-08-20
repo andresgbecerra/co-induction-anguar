@@ -2,13 +2,39 @@
 
 >Angular is an application design framework and development platform for creating efficient and sophisticated single-page apps.
 ***
-**TypeScript**
+
+### Content
+
+- [TypeScript](#typescript)
+- [OAT ahead of time](#oat-ahead-of-time)
+- [Module](#module)
+- [Component](#component)
+- [Binding](#binding)
+- [Directive](#directive)
+- [Life cycle Hooks](#life-cycle-hooks)
+- [Router](#router)
+- [Service](#service)
+- [Dependency Injection](#dependency-injection)
+- [EventEmitter](#eventemitter)
+- [Pipes](#pipes)
+- [Observables](#observables)
+- [Decorator](#decorator)
+- [Templates](#templates)
+- [Libraries and Modules](#libraries-and-modules)
+- [Angular CLI](#angular-cli)
+- [And More](#and-more)
+
+
+
+***
+# TypeScript
 - Angular was written in TypeScript, a typed superset of JavaScript that implements many modern EcmaScript features.
 > ES6 is the current version of JavaScript. TypeScript is a superset of ES6, which means all ES6 features are part of TypeScript, but not all TypeScript features are part of ES6. Consequently, TypeScript must be transpiled into ES5/ES6 to run in most browsers.
+> 
+[Back](#content) 
 
-**Definitions**
 
-- **ahead-of-time - AOT**
+# OAT ahead of time
   - The Angular ahead-of-time (AOT) compiler converts your Angular HTML and TypeScript code into efficient JavaScript code during the build phase before the browser downloads and runs that code. 
   - Compiling your application during the build process provides a faster rendering in the browser. 
   - **Ahead-of-Time (AOT)** -	Compiles your application and libraries at build time. This is the default starting in Angular 9.
@@ -20,7 +46,9 @@
 
   > When you run the ng build (build only) or ng serve (build and serve locally) CLI commands, the type of compilation (JIT or AOT) depends on the value of the aot property in your build configuration specified in angular.json. By default, aot is set to true for new CLI applications.
 
-- **Module**
+  [Back](#content) 
+
+# Module
   - In general, a module collects a block of code dedicated to a single purpose. 
   - Angular uses standard JavaScript modules and also defines an Angular module, `NgModule`.
   - In JavaScript, or ECMAScript, each file is a module and all objects defined in the file belong to that module.
@@ -40,8 +68,10 @@
   - A collection of JavaScript modules are also referenced as a library. 
   - Each Angular library name begins with the @angular prefix. 
   - Install Angular libraries with the npm package manager and import parts of them with JavaScript import declarations.
+
+[Back](#content) 
   
-- **Components**
+# Component
   - Components are the most basic UI building block of an Angular application. 
   - Basically, a component is anything that is visible to the end user and which can be reused many times within an application.
   - Each component consists of:
@@ -52,7 +82,9 @@
     - When you utilize the providers field in the Component Decorator, any services you pass into that array, will be uniquely instantiated for that particular component!
   > The core concept of any Angular application is the component. In effect, the whole application can be modeled as a tree of these components.
 
-- **Binding** 
+[Back](#content) 
+
+# Binding
   - A process that allows applications to display data values to a user and respond to user actions. 
   - User actions include clicks, touches, keystrokes, and so on. 
   - Passing Data:
@@ -63,7 +95,9 @@
     - **Class and style binding** `[class.sale]="onSale"` - to add and remove CSS class names from an element's class attribute and to set styles dynamically.
     - **Two-way data binding with ngModel** - to listen for events and update values simultaneously between parent and child components.
 
-- **Directive**
+[Back](#content) 
+
+# Directive
    - A class that can modify the structure of the DOM `Document Object Model` or modify attributes in the DOM and component data model.
    - There are three main types of directives in Angular:
      - **Component** - directive with a template.
@@ -71,7 +105,8 @@
      - **Structural directives** - directives that change the behavior of a component or element by _affecting_ how the template is rendered. `ngFor, ngIf, ngSwitch`
 >  In fact, Angular components are in large part directives with templates. 
 
-- **Life cycle Hooks** 
+[Back](#content) 
+# Life cycle Hooks 
    - Here is the complete lifecycle hook interface inventory:
      - ngOnChanges - called when an input binding value changes
      - ngOnInit - after the first ngOnChanges
@@ -82,7 +117,9 @@
      - ngAfterViewChecked - after every check of a component's view(s)
      - ngOnDestroy - just before the component is destroyed 
 
-- **Router**
+[Back](#content) 
+
+# Router
   - It helps visitors navigate from one view to another by looking up the URL of the browser and changing the view accordingly. 
   - A service that provides navigation among views and URL manipulation capabilities. 
   - Router.events provides events as observables. 
@@ -105,10 +142,11 @@
   - The RouterOutlet is a directive from the router library that is used like a component. 
   - It acts as a placeholder that marks the spot in the template where the router should display the components for that outlet.
 
-- **Accessing Other Components** 
-   - The **@ViewChild** and **@ViewChildren** decorators provide access to the instantiated class of child components, allowing you to interact with non-private fields programmatically. 
 
-- **Service**
+[Back](#content) 
+
+
+# Service
   - In Angular, a class with the @Injectable() decorator that encapsulates non-UI logic and code that can be reused across an application. 
   - Angular distinguishes components from services to increase modularity and reusability. 
   - Service is a broad category encompassing any value, function, or feature that an application needs. 
@@ -122,7 +160,10 @@
   - Injectors maintain lists of providers and use them to provide service instances when they are required by components or other services.
   > The @Injectable() metadata allows the service class to be used with the dependency injection mechanism.
 
-- **Dependency injection** 
+
+[Back](#content) 
+
+# Dependency Injection 
   - Dependencies are services or objects that a class needs to perform its function. 
   - Dependency injection, or DI, is a design pattern in which a class requests dependencies from external sources rather than creating them.
   - The **@Injectable()** decorator specifies that Angular can use this class in the DI system. 
@@ -131,12 +172,17 @@
 - **injector**
   - An object in the Angular dependency-injection system that can find a named dependency in its cache or create a dependency using a configured provider.  
   - An injector provides a singleton instance of a dependency, and can inject this same instance in multiple components. 
-- **EventEmitter**
+  
+[Back](#content) 
+
+# EventEmitter
   - EventEmitter is responsible for raising the event. 
-  - The @output property normally is of type EventEmitter. 
+  - The **@output** property normally is of type EventEmitter. 
   - The child component will use the emit() method to emit an event along with the data.
 
-- **Pipes**
+[Back](#content) 
+
+# Pipes
   - Pipes are a way to transform the format of output data for display 
   - Pipes are simple functions that accept an input and return a transformed value in a more technical understanding. 
   -  In Angular, There are two types of pipes:
@@ -168,18 +214,23 @@
   - The async pipe is an impure pipe that saves boilerplate code in your component to maintain the subscription and keep delivering values from that observable as they arrive. 
   - The async pipe subscribes to an Observable or Promise and returns the latest value it has emitted. 
   - When a new value is emitted, the async pipe marks the component to be checked for changes. 
-  - When the component gets destroyed, the async pipe unsubscribes automatically to avoid potential memory leaks. 
+  - When the component gets destroyed, the async pipe unsubscribes automatically to avoid potential memory leaks.
 
-- **Observables**
+[Back](#content) 
+
+
+# Observables
   - Observables are recommended for event handling, asynchronous programming, and handling multiple values. 
   - Observables can deliver single or multiple values of any type, either **synchronously** (as a function delivers a value to its caller) or **asynchronously** on a schedule. 
   - Angular makes use of observables as an interface to handle a variety of common asynchronous operations. For example:
     - The HTTP module uses observables to handle AJAX requests and responses
     - The Router and Forms modules use observables to listen for and respond to user-input events
+  - [RxJS](https://github.com/andresgbecerra/co-induction-angular/blob/main/Interview/RxJS.md)
   > **Observable Vs Promise:** The biggest difference is that Promises won’t change their value once they have been fulfilled. They can only emit (reject, resolve) a single value. On the other hand, observables can emit multiple results. The subscriber will be receiving results until the observer is completed or unsubscribed from.
 
+[Back](#content) 
 
-- **@Decorator** 
+# Decorator 
   - A decorator that appears immediately before a class definition, which declares the class to be of the given type, and provides metadata suitable to the type.
   - A function that modifies a class or property definition. 
   - Angular defines decorators that attach metadata to classes or properties so that it knows what those classes or properties mean and how they should work.
@@ -189,6 +240,8 @@
     - property - @Input @Output
     - methods - @Hostlistener
     - parameter - @Inject() In the constructor  
+
+# Templates
 
 - **ng-template** 
   - ng-template is a virtual element and its contents are displayed only when needed (based on conditions).
@@ -203,6 +256,13 @@
   - This not only increases performance (even so slightly) since the browser ends up rendering less elements but can also be a valuable asset in having cleaner DOMs and styles alike.
   - It can for example enable us to use structural directives without breaking styling dependent on a precise DOM structure (as for example the ones we get when using flex containers, margins, the child combinator selector, etc.).
 
+- **Accessing Other Components** 
+   - The **@ViewChild** and **@ViewChildren** decorators provide access to the instantiated class of child components, allowing you to interact with non-private fields programmatically. 
+
+[Back](#content) 
+
+
+# Libraries and Modules
 
 - **First-party libraries**
    These libraries are only required if and when they can help you add functionality to your applications or solve a particular problem.
@@ -224,12 +284,18 @@
     - Add HttpClientModule to the imports array of NgModule.
     - Finally inject the HttpClient service in application class or service as a dependency.
 
+[Back](#content) 
 
 ***
-**Angular CLI**
+# Angular CLI
 The Angular CLI is a command-line interface tool that you use to initialize, develop, and maintain Angular applications directly from a command shell.
 ![angular cli](../assets/angular-cli.png)
+
+
 ***
+
+
+# And More
 
 - **polyfill**
   - An npm package that plugs gaps in the JavaScript implementation of a browser. See Browser Support for polyfills that support particular functionality for particular platforms.
@@ -242,10 +308,9 @@ The Angular CLI is a command-line interface tool that you use to initialize, dev
   - It create an application without NgModules 
   - Angular 14 introduces the standalone component — a component not part of any ngModule that can be used with either other standalone or module-based components.
 
-
-
-
-
 - **dynamic components**
   - Dynamic means, that the components location in the application is not defined at buildtime. That means, that it is not used in any angular template.
   - Instead, the component is instantiated and placed in the application at runtime. 
+
+
+[Back](#content) 
