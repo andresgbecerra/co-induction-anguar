@@ -20,7 +20,8 @@
 
 
 JS Engine Architecture:
-    - [JS Engine](https://cabulous.medium.com/how-v8-javascript-engine-works-5393832d80a7)
+    - [JS Engine Architecture details](https://cabulous.medium.com/how-v8-javascript-engine-works-5393832d80a7)
+  
  ![JS Engine](../assets/js-engine.png)
 
 - **Heap:** Refers to the physical space in memory used to store variables, functions and objects.
