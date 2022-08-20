@@ -24,29 +24,39 @@
 - I'm looking for an opportunity to apply my technology expertise along with my creative problem-solving skills at an innovative software company. 
 
 
-- **Who you are Professionally?**
+```
+- Who you are Professionally?
   - I'm a frontend developer with a strong background in good code practices and a focus on details.
-- **Why you are Qualified?**
+- Why you are Qualified?
    - I have spent the last four years building my skills as a Frontend developer in Angular for the Satena airlines and Annar Technologies. I concider myself a learning enthusiast, I like to learn new technical skills and apply them to projects.
-
-- **Why you are Here?**
+- Why you are Here?
   -  I'm a person who thrives in a fast-paced environment, so right now, I'm looking for an opportunity to apply my technology expertise along with my creative problem-solving skills at an innovative software company. 
   -  Although I love my current role, I feel I'm now ready for a more challenging assignment and this position really excites me.
+```
   
 [Back](#content) 
 
 # Why Do you want to work Here
 
 - "Why are you interested in working for this organization" Or, "Why is the particular position appealing"
-  - I believe my track record of integrating new features and understanding the complexity of projects as well as how to scale them appropriately makes me an excellent fit for these job requirements. In addition, the rule excites me because I love the idea of helping to develop cutting-edge software products.I know I could start delivering results from day one.
+- `I believe my track record of integrating new features and understanding the complexity of projects as well as how to scale them appropriately makes me an excellent fit for these job requirements. In addition, the rule excites me because I love the idea of helping to develop cutting-edge software products.I know I could start delivering results from day one.`
   
 [Back](#content) 
 # Sell Yourself
- - In my previous position, I worked late into the night fixing bugs reported by the customer that affected the production environment and delayed the ongoing sprint development. I even learned to design in Figma to help the design team build the templates when they were behind schedule. 
+ - `In my previous position, I worked late into the night fixing bugs reported by the customer that affected the production environment and delayed the ongoing sprint development. I even learned to design in Figma to help the design team build the templates when they were behind schedule.` 
   
 [Back](#content) 
 # What are your Strengths
 - "What makes you a good fit?" Or, "What makes you different?" Or, "Why should we hire you?"
+
+- >Let’s see. I’m **persistent_** I am constant with the development of a project. I do not give up searching, learning, and changing what is necessary to get the requirements. I mean I take each goal as mine.
+
+- >and  I am **adaptable—** I have learned new frameworks for both environments web and mobile, to collaborate or contribute best practices in the applications and the layout.
+
+- >And finally, I think I'm **Meticulous—** I keep an eye on the details, I mean when I am writing lines of code any wrong character can break the software. I´m meticulous in that sense
+
+
+```
 - Classic Personality Strengths:
   - Creativity
   - Persistence
@@ -57,18 +67,18 @@
   - Leadership
   - Problem Solving
   - Resourcefulness
-- Let’s see. I’m **persistent_** I am constant with the development of a project. I do not give up searching, learning, and changing what is necessary to get the requirements. I mean I take each goal as mine.
+```
 
-- and  I am **adaptable—** I have learned new frameworks for both environments web and mobile, to collaborate or contribute best practices in the applications and the layout.
-
-- And finally, I think I'm **Meticulous—** I keep an eye on the details, I mean when I am writing lines of code any wrong character can break the software. I´m meticulous in that sense
 
 [Back](#content) 
 
 # What are your Weaknesses
+
+- >I consider myself **impatient**, that is, I require immediacy, I like to see the results a little earlier, I would like to advance faster, but then what I do is to set benchmarks in the tasks and work to achieve them, this way I feel I can have results in the short term.
+```
 - Briefly describe a real weakness that wouldn't be a major handicap on the job. 
 - How you're already working on that weakness
-- I consider myself impatient, that is, I require immediacy, I like to see the results a little earlier, I would like to advance faster, but then what I do is to set benchmarks in the tasks and work to achieve them, this way I feel I can have results in the short term.
+```
   
 [Back](#content) 
 
@@ -95,7 +105,7 @@ Sorry I can't find my words
 
 
 - **preferred development environment:**
-  - I would like to be part of multicultural development teams, share knowledge, and experiences, and I would like to have the opportunity to learn about new techniques, methods, and software architectures. 
+  - >I would like to be part of multicultural development teams, share knowledge, and experiences, and I would like to have the opportunity to learn about new techniques, methods, and software architectures. 
 
 
 [Back](#content) 
