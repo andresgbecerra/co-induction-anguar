@@ -4,7 +4,7 @@
 ### Content
 
 - [Introduction](#introduction)
-- [Funtions](#funtions)
+- [Functions](#functions)
 - [Callback](#callback)
 - [1. Understanding Asynchronous Coding](#1-understanding-asynchronous-coding)
 - [2. The Necessity of Callbacks](#2-the-necessity-of-callbacks)
@@ -33,7 +33,7 @@ JS Engine Architecture:
 
 [Back](#content)
 
-# Funtions
+# Functions
 
 **Declarative Functions:**
 Declarative functions use the reserved word **function** at the beginning in order to declare the function, and they will always be available at runtime.:
@@ -185,173 +185,173 @@ The declaration starts with the reserved word **var**, where a variable that wil
 
 # 3. Promises
 
-   > The **promises** are the particular solution to the issues related to the use of **callbacks**..
-   - What are JS Promises:
-       - An Object with properties and methods.
-       - Represents an eventual success or failure of an asynchronous operation.
-       - It always returns a value.
-   - Creating a Promise:
+> The **promises** are the particular solution to the issues related to the use of **callbacks**..
+- What are JS Promises:
+    - An Object with properties and methods.
+    - Represents an eventual success or failure of an asynchronous operation.
+    - It always returns a value.
+- Creating a Promise:
+```js
+        let asyncFunction = function() {
+        return new Promise(function(resolve, reject) {
+            setTimeout(function() {
+                resolve("asyncFunction has resolved.");
+            }, 4000);
+        });
+        };
+```
+> A promise is a returned object to which callback functions are attached, rather than passing callbacks to a function.
+- Using Promises:
+```js
+        let promise = asyncFunction();
+
+        promise.then(functino(val){
+            console.log('This is the value: ' + val);
+        });
+        // This is the value: asyncFunction has resolved.
+```
+- One of the great advantages of using promises is chaining:
+    - Chaining is using two or more asynchronous operations in a row, where each operation begins when the previous one has finished successfully.
     ```js
-            let asyncFunction = function() {
+
+        let asyncFunction2 = function() {
+        return new Promise(function(resolve, reject) {
+            setTimeout(function() {
+                resolve("asyncFunction2 has resolved.");
+            }, 3000);
+        });
+        };
+
+    asyncFunction()
+    .then(function(val){
+            console.log('AsyncFuntion: ' + val);
+            return asyncFunction2();
+    })
+    .then(function(val){
+        console.log('AsyncFuntion2: ' + val);
+    })
+
+    //--------------------
+    // usando funciones de flecha
+    //--------------------
+
+    asyncFunction()
+    .then(val => {
+            console.log('AsyncFuntion: ' + val);
+            return asyncFunction2();
+    })
+    .then(val => console.log('AsyncFuntion2: ' + val));
+    ``` 
+- **catch( ) method:** Promises resolve by catching all errors, including thrown exceptions and programming errors. `This is essential for the functional composition of asynchronous operations`
+    ```js
+        let wordnikWords = "http://api.wordnik.com/v4/words.json/",
+            wordnikWord = "http://api.wordnik.com/v4/word.json/",
+            apiKey = "?api_key=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            wordObj={};
+
+        fetch(wordnikWords + "randomWord" + apiKey)
+        .then(function(response) {
+            wordObj = response;
+            //console.log(wordObj);
+            return response.json();
+        })
+        .then(function(data) {
+            console.log(data.word);
+            return fetch(wordnikWord + data.word + "/definitions" + apiKey);
+        })
+        .then(function(def) {
+            //console.log(def);
+            return def.json();
+        })
+        .then(function(def) {
+            console.log(def);
+        })
+        .catch(function(err) { // captura de errores
+            console.log(err);
+        });
+
+    ```
+    - The error returned by a promise can also be caught by passing a second callback in the then() method:
+        ```js
+        let promise = new Promise(function(resolve, reject) {
+            setTimeout(function() {
+                reject("Error");
+            }, 4000)
+        });
+
+        promise.then(function(val) {
+            console.log(val);
+        }, function(val) {
+            console.log("rejected: " + val);
+        });
+        ``` 
+- **finally( ) method:**
+- This method can be useful if it is necessary to do some processing or cleanup after the promise ends, regardless of its result.
+- The finally( ) method does not take any arguments.
+```js
+    asyncFunction2()
+    .then(msg => console.log(msg))
+    .catch(err => console.log(err))
+    .finally(() => console.log("Cleaning up tasks."));
+```
+
+> Asynchonous Commands:
+>- setTimeout()
+>- setInterval()
+>- Node.js: setImmediate()
+>- Node.js: process.nextTick()
+>- Node.js: readFile()
+- **Using static .all and .race methods of the Promises**
+- These static methods are in the constructor of the Promise Object and are used to access the functionalities: `Promise.all() ` and ` Promise.race()`.
+    ```js
+        let firstFunction = function() {
+        return new Promise(function(resolve, reject) {
+            setTimeout(function() {
+                resolve("Function1");
+            }, 1000);
+        });
+        };
+
+        let secondFunction = function() {
             return new Promise(function(resolve, reject) {
                 setTimeout(function() {
-                    resolve("asyncFunction has resolved.");
-                }, 4000);
-            });
-          };
-    ```
-    > A promise is a returned object to which callback functions are attached, rather than passing callbacks to a function.
-    - Using Promises:
-    ```js
-            let promise = asyncFunction();
-
-            promise.then(functino(val){
-                console.log('This is the value: ' + val);
-            });
-            // This is the value: asyncFunction has resolved.
-    ```
-    - One of the great advantages of using promises is chaining:
-      - Chaining is using two or more asynchronous operations in a row, where each operation begins when the previous one has finished successfully.
-       ```js
-
-         let asyncFunction2 = function() {
-            return new Promise(function(resolve, reject) {
-                setTimeout(function() {
-                    resolve("asyncFunction2 has resolved.");
+                    resolve("Function2");
                 }, 3000);
             });
-          };
+        };
 
-        asyncFunction()
-        .then(function(val){
-             console.log('AsyncFuntion: ' + val);
-             return asyncFunction2();
-        })
-        .then(function(val){
-            console.log('AsyncFuntion2: ' + val);
-        })
-
-        //--------------------
-        // usando funciones de flecha
-        //--------------------
-
-        asyncFunction()
-        .then(val => {
-             console.log('AsyncFuntion: ' + val);
-             return asyncFunction2();
-        })
-        .then(val => console.log('AsyncFuntion2: ' + val));
-       ``` 
-    - **catch( ) method:** Promises resolve by catching all errors, including thrown exceptions and programming errors. `This is essential for the functional composition of asynchronous operations`
-        ```js
-            let wordnikWords = "http://api.wordnik.com/v4/words.json/",
-                wordnikWord = "http://api.wordnik.com/v4/word.json/",
-                apiKey = "?api_key=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                wordObj={};
-
-            fetch(wordnikWords + "randomWord" + apiKey)
-            .then(function(response) {
-                wordObj = response;
-                //console.log(wordObj);
-                return response.json();
-            })
-            .then(function(data) {
-                console.log(data.word);
-                return fetch(wordnikWord + data.word + "/definitions" + apiKey);
-            })
-            .then(function(def) {
-                //console.log(def);
-                return def.json();
-            })
-            .then(function(def) {
-                console.log(def);
-            })
-            .catch(function(err) { // captura de errores
-                console.log(err);
-            });
-
-        ```
-        - The error returned by a promise can also be caught by passing a second callback in the then() method:
-         ```js
-          let promise = new Promise(function(resolve, reject) {
-                setTimeout(function() {
-                    reject("Error");
-                }, 4000)
-            });
-
-            promise.then(function(val) {
-                console.log(val);
-            }, function(val) {
-                console.log("rejected: " + val);
-            });
-         ``` 
-- **finally( ) method:**
-   - This method can be useful if it is necessary to do some processing or cleanup after the promise ends, regardless of its result.
-   - The finally( ) method does not take any arguments.
-    ```js
-        asyncFunction2()
-        .then(msg => console.log(msg))
-        .catch(err => console.log(err))
-        .finally(() => console.log("Cleaning up tasks."));
-    ```
-
-  > Asynchonous Commands:
-   >- setTimeout()
-   >- setInterval()
-   >- Node.js: setImmediate()
-   >- Node.js: process.nextTick()
-   >- Node.js: readFile()
-- **Using static .all and .race methods of the Promises**
-   - These static methods are in the constructor of the Promise Object and are used to access the functionalities: `Promise.all() ` and ` Promise.race()`.
-     ```js
-            let firstFunction = function() {
+        let thirdFunction = function() {
             return new Promise(function(resolve, reject) {
                 setTimeout(function() {
-                    resolve("Function1");
-                }, 1000);
+                    resolve("Function3");
+                }, 5000);
             });
-            };
+        };
 
-            let secondFunction = function() {
-                return new Promise(function(resolve, reject) {
-                    setTimeout(function() {
-                        resolve("Function2");
-                    }, 3000);
-                });
-            };
+        //----------------
+        // Promise.all()
+        //----------------
+        Promise.all([firstFunction(), secondFunction(), thirdFunction()])
+            .then(function(result) {                    
+                console.log(result[0] + " " + result[2] + " " + result[1]);
+            })
+            .catch(function(result) {
+                console.log(result);
+            });
 
-            let thirdFunction = function() {
-                return new Promise(function(resolve, reject) {
-                    setTimeout(function() {
-                        resolve("Function3");
-                    }, 5000);
-                });
-            };
+        //----------------
+        // Promise.race()
+        //----------------
+        Promise.race([firstFunction(), secondFunction(), thirdFunction()])
+            .then(function(result) {
+                console.log(result);
+            })
+            .catch(function(result) {
+                console.log(result);
+            });
 
-            //----------------
-            // Promise.all()
-            //----------------
-            Promise.all([firstFunction(), secondFunction(), thirdFunction()])
-                .then(function(result) {                    
-                    console.log(result[0] + " " + result[2] + " " + result[1]);
-                })
-                .catch(function(result) {
-                    console.log(result);
-                });
-
-            //----------------
-            // Promise.race()
-            //----------------
-            Promise.race([firstFunction(), secondFunction(), thirdFunction()])
-                .then(function(result) {
-                    console.log(result);
-                })
-                .catch(function(result) {
-                    console.log(result);
-                });
-
-     ```
-   > Promise.all( ) and Promise.race( ) are two composition tools for executing asynchronous operations in parallel.
+    ```
+> Promise.all( ) and Promise.race( ) are two composition tools for executing asynchronous operations in parallel.
 
 
 [Back](#content)
