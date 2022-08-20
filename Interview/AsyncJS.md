@@ -28,6 +28,9 @@ JS Engine Architecture:
 - **Stack:** This is the stack where functions and API calls are stored (Web API in browsers and C/C++ API on local machines via NodeJs). This stack behaves as a last-in-first-out (LIFO) structure..
 - **API’s (Web or C/C++):** This is where the real functionalities of the built-in functions such as setTimeout() and fetch() are found.
 - **Callback queue:** Some API functions require a callback function to be provided to know what to do after the API function has been executed. These callback functions are stored in this queue and behave as a first-in-first-out (FIFO) structure. 
+> Callback Queue gets the ordinary callback functions coming from the API, for instance setTimeout() after the timer expires.
+- **Microtask Queue:** Microtask Queue is like the Callback Queue, but Microtask Queue has higher priority. All the callback functions coming through Promises and Mutation Observer will go inside the Microtask Queue. For example, in the case of .fetch(), the callback function gets to the Microtask Queue. Promise handling always has higher priority so the JavaScript engine executes all the tasks from Microtask Queue and then moves to the Callback Queue.
+> Microtask Queue gets the callback functions coming through Promises and Mutation Observer.
 - **Event loop:** It is an algorithm that is constantly monitoring the stack. When the stack is empty, the first function located in the callback queue is entered into the stack to complete its execution and then the next one until the callback queue is empty.
 
 
