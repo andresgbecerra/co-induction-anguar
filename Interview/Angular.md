@@ -227,6 +227,8 @@
     - The Router and Forms modules use observables to listen for and respond to user-input events
   - [RxJS](https://github.com/andresgbecerra/co-induction-angular/blob/main/Interview/RxJS.md)
   > **Observable Vs Promise:** The biggest difference is that Promises won’t change their value once they have been fulfilled. They can only emit (reject, resolve) a single value. On the other hand, observables can emit multiple results. The subscriber will be receiving results until the observer is completed or unsubscribed from.
+  - **Promises** are basically objects that may or may not resolve (essentially return) a value in the future, but which will notify the calling function via callbacks whether it is successful or not. 
+  - Promises are used to handle asynchronous operations in javascript.
 
 [Back](#content) 
 
@@ -240,6 +242,8 @@
     - property - @Input @Output
     - methods - @Hostlistener
     - parameter - @Inject() In the constructor  
+
+[Back](#content) 
 
 # Templates
 
