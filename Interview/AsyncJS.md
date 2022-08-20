@@ -185,7 +185,7 @@ The declaration starts with the reserved word **var**, where a variable that wil
 
 # 3. Promises
 
-> The **promises** are the particular solution to the issues related to the use of **callbacks**..
+> The **promises** are the particular solution to the issues related to the use of **callbacks**.
 - What are JS Promises:
     - An Object with properties and methods.
     - Represents an eventual success or failure of an asynchronous operation.
@@ -242,7 +242,10 @@ The declaration starts with the reserved word **var**, where a variable that wil
     })
     .then(val => console.log('AsyncFuntion2: ' + val));
     ``` 
-- **catch( ) method:** Promises resolve by catching all errors, including thrown exceptions and programming errors. `This is essential for the functional composition of asynchronous operations`
+- **catch( ) method:** 
+  - Promises resolve by catching all errors, including thrown exceptions and programming errors. 
+   >This is essential for the functional composition of asynchronous operations.
+  
     ```js
         let wordnikWords = "http://api.wordnik.com/v4/words.json/",
             wordnikWord = "http://api.wordnik.com/v4/word.json/",
@@ -286,14 +289,14 @@ The declaration starts with the reserved word **var**, where a variable that wil
         });
         ``` 
 - **finally( ) method:**
-- This method can be useful if it is necessary to do some processing or cleanup after the promise ends, regardless of its result.
-- The finally( ) method does not take any arguments.
-```js
-    asyncFunction2()
-    .then(msg => console.log(msg))
-    .catch(err => console.log(err))
-    .finally(() => console.log("Cleaning up tasks."));
-```
+  - This method can be useful if it is necessary to do some processing or cleanup after the promise ends, regardless of its result.
+  - The finally( ) method does not take any arguments.
+  ```js
+      asyncFunction2()
+      .then(msg => console.log(msg))
+      .catch(err => console.log(err))
+      .finally(() => console.log("Cleaning up tasks."));
+  ```
 
 > Asynchonous Commands:
 >- setTimeout()
@@ -301,8 +304,9 @@ The declaration starts with the reserved word **var**, where a variable that wil
 >- Node.js: setImmediate()
 >- Node.js: process.nextTick()
 >- Node.js: readFile()
+
 - **Using static .all and .race methods of the Promises**
-- These static methods are in the constructor of the Promise Object and are used to access the functionalities: `Promise.all() ` and ` Promise.race()`.
+  - These static methods are in the constructor of the Promise Object and are used to access the functionalities: `Promise.all() ` and ` Promise.race()`.
     ```js
         let firstFunction = function() {
         return new Promise(function(resolve, reject) {
@@ -351,7 +355,7 @@ The declaration starts with the reserved word **var**, where a variable that wil
             });
 
     ```
-> Promise.all( ) and Promise.race( ) are two composition tools for executing asynchronous operations in parallel.
+    > Promise.all( ) and Promise.race( ) are two composition tools for executing asynchronous operations in parallel.
 
 
 [Back](#content)
@@ -365,25 +369,25 @@ The declaration starts with the reserved word **var**, where a variable that wil
    - Async functions allow promises to resolve in a synchronous and non-blocking manner in the process. async functions can be either expression or declarative.
    - An async function can contain an await expression, which pauses the execution of the asynchronous function and waits for the resolution of the passed Promise.
    - When an async function is called, it returns a Promise element.
-    ```js
-            const swapiFilms = async function() {
-            let url = "https://swapi.dev/api/films/",
-                filmsData = {},
-                films = [];
+```js
+        const swapiFilms = async function() {
+        let url = "https://swapi.dev/api/films/",
+            filmsData = {},
+            films = [];
 
-            filmsData = await fetch(url).then(data => data.json());
+        filmsData = await fetch(url).then(data => data.json());
 
-            //processing data
-            films = filmsData.results.map(obj => obj.title);
-            console.log(films);
-           };
+        //processing data
+        films = filmsData.results.map(obj => obj.title);
+        console.log(films);
+        };
 
-          swapiFilms(); // llama la función async
-    ```
-    - **await Keyword**
-       - Can only be used within an Async function.
-       - Wait for Promise resolution.
-       - Causes the Async function to pause, generating synchronous coding behavior.
+        swapiFilms(); // llama la función async
+```
+- **await Keyword**
+     - Can only be used within an Async function.
+     - Wait for Promise resolution.
+     - Causes the Async function to pause, generating synchronous coding behavior.
 
 [Back](#content)
 
