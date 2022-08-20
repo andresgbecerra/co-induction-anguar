@@ -1,18 +1,16 @@
 ## Asynchronous JavaScript
 ***
 
-# Content
+### Content
 
-[Introduction](#introduction)
-    - [Functions](#funtions)
-    - [Callback](#callback)
-
-
-[1. Understanding Asynchronous Coding](#1-understanding-asynchronous-coding)
-[2. The Necessity of Callbacks](#2-the-necessity-of-callbacks)
-[3. Promises](#3-promises)
-[4. Async Await](#4-async-await)
-[Generators](#generators)
+- [Introduction](#introduction)
+- [Funtions](#funtions)
+- [Callback](#callback)
+- [1. Understanding Asynchronous Coding](#1-understanding-asynchronous-coding)
+- [2. The Necessity of Callbacks](#2-the-necessity-of-callbacks)
+- [3. Promises](#3-promises)
+- [4. Async Await](#4-async-await)
+- [Generators](#generators)
 
 
 ***
