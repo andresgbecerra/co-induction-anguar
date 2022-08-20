@@ -38,7 +38,7 @@
 # Why Do you want to work Here
 
 - "Why are you interested in working for this organization" Or, "Why is the particular position appealing"
-- `I feel that my proven track record leading multifunctional teams makes me an excellent match for these job requirements. Also, the rule excites me because I love the idea of helping to develop cutting-edge software products.I know I could start delivering results from day one.`
+  - I believe my track record of integrating new features and understanding the complexity of projects as well as how to scale them appropriately makes me an excellent fit for these job requirements. In addition, the rule excites me because I love the idea of helping to develop cutting-edge software products.I know I could start delivering results from day one.
   
 [Back](#content) 
 # Sell Yourself
@@ -74,7 +74,7 @@
 
 # Where do you see yourself in five years
 
-`"My goal right now is to find a position at a company where I can grow and take on new challenges over time.Ultimately, I'd like to assume more management responsibilities and maybe get involved in product strategy as well. But most importantly, I want to work for an organization where I can build a career."`
+`"My goal right now is to find a position at a company where I can grow and take on new challenges over time. Ultimately, I'd like to assume more management responsibilities and maybe get involved in product strategy as well. But most importantly, I want to work for an organization where I can build a career."`
 
 [Back](#content) 
 # Ask Questions
