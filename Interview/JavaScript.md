@@ -28,8 +28,8 @@
 - [Functions](#functions)
 - [Callback](#callback)
 - [Promises](#promises)
-- [Classes**](#classes)
-- [Temporal Dead Zone - TDZ**](#temporal-dead-zone---tdz)
+- [Classes](#classes)
+- [Temporal Dead Zone - TDZ](#temporal-dead-zone---tdz)
 - [Prototype](#prototype)
 - [Memoization](#memoization)
 - [Recursion](#recursion)
@@ -48,7 +48,7 @@
 # Engine
 
 - **Just in Time - JIT**
-  - the compilation is done during execution.
+  - The compilation is done during execution.
   - An Interpreter is a program, which executes the program instructions without requiring them to be precompiled into a machine-readable format.
   - Compilation is a process of converting the program source code into machine-readable binary code, before the execution.
   > JavaScript is an interpreted, JIT(Just In Time)
@@ -345,6 +345,42 @@
 
 # Functions
 
+> A function is a group of statements that, together, perform a task.
+> By default, functions return undefined. To return any other value, the function must have a return statement that specifies the value to return.
+
+- **Function Declaration**
+  - A function declaration tells the JavaScript engine about a function’s name, return type, and parameters. When a function has been declared, it can be used anytime inside a class or development scope whenever it’s been called/invoked.
+  - Function declarations in JavaScript are hoisted to the top of the enclosing function or global scope. You can use the function **before** you declared it
+  ```js
+    hoisted(); // logs "foo"
+
+    function hoisted() {
+      console.log('foo');
+    }
+  ```
+  >To declare a function, it must start with function name(), just like a variable declaration must start with Var.
+
+- **Function Expression**
+  - A JavaScript function can also be defined using an expression.
+  - Just as we know in JavaScript, an expression is a section of a statement that evaluates a value.
+  - After a function expression has been stored in a variable (Var, let, const), the variable can be used as a function.
+  - Functions stored in variables do not need function names. They are always invoked (called) using the variable name.
+  - Note that function expressions are not hoisted:
+    ```js
+      notHoisted(); // TypeError: notHoisted is not a function
+
+      var notHoisted = function() {
+        console.log('bar');
+      };
+    ```
+
+- **Function Declaration vs. Function Expression**
+  - They’re actually really similar. How you call them is exactly the same. The difference lies in how the browser loads them into the execution context.
+   - Declaration: Function declarations load before any code is executed.
+   - Expression: Function expressions load only when the interpreter reaches that line of code.
+   - Declaration: Similar to the var statement, function declarations are hoisted to the top of other code.
+   - Expression: Function expressions aren’t hoisted, which allows them to retain a copy of the local variables from the scope where they were defined.
+
 > **Pure function** does not depend on any state, data, or change during the execution. In other words, given the same arguments, a pure function should always return the same output.
 
 - **Arrow functions** 
@@ -373,6 +409,20 @@
      -  can be returned by another function
      -  can be used as a property of an object.
     > Functions that are used as an argument to another function are called callback functions.If the same parameter is used again while invoking the function, instead of computing the result, we directly return the stored (cached) value. 
+    ```js
+        function greeting(name) {
+          alert(`Hello, ${name}`);
+        }
+
+        function processUserInput(callback) {
+          const name = prompt('Please enter your name.');
+          callback(name);
+        }
+
+        processUserInput(greeting);
+    ```
+    > The above example is a synchronous callback, as it is executed immediately.
+    - Note, however, that callbacks are often used to continue code execution after an **asynchronous** operation has completed — these are called asynchronous callbacks. A good example is the callback functions executed inside a .then() block chained onto the end of a promise after that promise fulfills or rejects. This structure is used in many modern web APIs, such as fetch().
 
 [Back](#content)
 
@@ -400,17 +450,18 @@
   - Object destructuring is a new way to extract elements from an object or an array.
   - Using object destructuring we can extract all the elements inside an object in one line of code.
 
-# Classes**
+# Classes
   - Introduced in the ES6 version, classes are nothing but syntactic sugars for constructor functions.
   - They provide a new way of declaring constructor functions in javascript.  
   - Key points to remember about classes:
     - Unlike functions, classes are not hoisted. A class cannot be used before it is declared.
     - A class can inherit properties and methods from other classes by using the **extends** keyword.
     - All the syntaxes inside the class must follow the strict mode(‘use strict’) of javascript. An error will be thrown if the strict mode rules are not followed.
-    - 
+
+
 [Back](#content)
 
-# Temporal Dead Zone - TDZ**
+# Temporal Dead Zone - TDZ
   - Temporal Dead Zone is a behaviour that occurs with variables declared using let and const keywords. It is a behaviour where we try to access a variable before it is initialized.
   - Throws a reference error 
 
