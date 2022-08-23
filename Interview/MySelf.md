@@ -55,6 +55,7 @@
 
 - >And finally, I think I'm **Meticulous—** I keep an eye on the details, I mean when I am writing lines of code any wrong character can break the software. I´m meticulous in that sense
 
+- >I have achieved strong **hands-on expertise** in programming, understand the complexity of a project, and often apply environment-independent solutions to continue advancing in the tasks, for example implementing local mock servers to obtain or simulate backend responses or using design patterns to decouple blocks of code.
 
 ```
 - Classic Personality Strengths:
@@ -84,7 +85,7 @@
 
 # Where do you see yourself in five years
 
-`"My goal right now is to find a position at a company where I can grow and take on new challenges over time. Ultimately, I'd like to assume more management responsibilities and maybe get involved in product strategy as well. But most importantly, I want to work for an organization where I can build a career."`
+`"My goal right now is to find a position at a company where I can grow and take on new challenges over time. Ultimately, I'd like to assume more management responsibilities and maybe get involved in software product strategy as well. But most importantly, I want to work for an organization where I can build a career."`
 
 [Back](#content) 
 # Ask Questions
@@ -105,13 +106,16 @@ Sorry I can't find my words
 
 
 - **preferred development environment:**
-  - >I would like to be part of multicultural development teams, share knowledge, and experiences, and I would like to have the opportunity to learn about new techniques, methods, and software architectures. 
+    - >Well for me the ideal development environment is one where teamwork is efficient, communication is positive, and team members are willing to learn and teach.
+    - >I would like to be part of multicultural development teams, share knowledge, and experiences, and have the opportunity to learn about new techniques, methods, and software architectures. 
 
 
 [Back](#content) 
 
 # Experiences
 - **Tech Experience:** & **most interesting project:**
+  - The last project before joining Unosquare, was related to a software for quality control of clinical samples implemented in clinical laboratories in Colombia, the main objective of the project was to manage the data of each clinical sample and facilitate the interpretation through the use of graphs, grids and different components.
+  - Using Angular with redux to improve performance and share data across the application.
   - I have worked with some Amazon workspace services, in a project that had the goal to control and monitor an industrial boiler through an augmented reality mobile application implemented in Unity with vuforia and a web application in angular that also allowed to check the status of the boiler components.
   - The industrial boiler has a simens logo 8 PLC that allows to connect with AWS IoT service to send all the analog signals from the sensors and valves of the boiler components.
   - This application also used AWS Elastic Beanstalk as a backend server with a MySQL database in AWS RDS. 
