@@ -139,8 +139,7 @@ Sorry I can't find my words
   - Integrated an external library to generate report files with graphs, improving the report download time by 64%.
   - Supported the backend team by implementing functions and logic in the controllers that allow extracting, organizing, and sending data, reducing the number of bugs by 15%.
   - Implemented the Facade design pattern to decouple the components from the implementation details, simplifying the project structure by 50%.
-- **SATENA** is a commercial passenger airline owned by the Colombian government and its main activity is the provision of air transportation services for passengers, mail, and cargo in Colombia and abroad.
-  - From the IT department, I developed, designed, and implemented in-house solutions needed for the airline and WEB applications, which allowed manage the staff efficiently, and control the aircraft maintenance time and warehouse inventories.
+- **SATENA** is a commercial passenger airline owned by the Colombian government and its main activity is the provision of air transportation services for passengers, mail, and cargo in Colombia and abroad. From the IT department, I developed, designed, and implemented in-house solutions needed for the airline and WEB applications, which allowed manage the staff efficiently, and control the aircraft maintenance time and warehouse inventories.
   - Reduced the number of tickets reported to the IT department by 25% with the definitive solution to bugs in the in-house application for staff management.
   - Improved the overall experience and performance of the website by 45% using functional JS programming techniques.
 
