@@ -11,6 +11,7 @@
 - [Where do you see yourself in five years](#where-do-you-see-yourself-in-five-years)
 - [Ask Questions](#ask-questions)
 - [Experiences](#experiences)
+- [Linkedin](#linkedin)
 
 
 ***
@@ -55,7 +56,7 @@
 
 - >And finally, I think I'm **Meticulous—** I keep an eye on the details, I mean when I am writing lines of code any wrong character can break the software. I´m meticulous in that sense
 
-- >I have achieved strong **hands-on expertise** in programming, understand the complexity of a project, and often apply environment-independent solutions to continue advancing in the tasks, for example implementing local mock servers to obtain or simulate backend responses or using design patterns to decouple blocks of code.
+- >I have achieved strong **hands-on expertise** in programming, understand the complexity of a project, and often apply environment-independent solutions to continue advancing in the tasks or a new feature, for example implementing local mock servers to obtain or simulate backend responses or using design patterns to decouple blocks of code.
 
 ```
 - Classic Personality Strengths:
@@ -120,4 +121,32 @@ Sorry I can't find my words
   - The industrial boiler has a simens logo 8 PLC that allows to connect with AWS IoT service to send all the analog signals from the sensors and valves of the boiler components.
   - This application also used AWS Elastic Beanstalk as a backend server with a MySQL database in AWS RDS. 
 
+
 [Back](#content) 
+
+# Linkedin
+
+- **Unosquare** helps operationally augment technology teams, design and build user experience-focused web applications and products, and drive client initiatives in digital transformation.
+  - I am part of the Unosquare JS Center of Excellence, currently mastering my knowledge on the following topics: 
+    - Production-Grade Angular 
+    - Go, Golang 
+    - Concurrent and functional programming 
+    - E2E and Unit testing
+
+- **ANNAR** is an innovation and development company focused on the health sector, where we design and implement different digital products for data analysis, quality, administration, and management of clinical laboratories.
+  - Incorporated customizable components based on Angular material, to be reused in the development of the application, reducing layout time by 20%.
+  - Improved the overall design of the ValiQC application by reducing the size by 40%, refactoring the CSS styles with better specificity rules, and defining selectors with the BEM methodology.
+  - Integrated an external library to generate report files with graphs, improving the report download time by 64%.
+  - Supported the backend team by implementing functions and logic in the controllers that allow extracting, organizing, and sending data, reducing the number of bugs by 15%.
+  - Implemented the Facade design pattern to decouple the components from the implementation details, simplifying the project structure by 50%.
+- **SATENA** is a commercial passenger airline owned by the Colombian government and its main activity is the provision of air transportation services for passengers, mail, and cargo in Colombia and abroad.
+  - From the IT department, I developed, designed, and implemented in-house solutions needed for the airline and WEB applications, which allowed manage the staff efficiently, and control the aircraft maintenance time and warehouse inventories.
+  - Reduced the number of tickets reported to the IT department by 25% with the definitive solution to bugs in the in-house application for staff management.
+  - Improved the overall experience and performance of the website by 45% using functional JS programming techniques.
+
+  Projects:
+   - SATENA Official mobile App (iOS / Android)
+   - Passenger Control App(.NET Core/ Angular / Xamarin), This app allows to efficiently classify the type of passenger, reducing the waiting time by 42% and improving the dispatch of the flight.
+
+[Back](#content) 
+
