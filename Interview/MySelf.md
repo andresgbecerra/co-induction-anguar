@@ -49,6 +49,7 @@
 [Back](#content) 
 # What are your Strengths
 - "What makes you a good fit?" Or, "What makes you different?" Or, "Why should we hire you?"
+- > I believe I am the right candidate for the requirements of this job because my experience as a frontend developer has allowed me to understand the complexity of a project and apply techniques that can make it scale efficiently, in addition to that I really enjoy working in multicultural teams and I am very goal oriented.
 
 - >Let’s see. I’m **persistent_** I am constant with the development of a project. I do not give up searching, learning, and changing what is necessary to get the requirements. I mean I take each goal as mine.
 
@@ -117,6 +118,7 @@ Sorry I can't find my words
 - **Tech Experience:** & **most interesting project:**
   - The last project before joining Unosquare, was related to a software for quality control of clinical samples implemented in clinical laboratories in Colombia, the main objective of the project was to manage the data of each clinical sample and facilitate the interpretation through the use of graphs, grids and different components.
   - Using Angular with redux to improve performance and share data across the application.
+  - I try to be really accurate in building components from the wireframe of systems design.
   - I have worked with some Amazon workspace services, in a project that had the goal to control and monitor an industrial boiler through an augmented reality mobile application implemented in Unity with vuforia and a web application in angular that also allowed to check the status of the boiler components.
   - The industrial boiler has a simens logo 8 PLC that allows to connect with AWS IoT service to send all the analog signals from the sensors and valves of the boiler components.
   - This application also used AWS Elastic Beanstalk as a backend server with a MySQL database in AWS RDS. 

@@ -325,7 +325,7 @@
   - **The Facade Pattern**
     -  Facades are controversial and can be misused.
     -  Facades are a pure delegation layer and shuold NOT handle business logic.
-    -  Facades provide a clean separation between components and te rest of the application.
+    -  Facades provide a clean separation between components and the rest of the application.
     -  Just as Input and Output provide an API for your components, Facades provide an API for you application.
     -  Facades are an excellent way to incrementally integrate NgRx.
     -  Facades are great for mocking out a business logic layer.
