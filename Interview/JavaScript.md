@@ -70,6 +70,7 @@
   - An Interpreter is a program, which executes the program instructions without requiring them to be precompiled into a machine-readable format.
   - Compilation is a process of converting the program source code into machine-readable binary code, before the execution.
   > JavaScript is an interpreted, JIT(Just In Time)
+- **Garbage collection:** is the process of finding and deleting objects which are no longer being referenced by other objects.`GC is a fundamental component of the memory management system used by JavaScript.`
 
 **Host environment**
 - **Heap:** This refers to the physical space in memory used to store variables, functions and Objects.
@@ -78,8 +79,6 @@
 - **Callback queue:** Some API functions require a callback function to be provided to know what to do after the API function has been executed. These callback functions are stored in this queue and behave as a first-in-first-out (FIFO) structure. 
 - **Event loop:** It is an algorithm that is constantly monitoring the Stack. When the stack is empty, the first function located in the callback queue is entered into the stack to complete its execution and then the next one until the callback queue is empty.
   
-
-- **Garbage collection:** is the process of finding and deleting objects which are no longer being referenced by other objects.`GC is a fundamental component of the memory management system used by JavaScript.`
 
 [Back](#content)
 
