@@ -232,9 +232,9 @@ incBy3(); //9
     mathHomework.study();
    // Please study Math   
   ```
-  - The two objects jsHomework and mathHomework each pro- totype link to the single homework object, which has the study() function. jsHomework and mathHomework are each given their own topic property
+  - The two objects jsHomework and mathHomework each prototype link to the single homework object, which has the study() function. jsHomework and mathHomework are each given their own topic property
    ![prototype objects](../../assets/prototype-objects.png)
-  > jsHomework.study() delegates to homework.study(), but its this (this.topic) for that execution resolves to jsHome- work because of how the function is called, so this.topic is "JS". Similarly for mathHomework.study() delegating to homework.study() but still resolving this to mathHome- work, and thus this.topic as "Math".
+  > jsHomework.study() delegates to homework.study(), but its this (this.topic) for that execution resolves to jsHomework because of how the function is called, so this.topic is "JS". Similarly for mathHomework.study() delegating to homework.study() but still resolving this to mathHomework, and thus this.topic as "Math".
 
 
 _The End_
