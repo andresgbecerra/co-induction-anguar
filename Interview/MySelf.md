@@ -16,6 +16,8 @@
 
 ***
 
+//TODO: Talk about a mistake
+
 # Tell me about yourself
 
 - I'm a Frontend developer with 4 years of experience developing web applications using Angular, Nodejs, and REST services with a focus on details and transforming business requirements into highly scalable code. 

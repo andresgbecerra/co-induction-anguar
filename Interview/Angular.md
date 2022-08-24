@@ -7,6 +7,7 @@
 
 - [TypeScript](#typescript)
 - [OAT ahead of time](#oat-ahead-of-time)
+- [DOM](#dom)
 - [Module](#module)
 - [Component](#component)
 - [Binding](#binding)
@@ -30,7 +31,8 @@
 # TypeScript
 - Angular was written in TypeScript, a typed superset of JavaScript that implements many modern EcmaScript features.
 > ES6 is the current version of JavaScript. TypeScript is a superset of ES6, which means all ES6 features are part of TypeScript, but not all TypeScript features are part of ES6. Consequently, TypeScript must be transpiled into ES5/ES6 to run in most browsers.
-> 
+
+
 [Back](#content) 
 
 
@@ -47,6 +49,20 @@
   > When you run the ng build (build only) or ng serve (build and serve locally) CLI commands, the type of compilation (JIT or AOT) depends on the value of the aot property in your build configuration specified in angular.json. By default, aot is set to true for new CLI applications.
 
   [Back](#content) 
+
+
+# DOM
+
+- **Shadow DOM:**
+  - Is a framework(Angular) agnostic concept that applies to how your style and logic for a component get bundled and encapsulated.
+  - Using Shadow DOM we are able to hide the internals of the component to the browser and make it look like it's a custom component that can be packaged and moved around through the entire application.
+  - It is a way to encapsulate and hide away the internals of an Angular component. 
+
+- **Virtual DOM:**
+  - Is a mechanism by which we are able to efficiently make updates to a component on our web UI, so we don't render links all the time.
+  - If something change in the component you don't do a full page refresh of the entire app, only certain localized pieces of the app will change, this concept is used on React and Vue.
+
+[Back](#content) 
 
 # Module
   - In general, a module collects a block of code dedicated to a single purpose. 
