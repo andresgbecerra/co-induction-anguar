@@ -424,7 +424,7 @@
      -  they can be used as an argument of another function
      -  can be returned by another function
      -  can be used as a property of an object.
-    > Functions that are used as an argument to another function are called callback functions.If the same parameter is used again while invoking the function, instead of computing the result, we directly return the stored (cached) value. 
+  > Functions that are used as an argument to another function are called callback functions.If the same parameter is used again while invoking the function, instead of computing the result, we directly return the stored (cached) value. 
 
   ```js
       function greeting(name) {
