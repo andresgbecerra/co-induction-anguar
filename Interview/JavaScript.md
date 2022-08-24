@@ -262,6 +262,7 @@
     - It’s a predefined method in javascript.
     - This method invokes a method (function) by specifying the owner object. 
     - call() method allows an object to use the method (function) of another object.
+    - The call() method calls the function with a given this value and arguments provided individually.
     - call() accepts arguments
       ```js
         function sayHello(){
@@ -306,7 +307,7 @@
       - Example with arguments:
         ```js
             var bikeDetails = {
-                displayDetails: function(registrationNumber,brandName){
+                displayDetails: function(registrationNumber, brandName){
                     return this.name+ " , "+ "bike details: "+ registrationNumber + " , " + brandName;
                 }
             }
@@ -332,6 +333,7 @@
   - Currying is an advanced technique to transform a function of arguments n, to n functions of one or fewer arguments.
   - if we have a function f(a,b), then the function after currying, will be transformed to f(a)(b).
   - By using the currying technique, we do not change the functionality of a function, we just change the way it is invoked. 
+  >  currying is when a function — instead of taking all arguments at one time — takes the first one and returns a new function, which takes the second one and returns a new function, which takes the third one, etc. until all arguments are completed.
 
 [Back](#content)
 
