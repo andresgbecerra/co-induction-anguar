@@ -47,24 +47,38 @@
 
 # Engine
 
+- From a high-level view, the V8 JavaScript engine execution consists of 5 steps.
+  1. Initialize environment in the host
+  2. Compile JavaScript codes
+  3. Generate bytecodes
+  4. Interpret and execute bytecodes
+  5. Optimize some bytecodes for better performance
+
+- Initialize environment
+    - Technically, this is not part of V8’s job. It is the renderer process of the browser initializes the following two items:
+      - V8 engine
+      - Host environment
+
+
+**V8 engine**
+- **Parser** - The JavaScript source code is first converted to tokens. Tokens represent the alphabet of a language. JavaScript is fed into a Parser, which generates an Abstract Syntax Tree.
+- **Interpreter** - Abstract Syntax Tree is the input for the V8 Ignition Interpreter, which generates the ByteCode
+- **Compiler** - The Turbofan Compiler of the V8 Engine takes in the ByteCode and generates machine code
+- **Optimizing Compiler**- It takes ByteCode and some profiling data as the input and generates optimized machine code
 - **Just in Time - JIT**
   - The compilation is done during execution.
   - An Interpreter is a program, which executes the program instructions without requiring them to be precompiled into a machine-readable format.
   - Compilation is a process of converting the program source code into machine-readable binary code, before the execution.
   > JavaScript is an interpreted, JIT(Just In Time)
 
-- **Parser** - The JavaScript source code is first converted to tokens. Tokens represent the alphabet of a language. JavaScript is fed into a Parser, which generates an Abstract Syntax Tree.
-- **Interpreter** - Abstract Syntax Tree is the input for the V8 Ignition Interpreter, which generates the ByteCode
-- **Compiler** - The Turbofan Compiler of the V8 Engine takes in the ByteCode and generates machine code
-- **Optimizing Compiler**- It takes ByteCode and some profiling data as the input and generates optimized machine code
-
+**Host environment**
 - **Heap:** This refers to the physical space in memory used to store variables, functions and Objects.
 - **Stack:** This is the stack where functions and API calls are stored (Web API in browsers and C/C++ API on local machines via NodeJs). This stack behaves as a last-in-first-out (LIFO) structure.
 - **API's (Web or C/C++):** This is where the actual functionality of built-in functions such as setTimeout() and fetch() are found.
 - **Callback queue:** Some API functions require a callback function to be provided to know what to do after the API function has been executed. These callback functions are stored in this queue and behave as a first-in-first-out (FIFO) structure. 
 - **Event loop:** It is an algorithm that is constantly monitoring the Stack. When the stack is empty, the first function located in the callback queue is entered into the stack to complete its execution and then the next one until the callback queue is empty.
   
-  
+
 - **Garbage collection:** is the process of finding and deleting objects which are no longer being referenced by other objects.`GC is a fundamental component of the memory management system used by JavaScript.`
 
 [Back](#content)

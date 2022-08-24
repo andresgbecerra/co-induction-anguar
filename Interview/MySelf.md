@@ -44,7 +44,7 @@
   
 [Back](#content) 
 # Sell Yourself
- - `In my previous position, I worked late into the night fixing bugs reported by the customer that affected the production environment and delayed the ongoing sprint development. I even learned to design in Figma to help the design team build the templates when they were behind schedule.` 
+ - `In my previous position, I worked late into the night fixing bugs reported by the client that affected the production environment and delayed the ongoing sprint development. I even learned to design in Figma to help the design team build the templates when they were behind schedule.` 
   
 [Back](#content) 
 # What are your Strengths
