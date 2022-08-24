@@ -170,8 +170,8 @@
 
 
 # Coercion
-  - Type coercion is the automatic or _implicit_ conversion of values from one data type to another (such as strings to numbers).
-  - **Type conversion** is similar to type **coercion** because they both convert values from one data type to another with one key difference — type coercion is implicit whereas type conversion can be either implicit or explicit.
+  - **Type coercion:** is the automatic or _implicit_ conversion of values from one data type to another (such as strings to numbers).
+  - **Type conversion:** is similar to _type coercion_ because they both convert values from one data type to another with one key difference — type coercion is implicit whereas type conversion can be either implicit or explicit.
   - **Boolean Coercion** takes place when using logical operators, ternary operators, if statements, and loop checks. To understand boolean coercion in if statements and operators, we need to understand truthy and falsy values.
     - Truthy values are those which will be converted (coerced) to true. 
     - Falsy values are those which will be converted to false.
