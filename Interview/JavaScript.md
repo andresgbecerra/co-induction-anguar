@@ -198,8 +198,9 @@
   - **“ == “ and “ === “ operators**
     - Both are comparison operators. 
     - The difference between both the operators is that “==” is used to compare values whereas, “ === “ is used to compare both values and types.
+      > == loose equality / === stritc equality 
     -  === disallows any sort of type conversion (aka, “coercion”) in its comparison.
-    > == loose equality / === stritc equality 
+    > You could think of Object.is(..) as the “quadruple-equals” ====, the really- really-strict comparison instead of === that is not actually strictly exactly equal comparison, in the strictest sense.
   
 [Back](#content)  
 
