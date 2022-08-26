@@ -16,7 +16,7 @@
 
 ***
 
-//TODO: Talk about a mistake
+//TODO: Talk about a mistake - STAR
 
 # Tell me about yourself
 
