@@ -161,55 +161,165 @@
     | _STRING_ | string | "Andres" ... var address string = "Cll 45" |
     | _BOOLEAN_ | bool && \| \|  ! < <=  > >= == != | true false ... var isHide bool = true |
 
+- The **reflect** package allows us to change or modify the object or any variable at the dynamic. In more technical words, it allows us to manipulate the value of objects dynamically. 
+- Reflection is the way a programming language can check the type of values at runtime. 
+  ```go
+  package main
+ 
+        import (
+            "fmt"
+            "reflect"
+        )
+        
+        type Person struct{
+            Name string
+            Age int
+        }
+        
+        func main() {
+            p := Person{"Andres", 22}
+            fmt.Println(reflect.TypeOf(p))      // main.Person
+
+            fmt.Println(reflect.TypeOf("Andres"))  // string
+            
+            var x = 10
+            fmt.Println(reflect.TypeOf(float64(x) * 5.5))  // float64
+
+        }
+  ```
+
+
+- **Variables**
+    - The ***var*** keyword is used to declare a variable.
+    ```go
+        package main
+        
+        import "fmt"
+        
+        func main() {
+                var name = "Andres"               // no type declaration
+                var username string = "Andres123" // type declaration
+                var numberOfPosts int             // no initialization
+                fmt.Println(numberOfPosts)        // prints 0
+        }
+    ```
+    - Initialization shorthand enables us to initialize variables in a concise manner. Which means we can initialize without using var and declaring datatype of that variable.
+    - Inside a function, the := short assignment statement can be used in place of a var declaration with implicit type.
+    ```go
+        package main
+        
+        import "fmt"
+        
+        func main() {
+                name := "Andres"  // notice the colon equal syntax
+        }
+    ```
+
+
+- **Control Structures**
+  - **IF Statement:**
+    - the if statement can start with a short statement to execute before the condition.
+    - Variables declared by the statement are only in scope until the end of the if.
+    ```go
+        package main
+
+        import (
+            "fmt"
+            "math"
+        )
+
+        func sqrt(x float64) string {
+            if x < 0 {
+                return sqrt(-x) + "i"
+            }
+            return fmt.Sprint(math.Sqrt(x))
+        }
+
+        func main() {
+            fmt.Println(sqrt(2), sqrt(-4))
+        }
+    ```
+
+
+
+
+
+[Back](#content)
+
 ***
 
 
 # Complex Structures
 
+[Back](#content)
 ***
 
 
 # Go Toolkit
 
+[Back](#content)
 ***
 
 
 # Struts
+
+
+[Back](#content)
 
 ***
 
 
 # Pointers
 
+
+[Back](#content)
+
 ***
 
 
 # Error Handling
+
+
+[Back](#content)
 
 ***
 
 
 # Methods
 
+
+[Back](#content)
+
 ***
 
 
 # Interfaces
+
+
+[Back](#content)
 
 ***
 
 
 # Web Servers
 
+
+[Back](#content)
+
 ***
 
 
 # Hitting an External API
+
+
+[Back](#content)
 
 ***
 
 
 # Concurrency
 
-***
+[Back](#content)
 
+
+_The End_
