@@ -15,6 +15,7 @@
 - [CLS - Common Language Specification](#cls---common-language-specification)
 - [CTS - Common Type System](#cts---common-type-system)
 - [IDE - Integrate Development Environtment](#ide---integrate-development-environtment)
+- [donet CLI](#donet-cli)
 
 
 ***
@@ -125,6 +126,33 @@
 
 # IDE - Integrate Development Environtment
 - Visual Studio VS
+- Visual Studio Code VSC
+- Rider (JetBrains)
+
+[Back](#content)
+
+# donet CLI
+
+- Command-line Interface
+- The .NET command-line interface (CLI) is a cross-platform toolchain for developing, building, running, and publishing .NET applications.
+  
+  | Basic Commands | Project modification commands | Advanced commands | Tool management commands |
+  | -------------- | ----------------------------- | ----------------- | ------------------------ |
+  | new            |    add package                | nuget delete      |    tool install          |
+  | restore        |    add reference              | nuget locals      |    tool list             |
+  | build          |    remove package             | nuget push        |    tool update           |
+  | publish        |    remove reference           | msbuild           |    tool restore Available since .NET Core SDK 3.0. |
+  | run            |    list reference             | dotnet install script  | tool run Available since .NET Core SDK 3.0. |
+  | test           |                               |                    | tool uninstall    |
+  | vstest         |
+  | pack           |
+  | migrate        |
+  | clean          |
+  | sln            |
+  | help           |
+  | store          |
+
+
 
 [Back](#content)
 
