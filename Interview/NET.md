@@ -2,7 +2,7 @@
 
 > .NET is a software framework that is designed and developed by Microsoft. The first version of the .Net framework was 1.0 which came in the year 2002. In easy words, it is a virtual machine for compiling and executing programs written in different languages like C#, VB.Net, etc.
 
-> C# is a general-purpose, modern and object-oriented programming language pronounced as “C Sharp”. It was developed by Microsoft led by Anders Hejlsberg and his team within the .NET initiative and was approved by the European Computer Manufacturers Association (ECMA) and International Standards Organization (ISO). C# is among the languages for Common Language Infrastructure. C# is a lot similar to Java syntactically and is easy for users who have knowledge of C, C++ or Java.
+
 
 
 ***
@@ -13,6 +13,7 @@
 - [CLR - Common Language runtime](#clr---common-language-runtime)
 - [MSIL - Microsoft Intermediate Language](#msil---microsoft-intermediate-language)
 - [Roslyn](#roslyn)
+- [GC - Garbage Collection](#gc---garbage-collection)
 - [CLS - Common Language Specification](#cls---common-language-specification)
 - [CTS - Common Type System](#cts---common-type-system)
 - [IDE - Integrate Development Environtment](#ide---integrate-development-environtment)
@@ -74,6 +75,10 @@
 
 > CoreCLR for .NET Core
 
+- managed and unmanaged code:
+  - Managed code is executed by the Common Language Runtime (CLR) of the .NET Framework, whereas unmanaged code is executed by the Operating System (OS).
+  - CLR offers inbuilt security to managed code, whereas it’s the developer’s responsibility to write safe and secure code with unmanaged code.
+
 
 [Back](#content)
 
@@ -94,8 +99,18 @@
 - Is integrated by default in Visual studio and dotnet CLI.
 - Open Source
 - Analyze code style and quality.
+- Code Compiled:
+  - When a project is developed, C# source code is **compiled** into Intermediate Language (IL). IL is a set of instructions that produces a machine code for execution on the machine processor. 
+
+In four steps, code moves from the preprocessor to the compiler, to the assembler, and, lastly, to the linker. 
 
 >Compilers build a detailed model of application code as they validate the syntax and semantics of that code. They use this model to build the executable output from the source code. The .NET Compiler Platform SDK provides access to this model.
+
+[Back](#content)
+
+# GC - Garbage Collection
+- garbage collection is the process of managing memory in an application. The garbage collector automatically disposes of memory that is no longer used to make memory available for new allocations.
+
 
 [Back](#content)
 
