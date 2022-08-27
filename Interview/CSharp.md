@@ -21,10 +21,13 @@
 - [Object](#object)
 - [Array](#array)
 - [Serialization](#serialization)
+- [XSD file](#xsd-file)
 - [Interface](#interface)
 - [Class](#class)
 - [Method](#method)
 - [Structure](#structure)
+- [Delegate](#delegate)
+- [Events](#events)
 - [Constructor](#constructor)
 - [Destructor](#destructor)
 - [Generics](#generics)
@@ -32,14 +35,20 @@
 - [Dependency Injection](#dependency-injection)
 - [HashSet](#hashset)
 - [Types of Control](#types-of-control)
-- [Multithreading](#multithreading)
+- [Thread - Multithreading](#thread---multithreading)
 - [Constants](#constants)
 - [Boxing - Unboxing](#boxing---unboxing)
+- [Get and Set](#get-and-set)
+- [Async and Await](#async-and-await)
+- [Deadlock](#deadlock)
 - [Costum Control](#costum-control)
 - [Circular references](#circular-references)
 - [Exception handling](#exception-handling)
 - [System.IO](#systemio)
 - [Finally and Finalize block](#finally-and-finalize-block)
+- [Lock, Monitors, and Mutex Object in Threading.](#lock-monitors-and-mutex-object-in-threading)
+- [Race Condition](#race-condition)
+- [Thread Pooling](#thread-pooling)
 
 
 # Introduction
@@ -290,11 +299,41 @@
 [Back](#content)
 
 # Serialization
-- Serialization is the process of converting an object into a stream of bytes for storage on a memory, database, or file. This allows the developer to save the state of an object for future reference. 
-- Serialization can be performed by applying `SerializableAttribute` to a type to indicate that instances of this type can be serialized. All public and private fields marked as such are then serialized by default.
+
+- It is a process of converting code to its binary format.
+- Serialization is the process of converting an object into a stream of bytes for storage on a memory, database, or file. 
+- This allows the developer to save the state of an object for future reference. 
+- Serialization can be performed by applying `Serializable` Attribute to a type to indicate that instances of this type can be serialized. 
+- All public and private fields marked as such are then serialized by default.
+
+- The different types of Serialization are: **XML** serialization, **SOAP**, and **Binary**.
+  - XML serialization:
+    - It serializes all the public properties to the XML document. 
+    - Since the data is in XML format, it can be easily read and manipulated in various formats. 
+    - The classes reside in System.sml.Serialization.
+  - SOAP: 
+    - Classes reside in System.Runtime.Serialization. 
+    - Similar to XML but produces a complete SOAP compliant envelope that can be used by any system that understands SOAP.
+  - Binary Serialization:
+    - Allows any code to be converted to its binary form. 
+    - Can serialize and restore public and non-public properties. 
+    - It is faster and occupies less space.
+
+[Back](#content)
+
+# XSD file 
+
+- XSD file stands for XML Schema Definition. 
+- It gives a structure for the XML file. 
+- It means it decides the elements that the XML should have and in what order and what properties should be present. 
+- Without an XSD file associated with XML, the XML can have any tags, any attributes, and any elements.
+- Xsd.exe tool converts the files to XSD format. 
+- During Serialization of C# code, the classes are converted to XSD compliant format by xsd.exe.
 
 
 [Back](#content)
+
+
 
 # Interface
 - An Interface is a class with no implementation. The only thing that it contains is the declaration of methods, properties, and events.
@@ -356,6 +395,65 @@
 | Members are private by default |	Members are public by default |
 | Good for larger complex objects |	Good for Small isolated models |
 | Can use waste collector for memory management	 | Cannot use Garbage collector and hence no Memory management |
+
+
+[Back](#content)
+
+# Delegate
+
+- Delegate is a variable that holds the reference to a method. Hence it is a function pointer of reference type. 
+- All Delegates are derived from System.Delegate namespace. 
+- Both Delegate and the method that it refers to can have the same signature.
+- Declaring a delegate:
+  ```cs
+   public delegate void AddNumbers(int n);
+  ```
+- After the declaration of a delegate, the object must be created of the delegate using the new keyword.
+  ```cs
+   AddNumbers an1 = new AddNumbers(number);
+  ```
+- The delegate provides a kind of encapsulation to the reference method, which will internally get called when a delegate is called.
+  ```cs
+   public delegate int myDel(int number);
+    public class Program
+    {
+        public int AddNumbers(int a)
+        {
+            int Sum = a + 10;
+            return Sum;
+        }
+        public void Start()
+        {
+            myDel DelgateExample = AddNumbers;
+        }
+    }
+  ```
+- In the above example, we have a delegate myDel which takes an integer value as a parameter. 
+- Class Program has a method of the same signature as the delegate, called AddNumbers().
+- If there is another method called Start() which creates an object of the delegate, then the object can be assigned to AddNumbers as it has the same signature as that of the delegate.
+
+
+- **Multicast delegate:** 
+  - Unlike a simple delegate, a multicast delegate in C# references multiple target methods. 
+  - When a multicast delegate is used, all the functions the delegate is pointing to are invoked. 
+  - They’re implemented using the MulticastDelegate class, which is derived from the system.
+  - A Delegate that points to more than one method is called a Multicast Delegate. 
+  - Multicasting is achieved by using + and += operator.
+
+
+[Back](#content)
+
+# Events
+
+- Events are user actions that generate notifications to the application to which it must respond. 
+- The user actions can be mouse movements, keypress and so on.
+- Programmatically, a class that raises an event is called a publisher and a class which responds/receives the event is called a subscriber. 
+- An Event should have at least one subscriber else that event is never raised.
+- Delegates are used to declare Events:
+  ```cs
+      Public delegate void PrintNumbers();
+      Event PrintNumbers myEvent;
+  ```
 
 
 [Back](#content)
@@ -423,14 +521,49 @@
 
 [Back](#content)
 
+# Thread - Multithreading
+- A **Thread** is a set of instructions that can be executed, which will enable our program to perform concurrent processing. 
+- Concurrent processing helps us do more than one operation at a time. 
+- By default, C# has only one thread. 
+- But the other threads can be created to execute the code in parallel with the original thread.
+- Thread has a life cycle. It starts whenever a thread class is created and is terminated after the execution. 
+- System.Threading is the namespace which needs to be included to create threads and use its members.
+- Threads are created by extending the Thread Class. Start() method is used to begin thread execution.
+```cs
+ //CallThread is the target method//
+    ThreadStart methodThread = new ThreadStart(CallThread);
+    Thread childThread = new Thread(methodThread);
+    childThread.Start();
+```
 
-# Multithreading
+> C# can execute more than one task at a time. 
 
-- Multithreading, or threading, can be a good way to improve the performance of a program where several operations run simultaneously. 
+- This is done by handling different processes by different threads. 
+- This is called **MultiThreading**.
+- **Multithreading**, or threading, can be a good way to improve the performance of a program where several operations run simultaneously. 
 - It allows distinct threads to run at their own time, rather than having to wait for the previous step to be complete. This has the potential to speed up a program.
 - However, multithreading is not advisable when much of the program’s processes are interdependent. 
 - For example, if Step B was reliant on the prior completion of Step A, multithreading would lead to performance issues and create bugs in the program. 
 - As a program grows more complex, threading becomes a more delicate operation. 
+- There are several thread methods that are used to handle the multi-threaded operations:
+  - Start, Sleep, Abort, Suspend, Resume and Join.
+  - Most of these methods are self-explanatory.
+
+- properties of **Thread Class:**
+  - **IsAlive** – contains value True when a thread is Active.
+  - **Name** – Can return the name of the thread. Also, can set a name for the thread.
+  - **Priority** – returns the prioritized value of the task set by the operating system.
+  - **IsBackground** – gets or sets a value which indicates whether a thread should be a background process or foreground.
+  - **ThreadState** – describes the thread state.
+  
+- Different **states** of a thread are:
+  - **Unstarted** – Thread is created.
+  - **Running** – Thread starts execution.
+  - **WaitSleepJoin** – Thread calls sleep, calls wait on another object and calls join on another thread.
+  - **Suspended** – Thread has been suspended.
+  - **Aborted** – Thread is dead but not changed to state stopped.
+  - **Stopped** – Thread has stopped.
+
 
 
 [Back](#content)
@@ -462,6 +595,61 @@
 
 
 [Back](#content)
+
+# Get and Set 
+
+- They are called Accessors. 
+- These are made use by Properties. 
+- A property provides a mechanism to read, write the value of a private field. 
+- For accessing that private field, these accessors are used.
+    - Get Property is used to return the value of a property
+    - Set Property accessor is used to set the value.
+
+
+
+[Back](#content)
+
+# Async and Await
+
+- Async and Await keywords are used to create asynchronous methods in C.
+- Asynchronous programming means that the process runs independently of main or other processes.
+  ```cs
+      public async Task<int> CalculateCount()
+      {
+          //Write Code to calculate Count of characters in a file//
+
+          await Task.Delay(1000);
+          return 1;
+      }
+
+      public async Task myMethod()
+      {
+          Task<int> count = CalculateCount();
+          int result = await count;
+      }
+  ```
+- Async keyword is used for the method declaration.
+- The count is of a task of type int which calls the method CalculateCount().
+- Calculatecount() starts execution and calculates something.
+- Independent work is done on my thread and then an await count statement is reached.
+- If the Calculatecount is not finished, myMethod will return to its calling method, thus the main thread doesn‘t get blocked.
+- If the Calculatecount is already finished, then we have the result available when the control reaches await count. 
+- So the next step will continue in the same thread. 
+- However, it is not the situation in the above case where Delay of 1 second is involved.
+
+[Back](#content)
+
+
+# Deadlock 
+
+- It is a situation where a process is not able to complete its execution because two or more processes are waiting for each other to finish.
+- This usually occurs in multi-threading.
+- Here a Shared resource is being held by a process and another process is waiting for the first process to release it and the thread holding the locked item is waiting for another process to complete.
+
+
+
+[Back](#content)
+
 
 # Costum Control
 - A custom control is designed for single use in a specific application. There are three main ways to create a new custom control:
@@ -525,13 +713,47 @@
 
 [Back](#content)
 
+# Lock, Monitors, and Mutex Object in Threading.
+
+- **Lock** keyword ensures that only one thread can enter a particular section of the code at any given time. 
+- In the above Example, lock(ObjA) means the lock is placed on ObjA until this process releases it, no other thread can access ObjA.
+- A **Mutex** is also like a lock but it can work across multiple processes at a time. WaitOne() is used to lock and ReleaseMutex() is used to release the lock. But Mutex is slower than lock as it takes time to acquire and release it.
+- **Monitor** - Monitor.Enter and Monitor.Exit implements lock internally. 
+- a lock is a shortcut for Monitors. 
+- lock(objA) internally calls.
+
+
+[Back](#content)
+
+# Race Condition
+
+- A Race condition occurs when two threads access the same resource and are trying to change it at the same time. 
+- The thread which will be able to access the resource first cannot be predicted.
+- If we have two threads, T1 and T2, and they are trying to access a shared resource called X. 
+- And if both the threads try to write a value to X, the last value written to X will be saved.
+
+
+[Back](#content)
+
+# Thread Pooling
+
+- A Thread pool is a collection of threads. 
+- These threads can be used to perform tasks without disturbing the primary thread. 
+- Once the thread completes the task, the thread returns to the pool.
+- System.Threading.ThreadPool namespace has classes that manage the threads in the pool and its operations.
+
+- **Object pooling:** is a software creational design pattern that recycles objects rather than recreating them. It does that by holding selected objects in a pool ready for use when they are requested by an application. 
+  - This process helps to improve performance by minimizing unnecessary object creation. 
+
+
+
+[Back](#content)
+
 - **File handling:** is the process of saving information to the disk for external storage. The saved file contains bytes of data and is available for retrieval at a later date.
 - **Control statements:** are used to control the actions a program takes; this is sometimes referred to as the flow of execution. Common actions in C# include calling methods, assigning values, declaring variables, and looping through collections.
 - **Continue and Break Statement:** Break statement breaks the loop. It makes the control of the program to exit the loop. Continue statement makes the control of the program to exit only the current iteration. It does not break the loop.
 - **Indexers:** are used to index instances of a class or structure. The indexed values can then be easily accessed like an array, but without explicitly specifying a type or instance member.
 - **Fields & Properties:** A field is a member of a class or an object of any type that represents a location for storing a value, whereas a property is a class member that provides a mechanism to read, write, and compute the value of a private field.
-- **Object pooling:** is a software creational design pattern that recycles objects rather than recreating them. It does that by holding selected objects in a pool ready for use when they are requested by an application. 
-  - This process helps to improve performance by minimizing unnecessary object creation. 
 -  **Method overriding:** is used to invoke functions that belong to different classes. This process creates a method in the derived class with the same signature as a method in the base class without modifying the code of the base class. This helps achieve runtime polymorphism.
 - **Method overloading:** is the process of assigning different signatures or arguments to two or more methods bearing the same name. It’s an example of polymorphism in object-oriented programming. 
    - Method overloading improves the readability of the program by reducing the number of names associated with a specific action.
@@ -543,7 +765,8 @@
   - For example, if a website requires the same search control in multiple places, it can be created once as a user control and then dropped into different areas of the code. This serves the dual purposes of reusability and bug prevention.
 - **Reflection:** is used to obtain metadata on types at runtime. In other words, it allows developers to retrieve data on the loaded assemblies and the types within them.
   - It’s implemented using a two-step process. First, you get the type object. Second, you use the type to browse members, such as methods and properties. 
-- **Multicast delegate:** Unlike a simple delegate, a multicast delegate in C# references multiple target methods. When a multicast delegate is used, all the functions the delegate is pointing to are invoked. They’re implemented using the MulticastDelegate class, which is derived from the system.
+
+
 [Back](#content)
 
 _The End_
