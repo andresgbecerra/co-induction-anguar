@@ -12,6 +12,7 @@
 - [Introduction](#introduction)
 - [CLR - Common Language runtime](#clr---common-language-runtime)
 - [MSIL - Microsoft Intermediate Language](#msil---microsoft-intermediate-language)
+- [Compilation](#compilation)
 - [Roslyn](#roslyn)
 - [GC - Garbage Collection](#gc---garbage-collection)
 - [CLS - Common Language Specification](#cls---common-language-specification)
@@ -75,9 +76,11 @@
 
 > CoreCLR for .NET Core
 
-- managed and unmanaged code:
+- **managed** and **unmanaged** code:
   - Managed code is executed by the Common Language Runtime (CLR) of the .NET Framework, whereas unmanaged code is executed by the Operating System (OS).
   - CLR offers inbuilt security to managed code, whereas it’s the developer’s responsibility to write safe and secure code with unmanaged code.
+  - **Managed code** is a code that is executed by the CLR (Common Language Runtime) i.e all application code based on .Net Platform. It is considered as managed because of the .Net framework which internally uses the garbage collector to clear up the unused memory.
+  - **Unmanaged code** is any code that is executed by the application runtime of any other framework apart from .Net. The application runtime will take care of memory, security, and other performance operations.
 
 
 [Back](#content)
@@ -85,6 +88,17 @@
 # MSIL - Microsoft Intermediate Language
 
 - MSIL is the Microsoft Intermediate Language, it provides instructions for calling methods, storing and initializing values, memory handling, exception handling and so on. All the .NET codes are first compiled to Intermediate Language.
+
+
+[Back](#content)
+
+# Compilation
+
+- There are four steps in code compilation, which include:
+  - Compiling the source code into Managed code by C# compiler.
+  - Combining the newly created code into assemblies.
+  - Loading the Common Language Runtime(CLR).
+  - Executing the assembly by CLR.
 
 
 [Back](#content)
@@ -104,7 +118,7 @@
 
 In four steps, code moves from the preprocessor to the compiler, to the assembler, and, lastly, to the linker. 
 
->Compilers build a detailed model of application code as they validate the syntax and semantics of that code. They use this model to build the executable output from the source code. The .NET Compiler Platform SDK provides access to this model.
+> Compilers build a detailed model of application code as they validate the syntax and semantics of that code. They use this model to build the executable output from the source code. The .NET Compiler Platform SDK provides access to this model.
 
 [Back](#content)
 
