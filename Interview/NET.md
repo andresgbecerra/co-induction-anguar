@@ -195,10 +195,9 @@
 
 📁⚙ Compilation Files
 
-Within the compilation process we have two related folders.
-ㅤ
-📁 bin : Contains the compiled .dll project file and more.
-📁 obj : It has the files that are generated in the compilation temporarily, to later be delivered to the bin file.
+- Within the compilation process we have two related folders.
+  - 📁 bin : Contains the compiled .dll project file and more.
+  - 📁 obj : It has the files that are generated in the compilation temporarily, to later be delivered to the bin file.
 ㅤ
 > 💡 To clean the compilation done, we can use the dotnet clean command
 
