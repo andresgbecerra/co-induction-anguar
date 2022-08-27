@@ -134,7 +134,7 @@
 
       ```
     - switchScan
-    - **switchMap:** Projects each source value to an Observable which is merged in the output Observable, emitting values only from the most recently projected Observable. 
+    - **switchMap:** maintains only one internal and active subscription, this means that it returns values only from the active observable, and when it receives a new internal subscription it will emit values when the previous one has been completed. 
       ```js
       import { of, switchMap } from 'rxjs';
 
