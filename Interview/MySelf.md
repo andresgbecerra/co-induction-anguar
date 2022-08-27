@@ -94,15 +94,23 @@
 [Back](#content) 
 # Ask Questions
 
+- "What is the weather like where you are?"
 - "What qualities do you think are most important for someone to excel in this position?"
 - "What are the most important priorities for the company, or department, or team right now?"
 - "What do you personally like most about working for this company?"
 - "What are the big opportunities right now?
-- What are the things I'm going to dive into and get my hands on if I'm given this job?" 
+- "What are the things I'm going to dive into and get my hands on if I'm given this job?" 
 - "What do you personally like most about working for this company?"
 - "What's your favorite part of the job?" or, 
 - "What's the most interesting project you're working on?"
+- "What stage is the project in?"
 - "Can you tell me more about a typical day on the job?"
+- "How many teams of developers does the company have??"
+- "How many developers does the team have?"
+- "How is the development team structured?"
+- "How is the development team composed?"
+- "What is your current work schedule?"
+
 
 [Back](#content) 
 
