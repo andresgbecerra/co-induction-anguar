@@ -46,6 +46,16 @@
     - throwError
     - timer
     - iif
+  
+- Join Creation Operators
+  - These are Observable creation operators that also have join functionality -- emitting values of multiple source Observables.
+    - **combineLatest:** Combines multiple Observables to create an Observable whose values are calculated from the latest values of each of its input Observables.
+    - concat
+    - forkJoin
+    - merge
+    - partition
+    - race
+    - zip
 
 - Transformation Operators
     - buffer
@@ -53,23 +63,91 @@
     - bufferTime
     - bufferToggle
     - bufferWhen
-    - concatMap
+    - **concatMap:** merges each internal subscription sequentially, that is, it does not emit values of the next observable until the previous one is completed.
     - concatMapTo
     - exhaust
-    - exhaustMap
+    - **exhaustMap:** omits merging new internal subscriptions while returning values, merges a new subscription only if the previous observable has been completed.
     - expand
     - groupBy
-    - map
-    - mapTo
-    - mergeMap
-    - mergeMapTo
-    - mergeScan
+    - **map:** it passes each source value through a transformation function to get corresponding output values.
+        ```js
+        import { fromEvent, map } from 'rxjs';
+
+        const clicks = fromEvent<PointerEvent>(document, 'click');
+        const positions = clicks.pipe(map(ev => ev.clientX));
+
+        positions.subscribe(x => console.log(x));
+        ```
+    - **mapTo**: Transforms the input data into a specific output value.
+        ```js
+        import { fromEvent, mapTo } from 'rxjs';
+
+        const clicks = fromEvent(document, 'click');
+        const greetings = clicks.pipe(mapTo('Hi'));
+
+        greetings.subscribe(x => console.log(x));
+        ```
+    - **mergeMap:** Merge all internal subscriptions or functions into the observable output.
+        ```js
+            import { of, mergeMap, interval, map } from 'rxjs';
+
+            const letters = of('a', 'b', 'c');
+            const result = letters.pipe(
+            mergeMap(x => interval(1000).pipe(map(i => x + i)))
+            );
+
+            result.subscribe(x => console.log(x));
+
+            // Results in the following:
+            // a0
+            // b0
+            // c0
+            // a1
+            // b1
+            // c1
+            // continues to list a, b, c every second with respective ascending integers
+        ```
+    - **mergeMapTo:** Projects each source value to the same Observable which is merged multiple times in the output Observable. `Deprecate`
+    - **mergeScan:** Applies an accumulator function over the source Observable where the accumulator function itself returns an Observable, then each intermediate Observable returned is merged into the output Observable.`It's like scan, but the Observables returned by the accumulator are merged into the outer Observable.`
     - pairwise
     - partition
-    - pluck
-    - scan
+    - **pluck:** is used to extract values from a specific property in a data stream.
+    - **scan:** Useful for encapsulating and managing state. Applies an accumulator (or "reducer function") to each value from the source after an initial state is established -- either via a seed value (second argument), or from the first value from the source.
+      ```js
+       import { of, scan, map } from 'rxjs';
+
+        const numbers$ = of(1, 2, 3);
+
+        numbers$
+        .pipe(
+            // Get the sum of the numbers coming in.
+            scan((total, n) => total + n),
+            // Get the average by dividing the sum by the total number
+            // received so var (which is 1 more than the zero-based index).
+            map((sum, index) => sum / (index + 1))
+        )
+        .subscribe(console.log);
+
+        // 1
+        // 1.5
+        // 2
+
+      ```
     - switchScan
-    - switchMap
+    - **switchMap:** Projects each source value to an Observable which is merged in the output Observable, emitting values only from the most recently projected Observable. 
+      ```js
+      import { of, switchMap } from 'rxjs';
+
+        const switched = of(1, 2, 3).pipe(switchMap(x => of(x, x * 2)));
+        switched.subscribe(x => console.log(x));
+        // outputs
+        // 1
+        // 2
+        // 2
+        // 4
+        // 3
+        // 6
+      ```
     - switchMapTo
     - window
     - windowCount
@@ -78,7 +156,7 @@
     - windowWhen
 
 - Utility Operators
-    - tap
+    - **tap:** Using tap to analyze a value and force an error. Used to perform side-effects for notifications from the source observable
     - delay
     - delayWhen
     - dematerialize
@@ -90,3 +168,9 @@
     - timeout
     - timeoutWith
     - toArray
+
+- Mathematical and Aggregate Operators
+    - count
+    - max
+    - min
+    - **reduce:** is used to apply an accumulator function to the emissions of the observable and returns the total value of the accumulator.

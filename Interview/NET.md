@@ -10,6 +10,7 @@
 ### Content
 
 - [Introduction](#introduction)
+- [Compilation Process](#compilation-process)
 - [CLR - Common Language runtime](#clr---common-language-runtime)
 - [MSIL - Microsoft Intermediate Language](#msil---microsoft-intermediate-language)
 - [Compilation](#compilation)
@@ -66,6 +67,19 @@
 [Back](#content)
 
 ***
+
+# Compilation Process
+
+- Compilation process is done in two parts
+  - Firts phase is done by language compilers
+  - Second phase is done by JIT
+
+
+How compiler process it works
+> In `Asp.net`, you write an page.aspx file that get compiled into a .Net assembly, this assembly is then used by the `Asp.net` runtime that execute http request.
+
+
+> This .Net assembly can be written in any .Net language like c# or `VB.Net`. But in the end, the code is compiled by the .Net CLR compiler into a Common Intermediary Language(CIL). This CIL is used by the CLR runtime which get loaded when you start a .Net process. The JIT then use this CIL and transform it into pure assembly that will be understandable by the computer.
 
 # CLR - Common Language runtime
 

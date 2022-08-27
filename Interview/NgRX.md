@@ -51,3 +51,77 @@
     - Developers can think of meta-reducers as hooks into the action->reducer pipeline.
     -  Meta-reducers allow developers to pre-process actions before normal reducers are invoked.
     > Meta-reducers in NgRx are similar to middleware used in Redux.
+
+
+***
+# NGRX
+
+- **Introduction**
+  - ***Data Binding***
+    - we pass data from the class (component.ts file) to the template (component.html file) via **property binding**.
+    - we pass events from the template (component.html file) back to the class (component.ts file) via **events binding**.
+  
+    ![Data Binding](../assets/data-binding.png)
+
+  - ***Custom Data Binding***
+    - we can find a custom **Input** from this component to another component and also we can listen to a custom **output** from this child component into the parent component.
+  
+    ![Custom Data Binding](../assets/custom-data-binding.png)
+
+    - The parent can send data to the child through the **input** if it has a defined **property**.
+    - The child can send **events** back to the parent via **output** so that the parent can then handled that.
+    > Data Flow:
+    > - **Parent**   [property] IN ---> (event) OUT
+    > - **Child**    @Input IN ---> @Output OUT
+
+    ![Parent-Child Data Binding](../assets/parent-child-data-binding.png)
+    > Properties/Input data goes down, events/output flow up
+
+  - **States Flow down**  
+    - In the container component, we get the data and we feed it into the presentation component. 
+    ![States flow](../assets/state-flow-down.png)
+  - **Events Flow up**  
+    - When something happens, the presentation component routes this event, so the container component processes event sends it up. 
+    ![Event flow](../assets/event-flow-up.png)
+
+- **NgRx Flow data**
+  - **States flow down** 
+    - States flow down from the store to the service(or Facade) into the component class, into the template. 
+    ![NgRx State flow](../assets/ngrx-state-flow-down.png)
+  - **Events flow up** 
+    - From the template Events flow up from the template component class into the service (or Facade), and it also could be an effect into the store with store being the single source the truth. 
+    ![NgRx Event flow](../assets/ngrx-event-flow-up.png)
+- **NGRX state management Lifecycle**  
+  ![NgRx State Management](../assets/ngrx-state-management.png)
+  - We have the STORE that surfaces data to the component via SELECTOR.
+  - A component communicate the event via ACTIONS into the REDUCER, which then modify the state in the STORE.
+  - If we need an asynchronous event, it call a SERVICE, then that same object can go to an EFFECT to service, change something and come back.
+  > The STORE is ***the single source of truth***.
+
+
+**NGRX implemeted with Facade**
+
+- **Actions:** 
+  - Is nothing more than an Object that has a type and a payload.
+  - It doesn't have a Test, because there's nothing to them. 
+  - They are data structure.
+- **Reducer:**  
+  - Listen for an action based on the action type and it performs some operation and return new state. 
+- **Selectors:**
+  - They are nothing more than really queries. 
+  - They are functions that can take other selectors.
+  - They return slices of state.
+- **Effects:**
+  - They are typically where we can put the business logic.
+  - They are asynchronous.
+  - They use streams to provide new sources of actions to reduce state based on external interactions such as:
+    - network requests
+    - web socket messages
+    - time-based events
+- **Facades:** Do two things
+  1. Dispatches *Actions*.
+  2. Allow to select data from the *Store*. 
+- **Adapter:**
+  - The adapter is handling the underlying collection.
+  - It is implemented in the reducer.
+
