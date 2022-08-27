@@ -11,6 +11,7 @@
 
 - [Introduction](#introduction)
 - [CLR - Common Language runtime](#clr---common-language-runtime)
+- [MSIL - Microsoft Intermediate Language](#msil---microsoft-intermediate-language)
 - [Roslyn](#roslyn)
 - [CLS - Common Language Specification](#cls---common-language-specification)
 - [CTS - Common Type System](#cts---common-type-system)
@@ -72,6 +73,13 @@
 ![CLR](../assets/dotnet-clr.png)
 
 > CoreCLR for .NET Core
+
+
+[Back](#content)
+
+# MSIL - Microsoft Intermediate Language
+
+- MSIL is the Microsoft Intermediate Language, it provides instructions for calling methods, storing and initializing values, memory handling, exception handling and so on. All the .NET codes are first compiled to Intermediate Language.
 
 
 [Back](#content)
