@@ -74,6 +74,11 @@
   - Thread-safe without a lock
   - .NET 4’s `Lazy<T> type`
 
+[Back](#content)
+
+# Namespace
+- They are used to organize large code projects. “System” is the most widely used namespace in C#. We can create our own namespace and use one namespace in another, which are called Nested Namespaces.
+- They are denoted by the keyword “namespace”.
 - C# programs consist of one or more files. 
 - Each file contains zero or more **namespaces**. 
 - A **namespace** contains types such as classes, structs, interfaces, enumerations, and delegates, or other **namespaces**. 
@@ -127,13 +132,6 @@
             }
         }
     ```
-
-[Back](#content)
-
-# Namespace
-- They are used to organize large code projects. “System” is the most widely used namespace in C#. We can create our own namespace and use one namespace in another, which are called Nested Namespaces.
-- They are denoted by the keyword “namespace”.
-
 
 [Back](#content)
 
