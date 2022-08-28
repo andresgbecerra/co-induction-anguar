@@ -581,6 +581,7 @@ class FileInfo : IFile // using colon (:)
     }
 }
 //////////////////
+// Instatiate - Interface Implementation
 public class Program
 {
     public static void Main()
@@ -606,6 +607,16 @@ public class Program
 [Back](#content)
 
 # Class
+
+```txt
+- A class is like a blueprint of a specific object that has certain attributes and features. 
+- For example, a car should have some attributes such as four wheels, two or more doors, steering, a windshield, etc. 
+- It should also have some functionalities like start, stop, run, move, etc. 
+- Now, any object that has these attributes and functionalities is a car. 
+- Here, the car is a class that defines some specific attributes and functionalities. Each individual car is an object of the car class. 
+- You can say that the car you are having is an object of the car class.
+```
+
 - Class is an encapsulation of properties and methods that are used to represent a real-time entity. It is a data structure that brings all the instances together in a single unit.
 - A Class is a user-defined blueprint from which objects are created. It brings various types of data together to form a single unit.
 - There are generally considered to be four types of classes in C#:
