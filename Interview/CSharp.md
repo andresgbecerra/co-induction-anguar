@@ -613,9 +613,94 @@ public class Program
 - For example, a car should have some attributes such as four wheels, two or more doors, steering, a windshield, etc. 
 - It should also have some functionalities like start, stop, run, move, etc. 
 - Now, any object that has these attributes and functionalities is a car. 
-- Here, the car is a class that defines some specific attributes and functionalities. Each individual car is an object of the car class. 
+- Here, the car is a class that defines some specific attributes and functionalities. 
+- Each individual car is an object of the car class. 
 - You can say that the car you are having is an object of the car class.
 ```
+
+> Likewise, in object-oriented programming, a class defines some properties, fields, events, methods, etc. 
+
+> A class defines the kinds of data and the functionality their objects will have.
+
+**Class Example:**
+```cs
+class Student
+{
+    // field members should have a private access modifier used with property
+    private int id; // Field
+
+    // A property encapsulates a private field using setter and getter to assign
+    public int StudentId // Property
+    {
+        get { return id; }
+        set { id = value; }
+    }
+    // You can also apply some additional logic in get and set:
+    public int StudentId // Property
+    {
+        get { return id; }
+
+        set {
+            if (value > 0)
+                id = value;
+        }
+    }
+}
+/////////////////////
+class Student
+{
+    // Auto-implemented Property
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    // Using auto-implemented property, you don't need to declare an underlying private field.
+
+    // A constructor is a special type of method which will be called
+    // automatically when you create an instance of a class.
+    // A constructor can be public, private, or protected
+    public Student() // A constructor name must be the same as a class name.
+    {
+        //constructor
+        // ..A class can have multiple constructors with different parameters 
+        // but can only have one parameterless constructor.
+    }
+
+    // A method can contain one or more statements to be executed as a single unit. 
+    // A method may or may not return a value. 
+    // A method can have one or more input parameters.
+    public string GetFullName() // method that returns string 
+    {
+        return FirstName + " " + LastName;
+    }
+
+    public int Sum(int num1, int num2) // method that returns the sum of two numbers
+    {
+        var total = num1 + num2;
+        
+        return total;
+    }
+    // The following method doesn't return anything and doesn't have any parameters.
+    public void Greet() // The return type is void.
+    {
+        Console.Write("Hello World!");
+    }
+}
+```
+
+**Objects of a Class**
+- You can create one or more objects of a class. 
+- Each object can have different values of properties and field but methods and events behaves the same.
+  ```cs
+  // an object of a class can be created using the new keyword 
+  // and assign that object to a variable of a class type. 
+  Student mystudent1 = new Student(); // new keyword
+  mystudent1.FirstName = "Steve";
+  mystudent1.LastName = "Jobs";
+
+  Student mystudent2 = new Student(); // new keyword
+  mystudent2.FirstName = "Bill";
+  mystudent2.LastName = "Gates";
+  ```
+
 
 - Class is an encapsulation of properties and methods that are used to represent a real-time entity. It is a data structure that brings all the instances together in a single unit.
 - A Class is a user-defined blueprint from which objects are created. It brings various types of data together to form a single unit.
