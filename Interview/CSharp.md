@@ -35,9 +35,9 @@
 - [Dependency Injection](#dependency-injection)
 - [HashSet](#hashset)
 - [Types of Control](#types-of-control)
-- [Thread - Multithreading](#thread---multithreading)
+- [Thread and Multithreading](#thread-and-multithreading)
 - [Constants](#constants)
-- [Boxing - Unboxing](#boxing---unboxing)
+- [Boxing and Unboxing](#boxing-and-unboxing)
 - [Get and Set](#get-and-set)
 - [Async and Await](#async-and-await)
 - [Deadlock](#deadlock)
@@ -66,6 +66,14 @@
   - **Inheritance:** 
     - It is the process where one class derives (or inherits) its attributes and methods from another
     - It is the ability to create new classes from another class. It is done by accessing, modifying, and extending the behavior of objects in the parent class.
+    - Inheritance in OOP is of four types:
+      - Single inheritance - Contains one base class and one derived class
+      - Hierarchical inheritance - Contains one base class and multiple derived classes of the same base class
+      - Multilevel inheritance - Contains a class derived from a derived class
+      - Multiple inheritance - Contains several base classes and a derived class
+      - All .NET languages support single, hierarchical, and multilevel inheritance. 
+      - They do not support multiple inheritance because, in these languages, a derived class cannot have more than one base class. 
+      - However, you can implement multiple inheritance in .NET through interfaces.
 
 - The **singleton** design pattern ensures that only one object of its kind exists, and provides global access to it for any other code. This design pattern can be implemented in a number of ways, using:
   - Thread-safety singleton
@@ -142,6 +150,9 @@
 [Back](#content)
 
 # Data Types
+
+> Data types are categorized based on how they store their value in the memory.
+
   | Data Type | Memory space | Range | Details |
   | ----------| ------------ | ----- | ------- |
   | short | 2 bytes | -32768 to 32768 | stores integers |
@@ -242,8 +253,19 @@
 [Back](#content)
 
 # Nullable
-- Nullable types are used to represent an undefined value of an underlying type. It essentially means ‘no value’ and is generally used when no data is available for the field.
 
+> The default value of a **reference type** variable is `null` when they are not initialized. 
+> `Null means not refering to any object`.
+> A **value type** variable cannot be `null` because it holds value, not a memory address.
+
+- C# 2.0 introduced nullable types, using which you can assign null to a value type variable or declare a value type variable without assigning a value to it.
+
+- Nullable types are used to represent an undefined value of an underlying type. It essentially means ‘no value’ and is generally used when no data is available for the field.
+  ```cs
+    Nullable<int> i = null;
+  ```
+- A nullable type can represent the correct range of values for its underlying value type, plus an additional null value. 
+- For example, Nullable<int> can be assigned any value from -2147483648 to 2147483647, or a null value.
 
 [Back](#content)
 
@@ -519,7 +541,7 @@
 
 [Back](#content)
 
-# Thread - Multithreading
+# Thread and Multithreading
 - A **Thread** is a set of instructions that can be executed, which will enable our program to perform concurrent processing. 
 - Concurrent processing helps us do more than one operation at a time. 
 - By default, C# has only one thread. 
@@ -562,7 +584,13 @@
   - **Aborted** – Thread is dead but not changed to state stopped.
   - **Stopped** – Thread has stopped.
 
-
+- Thread represents an actual OS-level thread, with its own stack and kernel resources. 
+- Thread allows the highest degree of control; you can Abort() or Suspend() or Resume() a thread, you can observe its state, and you can set thread-level properties like the stack size, apartment state, or culture. 
+- ThreadPool is a wrapper around a pool of threads maintained by the CLR.
+- The **Task class** from the Task Parallel Library offers the best of both worlds. 
+  - Like the ThreadPool, a task does not create its own OS thread. 
+  - Instead, tasks are executed by a TaskScheduler; the default scheduler simply runs on the ThreadPool. 
+  - Unlike the ThreadPool, Task also allows you to find out when it finishes, and (via the generic Task) to return a result.
 
 [Back](#content)
 
@@ -576,7 +604,7 @@
 
 [Back](#content)
 
-# Boxing - Unboxing
+# Boxing and Unboxing
 - **Boxing:** Converting a value type to a reference type.
   ```cs
       int Value1 -= 10;
@@ -707,6 +735,11 @@
   - It is called just before garbage collection. 
   - It is used to perform clean up operations of Unmanaged code. 
   - It is automatically called when a given instance is not subsequently called. 
+
+- The **Dispose method**, on the other hand, is meant to be called by the code that created your class so that you can clean up and release any resources you have acquired (unmanaged data, database connections, file handles, etc) the moment the code is done with your object.
+- **IDisposable:** The "primary" use of the IDisposable interface is to clean up unmanaged resources. Note the purpose of the Dispose pattern is to provide a mechanism to clean up both managed and unmanaged resources and when that occurs depends on how the Dispose method is being called.
+
+> The standard practice is to implement `IDisposable` and Dispose so that you can use your object in a using statement such as `using(var foo = new MyObject()) { }`. And in your **finalizer**, you call Dispose, just in case the calling code forgot to dispose of you.
   
 
 [Back](#content)
@@ -763,6 +796,7 @@
   - For example, if a website requires the same search control in multiple places, it can be created once as a user control and then dropped into different areas of the code. This serves the dual purposes of reusability and bug prevention.
 - **Reflection:** is used to obtain metadata on types at runtime. In other words, it allows developers to retrieve data on the loaded assemblies and the types within them.
   - It’s implemented using a two-step process. First, you get the type object. Second, you use the type to browse members, such as methods and properties. 
+
 
 
 [Back](#content)
