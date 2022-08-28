@@ -1372,7 +1372,9 @@ class Program
    - Method overloading improves the readability of the program by reducing the number of names associated with a specific action.
 - **The ref & out keywords:** are similar in that they are both used to pass arguments in a reference or function. However, there is a subtle difference:
   - With *ref* keywords, the value is already set, meaning the method can read and modify it
+  - **ref** tells the compiler that the object is initialized before entering the function, while
   - With *out* keywords, the value isn’t set and can’t be read by the method until it is set, meaning the method must set it before it can be returned
+  - **out** tells the compiler that the object will be initialized inside the function.
 - **Extension methods:** allow developers to add a method to existing types without changing the original source code. This allows them to extend the functionality of the method. An extension method is a static method and uses the **this** keyword.
 - **User controls:** allow developers to write code that can be used in various areas of the program. 
   - For example, if a website requires the same search control in multiple places, it can be created once as a user control and then dropped into different areas of the code. This serves the dual purposes of reusability and bug prevention.
