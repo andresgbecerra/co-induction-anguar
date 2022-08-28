@@ -168,7 +168,8 @@ In four steps, code moves from the preprocessor to the compiler, to the assemble
 - It is a set of basic rules and metrics that need to be followed and complied with by .NET compatible languages and then compiled (Roslyn) to another intermediate neutral language called CIL (Common Intermediate Language) where it will finally be translated to the CLR (Common Language Runtime) that will result in an **Assembly language**, machine language.
 - The **CLS** ensures complete interoperability between applications, regardless of the language used to create the application.
 - Allows to compile high-level languages into a common language CIL (Common Intermediate Language)
-- CLS defines a set of features that are needed by many common applications. It also provides a sort of recipe for any language that is implemented on top of .NET on what it needs to support.
+- CLS defines a set of features that are needed by many common applications. 
+- It also provides a sort of recipe for any language that is implemented on top of .NET on what it needs to support.
 
 ![CLS](../assets/dotnet-cls.png)
 
