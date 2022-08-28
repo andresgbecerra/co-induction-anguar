@@ -14,6 +14,7 @@
 - [Using](#using)
 - [Data Types](#data-types)
 - [Casting and type conversions](#casting-and-type-conversions)
+- [Access Modifiers](#access-modifiers)
 - [Variables](#variables)
 - [String](#string)
 - [Print](#print)
@@ -185,6 +186,19 @@
   - **Conversions with helper classes:** To convert between non-compatible types, such as integers and System.DateTime objects, or hexadecimal strings and byte arrays, you can use the System.BitConverter class, the System.Convert class, and the Parse methods of the built-in numeric types, such as Int32.Parse.
 
 [Back](#content)
+
+# Access Modifiers
+
+- Access modifiers are keywords used to specify the declared accessibility of a member or a type. 
+- This section introduces the four access modifiers:
+  - public
+  - protected
+  - internal
+  - private
+
+
+[Back](#content)
+
 
 # Variables
 
@@ -466,8 +480,128 @@
 
 
 # Interface
-- An Interface is a class with no implementation. The only thing that it contains is the declaration of methods, properties, and events.
+- An Interface is a class with no implementation. 
+- The only thing that it contains is the declaration of methods, properties, and events.
+  ```cs
+  interface IFile
+    {
+        void ReadFile();
+        void WriteFile(string text);
+    }
+   //////////////
+   // Invalid Interface with Access Modifiers
+   interface IFile
+    {
+        protected void ReadFile(); //compile-time ERROR
+        private void WriteFile(string text);//compile-time ERROR
+    }
+   //////////////
+   // Invalid Interface with Implementation
+   interface IFile
+    {
+        void ReadFile();
+        void WriteFile(string text){
+            Console.Write(text);  //ERROR: cannot implement method
+        }
+    } 
+  ```
+> You cannot apply access modifiers (public, protect, private, internal) to interface members.
 
+> All the members are public by default.
+
+> An interface can only contain declarations but not implementations.
+
+> A class or a Struct can implement one or more interfaces using colon `(:)`.
+
+Example:
+- the following class implements the IFile interface **implicitly**.
+```cs
+//  Interface Implementation
+interface IFile
+{
+    void ReadFile();
+    void WriteFile(string text);
+}
+
+class FileInfo : IFile // using colon (:)
+{
+    public void ReadFile()
+    {
+        Console.WriteLine("Reading File");
+    }
+
+    public void WriteFile(string text)
+    {
+        Console.WriteLine("Writing to file");
+    }
+}
+/////////////////////
+// Instatiate - Interface Implementation
+public class Program
+{
+    public static void Main()
+    {
+        IFile file1 = new FileInfo();
+        FileInfo file2 = new FileInfo();
+		
+        file1.ReadFile(); 
+        file1.WriteFile("content"); 
+
+        file2.ReadFile(); 
+        file2.WriteFile("content"); 
+    }
+} 
+```
+
+- An interface can be implemented **explicitly** using `<InterfaceName>.<MemberName>`.
+  
+```cs
+//  Explicit Implementation
+interface IFile
+{
+    void ReadFile();
+    void WriteFile(string text);
+}
+    
+class FileInfo : IFile // using colon (:)
+{
+    void IFile.ReadFile() // explicitly <InterfaceName>.<MemberName>
+    {
+        Console.WriteLine("Reading File");
+    }
+
+    void IFile.WriteFile(string text) // explicitly <InterfaceName>.<MemberName>
+    {
+        Console.WriteLine("Writing to file");
+    }
+    // ..more methods
+     public void Search(string text)
+    {
+        Console.WriteLine("Searching in file");
+    }
+}
+//////////////////
+public class Program
+{
+    public static void Main()
+    {
+        IFile file1 = new FileInfo(); // file1 object can only access members of IFile
+        FileInfo file2 = new FileInfo(); // file2 can only access members of FileInfo class
+
+        // **This is the limitation of explicit implementation.
+
+        file1.ReadFile(); 
+        file1.WriteFile("content"); 
+        //file1.Search("text to be searched")//compile-time ERROR 
+        
+        file2.Search("text to be searched");
+        //file2.ReadFile(); //compile-time ERROR 
+        //file2.WriteFile("content"); //compile-time ERROR 
+    }
+}
+```
+
+> Explicit implementation is useful when class is implementing multiple interfaces;
 
 [Back](#content)
 
