@@ -23,6 +23,7 @@
 - [Array](#array)
 - [Enum](#enum)
 - [Collections](#collections)
+- [Tuple](#tuple)
 - [Serialization](#serialization)
 - [XSD file](#xsd-file)
 - [Interface](#interface)
@@ -38,6 +39,7 @@
 - [Dependency Injection](#dependency-injection)
 - [HashSet](#hashset)
 - [Types of Control](#types-of-control)
+- [Extension Method](#extension-method)
 - [Thread and Multithreading](#thread-and-multithreading)
 - [Constants](#constants)
 - [Boxing and Unboxing](#boxing-and-unboxing)
@@ -393,14 +395,35 @@
 
 > In most cases, it is recommended to use the generic collections because they perform faster than non-generic collections and also minimize exceptions by giving compile-time errors.
 
-| Non-generic | Collections	Usage |
-| ----------- | ----------------- |
+| Non-generic Collections | Usage |
+| ----------------------- | ----- |
 | ArrayList	 | ArrayList stores objects of any type like an array. However, there is no need to specify the size of the ArrayList like with an array as it grows automatically. |
 | SortedList |	SortedList stores key and value pairs. It automatically arranges elements in ascending order of key by default. C# includes both, generic and non-generic SortedList collection. |
 | Stack |	Stack stores the values in LIFO style (Last In First Out). It provides a Push() method to add a value and Pop() & Peek() methods to retrieve values. C# includes both, generic and non-generic Stack. |
 | Queue |	Queue stores the values in FIFO style (First In First Out). It keeps the order in which the values were added. It provides an Enqueue() method to add values and a Dequeue() method to retrieve values from the collection. C# includes generic and non-generic Queue. |
 | Hashtable	| Hashtable stores key and value pairs. It retrieves the values by comparing the hash value of the keys. |
 | BitArray |	BitArray manages a compact array of bit values,which are represented as Booleans, where true indicates that the bit is on (1) and false indicates the bit is off (0). |
+
+
+[Back](#content)
+
+# Tuple
+
+- The `Tuple<T>` class was introduced in .NET Framework 4.0.
+- A tuple is a data structure that contains a sequence of elements of different data types. 
+- It can be used where you want to have a data structure to hold an object with properties, but you don't want to create a separate type for it.
+
+```cs
+  Tuple<int, string, string> person = 
+            new Tuple <int, string, string>(1, "Steve", "Jobs");
+  //////////////////////
+  // without specifying each element's type
+  var person = Tuple.Create(1, "Steve", "Jobs"); 
+  // Accessing Tuple Elements      
+  person.Item1; // returns 1
+  person.Item2; // returns "Steve"
+  person.Item3; // returns "Jobs"   
+```
 
 
 [Back](#content)
@@ -536,9 +559,17 @@
 
 # Delegate
 
-- Delegate is a variable that holds the reference to a method. Hence it is a function pointer of reference type. 
+- What if we want to pass a function as a parameter? How does C# handles the **callback** functions or event handler? The answer is - **delegate**.
+- Delegate is a variable that holds the reference to a method. 
+- Hence it is a function pointer of reference type. 
 - All Delegates are derived from System.Delegate namespace. 
 - Both Delegate and the method that it refers to can have the same signature.
+
+- There are three steps involved while working with delegates:
+  - Declare a delegate
+  - Set a target method
+  - Invoke a delegate
+  
 - Declaring a delegate:
   ```cs
    public delegate void AddNumbers(int n);
@@ -575,20 +606,133 @@
   - A Delegate that points to more than one method is called a Multicast Delegate. 
   - Multicasting is achieved by using + and += operator.
 
+- **Func Delegate**
+  - Func is a generic delegate included in the System namespace. 
+  - It has zero or more input parameters and one out parameter. 
+  - The last parameter is considered as an out parameter.
+  - Func delegate type can have zero to 16 input parameters.
+  - Func delegate does not allow **ref** and **out** parameters.
+  - Func delegate type can be used with an anonymous method or lambda expression.
+    ```cs 
+    class Program
+    {
+        static int Sum(int x, int y)
+        {
+            return x + y;
+        }
+
+        static void Main(string[] args)
+        {
+            Func<int,int, int> add = Sum;
+
+            int result = add(10, 10);
+
+            Console.WriteLine(result); // 20
+        }
+}
+    ```
+
+- **Action Delegate**
+  - Action is a delegate type defined in the System namespace. 
+  - An Action type delegate is the same as **Func delegate** except that the Action delegate doesn't return a value. 
+  - In other words, an Action delegate can be used with a method that has a void return type.
+  - Action delegate can be used with anonymous methods or lambda expressions.
+    ```cs
+    static void ConsolePrint(int i)
+    {
+        Console.WriteLine(i);
+    }
+
+    static void Main(string[] args)
+    {
+        Action<int> printActionDel = ConsolePrint;
+        printActionDel(10); // 10
+    }
+    ```
+
+- **Predicate Delegate**
+  - Predicate is the delegate like Func and Action delegates. 
+  - It represents a method containing a set of criteria and checks whether the passed parameter meets those criteria. 
+  - A predicate delegate methods must take one input parameter and return a boolean - `true` or `false`.
+    ```cs
+    static bool IsUpperCase(string str)
+      {
+          return str.Equals(str.ToUpper());
+      }
+
+      static void Main(string[] args)
+      {
+          Predicate<string> isUpper = IsUpperCase;
+
+          bool result = isUpper("hello world!!");
+
+          Console.WriteLine(result); // false
+      }
+    ```
+
+
 
 [Back](#content)
 
 # Events
 
+- An event is a notification sent by an object to signal the occurrence of an action. 
+- Events in .NET follow the `observer` design pattern.
 - Events are user actions that generate notifications to the application to which it must respond. 
 - The user actions can be mouse movements, keypress and so on.
-- Programmatically, a class that raises an event is called a publisher and a class which responds/receives the event is called a subscriber. 
+- Programmatically, a class that raises an event is called a **publisher** and a class which responds/receives the event is called a **subscriber**. 
+-  There can be multiple subscribers of a single event.
 - An Event should have at least one subscriber else that event is never raised.
 - Delegates are used to declare Events:
   ```cs
       Public delegate void PrintNumbers();
       Event PrintNumbers myEvent;
   ```
+> **Register** with an event using the `+=` operator. **Unsubscribe** it using the `-=` operator. `Cannot use the = operator`.
+
+> Pass event data using `EventHandler<TEventArgs>`.
+
+Example:
+```cs
+// Raising an Event
+public delegate void Notify();  // delegate
+                    
+public class ProcessBusinessLogic
+{
+    public event Notify ProcessCompleted; // event
+
+    public void StartProcess()
+    {
+        Console.WriteLine("Process Started!");
+        // some code here..
+        OnProcessCompleted();
+    }
+
+    protected virtual void OnProcessCompleted() //protected virtual method
+    {
+        //if ProcessCompleted is not null then call delegate
+        ProcessCompleted?.Invoke(); 
+    }
+}
+///////////////////
+// Consume an Event
+class Program
+{
+    public static void Main()
+    {
+        ProcessBusinessLogic bl = new ProcessBusinessLogic();
+        bl.ProcessCompleted += bl_ProcessCompleted; // register with an event
+        bl.StartProcess();
+    }
+
+    // event handler
+    public static void bl_ProcessCompleted()
+    {
+        Console.WriteLine("Process Completed!");
+    }
+}
+```
+
 
 
 [Back](#content)
@@ -674,6 +818,54 @@
   - **Selection** statements, which enable you to branch to different sections of code. `include <if>, <else>, <switch>, and <case>`
   - **Iteration** statements, which enable you to loop through connections or perform the same series of operations repeatedly until a specified condition is met. `include <do>, <for>, <foreach>, and <while>`
   - **Jump** statements, which enable control of flow to be shifted to another section of code. `include <break>, <continue>, <return>, and <goto>`
+
+
+[Back](#content)
+
+
+# Extension Method
+
+- Extension methods are additional custom methods which were originally not included with the class.
+- Extension methods allow you to inject additional methods without modifying, deriving or recompiling the original class, struct or interface. 
+- Extension methods can be added to your own custom class, .NET framework classes, or third party classes or interfaces.
+- In the following example, IsGreaterThan() is an extension method for int type, which returns true if the value of the int variable is greater than the supplied integer parameter.
+  ```cs
+  int i = 10;
+
+  bool result = i.IsGreaterThan(100); //returns false 
+  ```
+- The IsGreaterThan() method is not a method of int data type (Int32 struct). 
+- It is an extension method written by the programmer for the int data type. 
+- The IsGreaterThan() extension method will be available throughout the application by including the namespace in which it has been defined.
+  ```cs
+  // Define an Extension Method
+  namespace ExtensionMethods
+  {
+      public static class IntExtensions
+      {
+          public static bool IsGreaterThan(this int i, int value) // firts parameter - this
+          {
+              return i > value;
+          }
+      }
+  }
+  ///////////////
+  //Now, you can include the ExtensionMethods namespace wherever you want to use this extension method.
+  using ExtensionMethods;
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int i = 10;
+
+            bool result = i.IsGreaterThan(100); // Extension Method
+
+            Console.WriteLine(result);
+        }
+    }
+  ```
+> The first parameter of the extension method must be of the type for which the extension method is applicable, preceded by the **this** keyword.
 
 
 [Back](#content)
@@ -933,6 +1125,8 @@
   - For example, if a website requires the same search control in multiple places, it can be created once as a user control and then dropped into different areas of the code. This serves the dual purposes of reusability and bug prevention.
 - **Reflection:** is used to obtain metadata on types at runtime. In other words, it allows developers to retrieve data on the loaded assemblies and the types within them.
   - It’s implemented using a two-step process. First, you get the type object. Second, you use the type to browse members, such as methods and properties. 
+
+- the equality operator `==` checks whether two operands are equal or not, and the `Object.Equals()` method checks whether the two object instances are equal or not.
 
 
 
