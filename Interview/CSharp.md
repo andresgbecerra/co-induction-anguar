@@ -377,6 +377,8 @@
   ```
 
 # Collections
+
+
  - C# includes specialized classes that store series of values or objects.
  - There are two types of collections available in C#: **non-generic** collections and **generic** collections.
 
