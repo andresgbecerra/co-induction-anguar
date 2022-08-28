@@ -13,7 +13,6 @@
 - [Compilation Process](#compilation-process)
 - [CLR Common Language runtime](#clr-common-language-runtime)
 - [MSIL Microsoft Intermediate Language](#msil-microsoft-intermediate-language)
-- [Compilation](#compilation)
 - [Roslyn](#roslyn)
 - [GC Garbage Collection](#gc-garbage-collection)
 - [CLS Common Language Specification](#cls-common-language-specification)
@@ -45,7 +44,7 @@
 
 - **.NET Framework vs .NET Core**
     1. .NET Framework
-        - The first version - 2021
+        - The first version - 2002
         - Only compatible with windows
         - Intermediate execution platform
         - Designed for corporate apps with traditional architecture
@@ -77,6 +76,11 @@
   - Firts phase is done by language compilers
   - Second phase is done by JIT
 
+- There are four steps in **code compilation**, which include:
+  - Compiling the source code into Managed code by C# compiler.
+  - Combining the newly created code into assemblies.
+  - Loading the Common Language Runtime(CLR).
+  - Executing the assembly by CLR.
 
 How compiler process it works
 > In `Asp.net`, you write an page.aspx file that get compiled into a .Net assembly, this assembly is then used by the `Asp.net` runtime that execute http request.
@@ -119,7 +123,8 @@ How compiler process it works
 
 # MSIL Microsoft Intermediate Language
 
-- MSIL is the Microsoft Intermediate Language, it provides instructions for calling methods, storing and initializing values, memory handling, exception handling and so on. All the .NET codes are first compiled to Intermediate Language.
+- MSIL is the Microsoft Intermediate Language, it provides instructions for calling methods, storing and initializing values, memory handling, exception handling and so on. 
+- All the .NET codes are first compiled to Intermediate Language.
 - When we compile our .NET code then it is not directly converted to native/binary code; it is first converted into intermediate code known as MSIL code which is then interpreted by the CLR. 
 - MSIL is independent of hardware and the operating system. 
 - Cross language relationships are possible since MSIL is the same for all .NET languages.
@@ -128,16 +133,6 @@ How compiler process it works
 
 [Back](#content)
 
-# Compilation
-
-- There are four steps in code compilation, which include:
-  - Compiling the source code into Managed code by C# compiler.
-  - Combining the newly created code into assemblies.
-  - Loading the Common Language Runtime(CLR).
-  - Executing the assembly by CLR.
-
-
-[Back](#content)
 
 # Roslyn
 
@@ -150,16 +145,19 @@ How compiler process it works
 - Open Source
 - Analyze code style and quality.
 - Code Compiled:
-  - When a project is developed, C# source code is **compiled** into Intermediate Language (IL). IL is a set of instructions that produces a machine code for execution on the machine processor. 
+  - When a project is developed, C# source code is **compiled** into Intermediate Language (IL). 
+  - IL is a set of instructions that produces a machine code for execution on the machine processor. 
 
 In four steps, code moves from the preprocessor to the compiler, to the assembler, and, lastly, to the linker. 
 
-> Compilers build a detailed model of application code as they validate the syntax and semantics of that code. They use this model to build the executable output from the source code. The .NET Compiler Platform SDK provides access to this model.
+> Compilers build a detailed model of application code as they validate the syntax and semantics of that code.
+> They use this model to build the executable output from the source code. The .NET Compiler Platform SDK provides access to this model.
 
 [Back](#content)
 
 # GC Garbage Collection
-- garbage collection is the process of managing memory in an application. The garbage collector automatically disposes of memory that is no longer used to make memory available for new allocations.
+- Garbage collection is the process of managing memory in an application. 
+- The garbage collector automatically disposes of memory that is no longer used to make memory available for new allocations.
 
 
 [Back](#content)
@@ -231,7 +229,9 @@ In four steps, code moves from the preprocessor to the compiler, to the assemble
 
 
 > The default value of a **reference type** variable is `null` when they are not initialized. 
+
 > `Null means not refering to any object`.
+
 > A **value type** variable cannot be `null` because it holds value, not a memory address.
 
 - The common type system in .NET supports the following five categories of types:

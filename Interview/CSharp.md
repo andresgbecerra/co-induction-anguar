@@ -255,7 +255,9 @@
 # Nullable
 
 > The default value of a **reference type** variable is `null` when they are not initialized. 
+
 > `Null means not refering to any object`.
+
 > A **value type** variable cannot be `null` because it holds value, not a memory address.
 
 - C# 2.0 introduced nullable types, using which you can assign null to a value type variable or declare a value type variable without assigning a value to it.
