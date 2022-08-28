@@ -55,6 +55,7 @@
 - [Lock, Monitors, and Mutex Object in Threading.](#lock-monitors-and-mutex-object-in-threading)
 - [Race Condition](#race-condition)
 - [Thread Pooling](#thread-pooling)
+- [IEnumerable](#ienumerable)
 
 
 # Introduction
@@ -482,6 +483,7 @@
 # Interface
 - An Interface is a class with no implementation. 
 - The only thing that it contains is the declaration of methods, properties, and events.
+- In an interface, we have **virtual methods** that do not have method definition.
   ```cs
   interface IFile
     {
@@ -725,21 +727,29 @@ class Student
       - It is a class that cannot be inherited. 
       - To access the members of a sealed class, we need to create the object of the class. 
       - It is denoted by the keyword Sealed.
-- Techniques for overloading a method, Method overloading can be achieved in the three following ways:
-  - By using different types of data for parameters in a method
-  - By changing the number of parameters in a method
-  - By changing the order of parameters in a method
+
   
 > class be set to be inherited without overriding the method: Provided that the method isn’t virtual, it won’t be overridden. However, if the class is inheriting from a base class that contains a virtual member function, you can use the `sealed` modifier to avoid further overriding that member function.
 
 [Back](#content)
 
 # Method
-- A method is a code block that contains a series of statements used to perform particular operations. Methods must be declared within a class or a structure. They help save time by reusing code. 
+- A method is a code block that contains a series of statements used to perform particular operations. 
+- Methods must be declared within a class or a structure. 
+- They help save time by reusing code. 
   
 - A **Virtual method** must always have a default implementation. However, it can be overridden in the derived class, though not mandatory. It can be overridden using override keyword.
 
 - An **Abstract method** does not have an implementation. It resides in the abstract class. It is mandatory that the derived class implements the abstract method. An override keyword is not necessary here though it can be used.
+
+> We can't use **this** in static method because keyword **this** returns a reference to the current instance of the class containing it.
+
+> **Static method**s (or any static member) do not belong to a particular instance. They exist without creating an instance of the class and call with the name of a class not by instance so we can't use **this** keyword in the body of static Methods, but in case of Extension Methods we can use it as the functions parameters.
+
+- Techniques for overloading a method,** Method overloading** can be achieved in the three following ways:
+  - By using different types of data for parameters in a method
+  - By changing the number of parameters in a method
+  - By changing the order of parameters in a method
 
 
 [Back](#content)
@@ -1334,6 +1344,19 @@ class Program
 
 - **Object pooling:** is a software creational design pattern that recycles objects rather than recreating them. It does that by holding selected objects in a pool ready for use when they are requested by an application. 
   - This process helps to improve performance by minimizing unnecessary object creation. 
+
+
+[Back](#content)
+
+
+# IEnumerable
+
+- All of these interfaces inherit from IEnumerable. 
+- That interface basically lets you use the class in a **foreach** statement (in C#).
+  - **ICollection** is the most basic of the interfaces you listed. It's an enumerable interface that supports a Count and that's about it.
+  - **IList** is everything that ICollection is, but it also supports adding and removing items, retrieving items by index, etc. It's the most commonly-used interface for "lists of objects".
+  - **IQueryable** is an enumerable interface that supports LINQ. You can always create an IQueryable from an IList and use LINQ to Objects, but you also find IQueryable used for deferred execution of SQL statements in LINQ to SQL and LINQ to Entities.
+  - **IDictionary** is a different animal in the sense that it is a mapping of unique keys to values. It is also enumerable in that you can enumerate the key/value pairs, but otherwise it serves a different purpose than the others you listed.
 
 
 
