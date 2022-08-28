@@ -47,7 +47,7 @@
 - [Get and Set](#get-and-set)
 - [Async and Await](#async-and-await)
 - [Deadlock](#deadlock)
-- [Costum Control](#costum-control)
+- [Custom Control](#custom-control)
 - [Circular references](#circular-references)
 - [Exception handling](#exception-handling)
 - [System.IO](#systemio)
@@ -624,6 +624,9 @@ public class Program
 
 > A class defines the kinds of data and the functionality their objects will have.
 
+- A **field** is a member of a class or an object of any type that represents a location for storing a value, whereas a **property** is a class member that provides a mechanism to read, write, and compute the value of a private field.
+
+
 **Class Example:**
 ```cs
 class Student
@@ -746,10 +749,18 @@ class Student
 
 > **Static method**s (or any static member) do not belong to a particular instance. They exist without creating an instance of the class and call with the name of a class not by instance so we can't use **this** keyword in the body of static Methods, but in case of Extension Methods we can use it as the functions parameters.
 
-- Techniques for overloading a method,** Method overloading** can be achieved in the three following ways:
-  - By using different types of data for parameters in a method
-  - By changing the number of parameters in a method
-  - By changing the order of parameters in a method
+- **Method overloading:** 
+  - It is the process of assigning different signatures or arguments to two or more methods bearing the same name. 
+  - It’s an example of polymorphism in object-oriented programming. 
+  - Techniques for overloading a method, **Method overloading** can be achieved in the three following ways:
+    - By using different types of data for parameters in a method
+    - By changing the number of parameters in a method
+    - By changing the order of parameters in a method
+
+-  **Method overriding:** 
+   -  It is used to invoke functions that belong to different classes. 
+   -  This process creates a method in the derived class with the same signature as a method in the base class without modifying the code of the base class. 
+   -  This helps achieve runtime polymorphism.
 
 
 [Back](#content)
@@ -869,7 +880,7 @@ class Student
 
             Console.WriteLine(result); // 20
         }
-}
+    }
     ```
 
 - **Action Delegate**
@@ -1039,14 +1050,16 @@ class Program
 [Back](#content)
 
 # Dependency Injection
-- dependency injection (DI) is a design pattern used to develop loosely coupled code. This process moves the creation and binding of dependent objects outside of the class that depends on them. The main purpose of this is to make future changes to code more manageable. 
+- dependency injection (DI) is a design pattern used to develop loosely coupled code. 
+- This process moves the creation and binding of dependent objects outside of the class that depends on them. The main purpose of this is to make future changes to code more manageable. 
 
 
 [Back](#content)
 
 
 # HashSet
-- HashSet is an unordered collection of distinct values. Generally, it is used to prevent duplicate elements from being placed in a collection, and it performs better than a list in achieving this goal. 
+- HashSet is an unordered collection of distinct values. 
+- Generally, it is used to prevent duplicate elements from being placed in a collection, and it performs better than a list in achieving this goal. 
 - It is implemented using the HashSet class, which is derived from the System. 
 
 
@@ -1069,6 +1082,8 @@ class Program
 - Extension methods allow you to inject additional methods without modifying, deriving or recompiling the original class, struct or interface. 
 - Extension methods can be added to your own custom class, .NET framework classes, or third party classes or interfaces.
 - In the following example, IsGreaterThan() is an extension method for int type, which returns true if the value of the int variable is greater than the supplied integer parameter.
+- Extension methods allow developers to add a method to existing types without changing the original source code. 
+- This allows them to extend the functionality of the method. An extension method is a static method and uses the **this** keyword.
   ```cs
   int i = 10;
 
@@ -1246,31 +1261,39 @@ class Program
 [Back](#content)
 
 
-# Costum Control
-- A custom control is designed for single use in a specific application. There are three main ways to create a new custom control:
-  - Derive it from an existing user control
+# Custom Control
+- A custom control is designed for single use in a specific application. 
+- There are three main ways to create a new custom control:
+  - Derive it from an existing **user control**
   - Group existing controls together into new compiled control
   - Create a new control by deriving from the System.Windows.Controls.Control class
+
+- **User controls:** allow developers to write code that can be used in various areas of the program. 
+  - For example, if a website requires the same search control in multiple places, it can be created once as a user control and then dropped into different areas of the code. This serves the dual purposes of reusability and bug prevention.
 
 
 [Back](#content)
 
 # Circular references
 
-- Occur when two or more interdependent resources refer back to each other, either directly or indirectly, resulting in a closed loop or lock condition. This situation makes the resource unusable.
+- Occur when two or more interdependent resources refer back to each other, either directly or indirectly, resulting in a closed loop or lock condition. 
+- This situation makes the resource unusable.
 - circular references are most commonly resolved using garbage collection. The garbage collector systematically detects and collects circular references. Other solutions for circular references issues include callback methods, event handlers, and dependency injection.
-- 
+
+
 [Back](#content)
 
 # Exception handling
 
-- exception handling helps detect **errors** in code at runtime. The process is implemented using four different keywords:
+- exception handling helps detect **errors** in code at runtime. 
+- The process is implemented using four different keywords:
   - **Try** identifies blocks of code where exceptions are activated
   - **Catch** catches the exceptions that have been identified by <Try>
   - **Finally** executes a given set of statements depending on whether an exception is thrown out or not
   - **Throw** removes the exception
 
-> **throw exception** and a **throw clause**: The fundamental difference is that throw exceptions overwrite the stack trace, whereas throw clauses retain the stack information. As such, it is much harder to retrieve the original code responsible for throwing the exception with throw exceptions.
+> **throw exception** and a **throw clause**: 
+> The fundamental difference is that throw exceptions overwrite the stack trace, whereas throw clauses retain the stack information. As such, it is much harder to retrieve the original code responsible for throwing the exception with throw exceptions.
 
 [Back](#content)
 
@@ -1366,22 +1389,16 @@ class Program
 - **Control statements:** are used to control the actions a program takes; this is sometimes referred to as the flow of execution. Common actions in C# include calling methods, assigning values, declaring variables, and looping through collections.
 - **Continue and Break Statement:** Break statement breaks the loop. It makes the control of the program to exit the loop. Continue statement makes the control of the program to exit only the current iteration. It does not break the loop.
 - **Indexers:** are used to index instances of a class or structure. The indexed values can then be easily accessed like an array, but without explicitly specifying a type or instance member.
-- **Fields & Properties:** A field is a member of a class or an object of any type that represents a location for storing a value, whereas a property is a class member that provides a mechanism to read, write, and compute the value of a private field.
--  **Method overriding:** is used to invoke functions that belong to different classes. This process creates a method in the derived class with the same signature as a method in the base class without modifying the code of the base class. This helps achieve runtime polymorphism.
-- **Method overloading:** is the process of assigning different signatures or arguments to two or more methods bearing the same name. It’s an example of polymorphism in object-oriented programming. 
    - Method overloading improves the readability of the program by reducing the number of names associated with a specific action.
 - **The ref & out keywords:** are similar in that they are both used to pass arguments in a reference or function. However, there is a subtle difference:
   - With *ref* keywords, the value is already set, meaning the method can read and modify it
   - **ref** tells the compiler that the object is initialized before entering the function, while
   - With *out* keywords, the value isn’t set and can’t be read by the method until it is set, meaning the method must set it before it can be returned
   - **out** tells the compiler that the object will be initialized inside the function.
-- **Extension methods:** allow developers to add a method to existing types without changing the original source code. This allows them to extend the functionality of the method. An extension method is a static method and uses the **this** keyword.
-- **User controls:** allow developers to write code that can be used in various areas of the program. 
-  - For example, if a website requires the same search control in multiple places, it can be created once as a user control and then dropped into different areas of the code. This serves the dual purposes of reusability and bug prevention.
 - **Reflection:** is used to obtain metadata on types at runtime. In other words, it allows developers to retrieve data on the loaded assemblies and the types within them.
   - It’s implemented using a two-step process. First, you get the type object. Second, you use the type to browse members, such as methods and properties. 
 
-- the equality operator `==` checks whether two operands are equal or not, and the `Object.Equals()` method checks whether the two object instances are equal or not.
+- the Equality operator `==` checks whether two operands are equal or not, and the `Object.Equals()` method checks whether the two object instances are equal or not.
 
 
 
