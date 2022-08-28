@@ -17,9 +17,12 @@
 - [Variables](#variables)
 - [String](#string)
 - [Print](#print)
+- [Dynamic](#dynamic)
 - [Nullable](#nullable)
 - [Object](#object)
 - [Array](#array)
+- [Enum](#enum)
+- [Collections](#collections)
 - [Serialization](#serialization)
 - [XSD file](#xsd-file)
 - [Interface](#interface)
@@ -188,7 +191,7 @@
 - C# is a type-safe language, and the C# compiler guarantees that values stored in variables are always of the appropriate type. 
 - The value of a variable can be changed through assignment or through use of the ++ and -- operators.
 
-
+> **var** is a keyword, it is used to declare an implicit type variable, that specifies the type of a variable based on initial value.
 
 [Back](#content)
 
@@ -242,12 +245,41 @@
 
 > String and StringBuilder: A string object is immutable, meaning that it cannot be changed after it’s created. Any operation that tries to modify the string object will simply create a new string object. On the other hand, a string builder object is mutable and can be modified as the developer sees fit.
 
+- You can create an object of the **StringBuilder** class using the new keyword and passing an initial string.
+- The following example demonstrates creating StringBuilder objects.
+  ```cs 
+    using System.Text; // include at the top
+              
+    StringBuilder sb = new StringBuilder(); //string will be appended later
+    //or
+    StringBuilder sb = new StringBuilder("Hello World!");
+  ```
+
+
+
 [Back](#content)
 
 # Print
 
 - Console.WriteLine("Hello");
 - string name = Console.ReadLine();
+
+
+[Back](#content)
+
+# Dynamic
+
+- C# 4.0 (.NET 4.5) introduced a new type called dynamic that avoids compile-time type checking. 
+- A dynamic type escapes type checking at compile-time; instead, it resolves type at run time.
+- A dynamic type variables are defined using the dynamic keyword.
+- Dynamic types change types at run-time based on the assigned value. 
+- A dynamic variable can change type based on assigned value.
+  ```cs
+    dynamic MyDynamicVar = 1;
+
+    Console.WriteLine(MyDynamicVar.GetType());  // System.Int32
+  ```
+
 
 
 [Back](#content)
@@ -262,7 +294,8 @@
 
 - C# 2.0 introduced nullable types, using which you can assign null to a value type variable or declare a value type variable without assigning a value to it.
 
-- Nullable types are used to represent an undefined value of an underlying type. It essentially means ‘no value’ and is generally used when no data is available for the field.
+- Nullable types are used to represent an undefined value of an underlying type. 
+- It essentially means ‘no value’ and is generally used when no data is available for the field.
   ```cs
     Nullable<int> i = null;
   ```
@@ -274,7 +307,8 @@
 
 # Object
 - Object in an instance of a Class. Technically, it is just a block of memory allocated that can be stored in the form of Variables, Array or a Collection.
-- An object is a real-world entity and in C# it’s a single instance of a class. For example, if you had a class of ‘dogs’, ‘labradors’, ‘bulldogs’, and ‘golden retrievers’ would all be objects. 
+- An object is a real-world entity and in C# it’s a single instance of a class. 
+- For example, if you had a class of ‘dogs’, ‘labradors’, ‘bulldogs’, and ‘golden retrievers’ would all be objects. 
 
 [Back](#content)
 
@@ -282,7 +316,8 @@
 
 - An Array is used to store multiple variables of the same type. 
 - It is a collection of variables stored in a contiguous memory location.
-- Array is a collection of data that stores a fixed number of values of the same data type. Arrays can be retrieved easily for the developer’s reference. 
+- Array is a collection of data that stores a fixed number of values of the same data type. 
+- Arrays can be retrieved easily for the developer’s reference. 
   ```cs
     double numbers = new double[10];
     int[] score = new int[4] {25,24,23,25};
@@ -317,6 +352,54 @@
   - An ArrayList features a variable number of elements and can continually be added to
   - An Array cannot accept null values, whereas an ArrayList can
   - The relative simplicity of an Array means it typically provides better performance than an ArrayList
+
+[Back](#content)
+
+
+# Enum
+
+- An **enum** (or enumeration type) is used to assign constant names to a group of numeric integer values. 
+- It makes constant values more readable, for example, WeekDays.Monday is more readable then number 0 when referring to the day in a week
+- An enum is defined using the enum keyword, directly inside a namespace, class, or structure.
+-  All the constant names can be declared inside the curly brackets and separated by a comma. 
+-  The following defines an enum for the weekdays.
+  ```cs
+      enum WeekDays
+      {
+          Monday,
+          Tuesday,
+          Wednesday,
+          Thursday,
+          Friday,
+          Saturday,
+          Sunday
+      }
+  ```
+
+# Collections
+ - C# includes specialized classes that store series of values or objects.
+ - There are two types of collections available in C#: **non-generic** collections and **generic** collections.
+
+| Generic Collections	| Description |
+| ------------------	| ----------- |
+|`List<T>` | contains elements of specified type. It grows automatically as you add elements in it. |
+|`Dictionary<TKey,TValue>` | contains key-value pairs. |
+|`SortedList<TKey,TValue>`	| SortedList stores key and value pairs. It automatically adds the elements in ascending order of key by default. |
+|`Queue<T>` | stores the values in FIFO style (First In First Out). It keeps the order in which the values were added. It provides an  | Enqueue() method to add values and a Dequeue() method to retrieve values from the collection.
+|`Stack<T>` |	stores the values as LIFO (Last In First Out). It provides a Push() method to add a value and Pop() & Peek() methods to  |retrieve values.
+|`Hashset<T>`  | contains non-duplicate elements. It eliminates duplicate elements. |
+
+> In most cases, it is recommended to use the generic collections because they perform faster than non-generic collections and also minimize exceptions by giving compile-time errors.
+
+| Non-generic | Collections	Usage |
+| ----------- | ----------------- |
+| ArrayList	 | ArrayList stores objects of any type like an array. However, there is no need to specify the size of the ArrayList like with an array as it grows automatically. |
+| SortedList |	SortedList stores key and value pairs. It automatically arranges elements in ascending order of key by default. C# includes both, generic and non-generic SortedList collection. |
+| Stack |	Stack stores the values in LIFO style (Last In First Out). It provides a Push() method to add a value and Pop() & Peek() methods to retrieve values. C# includes both, generic and non-generic Stack. |
+| Queue |	Queue stores the values in FIFO style (First In First Out). It keeps the order in which the values were added. It provides an Enqueue() method to add values and a Dequeue() method to retrieve values from the collection. C# includes generic and non-generic Queue. |
+| Hashtable	| Hashtable stores key and value pairs. It retrieves the values by comparing the hash value of the keys. |
+| BitArray |	BitArray manages a compact array of bit values,which are represented as Booleans, where true indicates that the bit is on (1) and false indicates the bit is off (0). |
+
 
 [Back](#content)
 
@@ -408,7 +491,35 @@
 
 # Structure
 - A structure is a composite type of data consisting of various data types, including methods, fields, constructors, constants, properties, indexers, operators, and even other structures. 
-- A structure helps bring various data types together under a single unit. In this way, they are similar to classes. However, while classes are reference types, structures are value types. 
+- A structure helps bring various data types together under a single unit. 
+- In this way, they are similar to classes. 
+- However, while classes are reference types, structures are value types. 
+  ```cs
+    struct Coordinate
+    {
+        public int x;
+        public int y;
+    }
+    //////////////
+    struct Coordinate
+      {
+          public int x { get; set; }
+          public int y { get; set; }
+
+          public void SetOrigin()
+          {
+              this.x = 0;
+              this.y = 0;
+          }
+      }
+
+      Coordinate point = Coordinate();
+      point.SetOrigin();
+
+      Console.WriteLine(point.x); //output: 0  
+      Console.WriteLine(point.y); //output: 0 
+
+  ```
 
 | Class	| Struct |
 | -----	| ------ |
@@ -498,7 +609,10 @@
 [Back](#content)
 
 # Generics
-- Generics allow the developer to define classes and methods which can be used with any data type. This brings several benefits:
+
+- C# allows you to define generic classes, interfaces, abstract classes, fields, methods, static methods, properties, events, delegates, and operators using the type parameter and without the specific data type. 
+- Generics allow the developer to define classes and methods which can be used with any data type. 
+- This brings several benefits:
   - Saves time by reusing code
   - Provides type safety without unnecessary overhead
   - Removes the need for boxing and unboxing
@@ -507,6 +621,25 @@
   - They cannot be used with enumerations
   - They cannot be used with lightweight dynamic methods
   - The .NET framework doesn’t support context-bound generic types
+> A generic type is declared by specifying a type parameter in an angle brackets after a type name, e.g. `TypeName<T>` where `T` is a type parameter.
+
+```cs 
+  class DataStore<T>
+  {
+      public T Data { get; set; }
+  }
+  /////////////////
+  // create an instance of generic classes by specifying an actual type
+  DataStore<string> store = new DataStore<string>();
+  strStore.Data = "Hello World!";
+```
+> It is not required to use T as a type parameter. 
+
+> You can give any name to a type parameter. Generally, T is used when there is only one type parameter. 
+
+> It is recommended to use a more readable type parameter name as per requirement like `TSession`, `TKey`, `TValue` etc.
+
+
 
 [Back](#content)
 
