@@ -3,6 +3,12 @@
  ***
 
  - RxJS is a library for composing asynchronous and event-based programs by using observable sequences.
+ - The RxJS library also provides below utility functions for creating and working with observables.
+    - Converting existing code for async operations into observables
+    - Iterating through the values in a stream
+    - Mapping values to different types
+    - Filtering streams
+    - Composing multiple streams
 
 - ReactiveX combines the Observer pattern with the Iterator pattern and functional programming with collections to fill the need for an ideal way of managing sequences of events.
 

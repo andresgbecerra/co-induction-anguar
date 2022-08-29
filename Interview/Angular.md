@@ -22,6 +22,7 @@
 - [Observables](#observables)
 - [Decorator](#decorator)
 - [Templates](#templates)
+- [Zone](#zone)
 - [Libraries and Modules](#libraries-and-modules)
 - [Angular CLI](#angular-cli)
 - [And More](#and-more)
@@ -47,9 +48,25 @@
   - The compiler can only create instances of certain classes, supports only core decorators, and only supports calls to **macros** (functions or static methods) that return expressions.
 
 
+- JIT - Compile TypeScript just in time for executing it:
+  - Compiled in the browser.
+  - Each file compiled separately.
+  - No need to build after changing your code and before reloading the browser page.
+  - Suitable for local development.
+- AOT - Compile TypeScript during build phase:
+  - Compiled by the machine itself, via the command line (Faster).
+  - All code compiled together, inlining HTML/CSS in the scripts.
+  - No need to deploy the compiler (Half of Angular size).
+  - More secure, original source not disclosed.
+  - Suitable for production builds.
+
+- A **JIT** compiler runs after the program has started and compiles the code (usually bytecode or some kind of VM instructions) on the fly (or just-in-time, as it's called) into a form that's usually faster, typically the host CPU's native instruction set.
+- A JIT has access to dynamic runtime information whereas a standard compiler doesn't and can make better optimizations like inlining functions that are used frequently.
+- This is in contrast to a traditional compiler that compiles all the code to machine language before the program is first run.
+
   > When you run the ng build (build only) or ng serve (build and serve locally) CLI commands, the type of compilation (JIT or AOT) depends on the value of the aot property in your build configuration specified in angular.json. By default, aot is set to true for new CLI applications.
 
-  [Back](#content) 
+[Back](#content) 
 
 
 # DOM
@@ -85,6 +102,11 @@
   - A collection of JavaScript modules are also referenced as a library. 
   - Each Angular library name begins with the @angular prefix. 
   - Install Angular libraries with the npm package manager and import parts of them with JavaScript import declarations.
+
+- **Eager loading:** To load a feature module eagerly we need to import it into application module using imports metadata of @NgModule decorator.
+- Eager loading is useful in small size applications. 
+- In eager loading, all the feature modules will be loaded before the application starts. 
+- Hence the subsequent request to the application will be faster.
 
 [Back](#content) 
   
@@ -164,6 +186,9 @@
 
 
 # Service
+  - Angular services are singleton objects which get instantiated only once during the lifetime of an application. 
+  - They contain methods that maintain data throughout the life of an application, i.e. data does not get refreshed and is available all the time. 
+  - The main objective of a service is to organize and share business logic, models, or data and functions with different components of an Angular application. 
   - In Angular, a class with the @Injectable() decorator that encapsulates non-UI logic and code that can be reused across an application. 
   - Angular distinguishes components from services to increase modularity and reusability. 
   - Service is a broad category encompassing any value, function, or feature that an application needs. 
@@ -246,6 +271,16 @@
   > **Observable Vs Promise:** The biggest difference is that Promises won’t change their value once they have been fulfilled. They can only emit (reject, resolve) a single value. On the other hand, observables can emit multiple results. The subscriber will be receiving results until the observer is completed or unsubscribed from.
   - **Promises** are basically objects that may or may not resolve (essentially return) a value in the future, but which will notify the calling function via callbacks whether it is successful or not. 
   - Promises are used to handle asynchronous operations in javascript.
+  - Promises:
+    - return a single value
+    - not cancellable
+    - more readable code with try/catch and async/await
+  - Observables:
+    - work with multiple values over time
+    - cancellable
+    - support map, filter, reduce and similar operators
+    - use Reactive Extensions (RxJS)
+    - an array whose items arrive asynchronously over time
 
 [Back](#content) 
 
@@ -279,6 +314,16 @@
 
 - **Accessing Other Components** 
    - The **@ViewChild** and **@ViewChildren** decorators provide access to the instantiated class of child components, allowing you to interact with non-private fields programmatically. 
+
+[Back](#content) 
+
+
+# Zone
+
+- NgZone is a wrapper around Zone.js which is a library that creates a context around asynchronous functions in order to to make them trackable. 
+- Angular's change detection is heavily dependent on Zones.
+
+
 
 [Back](#content) 
 

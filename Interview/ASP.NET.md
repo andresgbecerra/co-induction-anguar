@@ -9,6 +9,11 @@
 - [CORS](#cors)
 - [Middleware](#middleware)
 - [Dependency Injection](#dependency-injection)
+- [Page life cycle](#page-life-cycle)
+- [Generic Host](#generic-host)
+- [Static](#static)
+- [ActionResult](#actionresult)
+- [OAuth](#oauth)
 
 ***
 
@@ -99,7 +104,7 @@
 
 
 
-> Costum Middlewares shoul be implement after `app.UseAuthorization()` in Program.cs file
+> Costum Middlewares shoul be implement after `app.UseAuthorization()` in Program.cs file .NET V 6.0
 ```cs
     // ...
     app.UseHttpsRedirection();
@@ -278,6 +283,79 @@ Dependency Injection (DI) is a design pattern which implements the IoC principle
   ```
   > It is recommended to use constructor injection instead of getting it using RequestServices.
 
+
+
+[Back](#content)
+
+# Page life cycle  
+- the events in `ASP.NET` page life cycle
+1) Page_PreInit 
+2) Page_Init
+3) Page_InitComplete
+4) Page_PreLoad
+5) Page_Load
+6) Page_LoadComplete
+7) Page_PreRender
+8) Render
+
+
+
+[Back](#content)
+
+# Generic Host
+
+- The .NET Generic Host is a feature which sets up some convenient patterns for an application including those for dependency injection (DI), logging, and configuration. 
+- It was originally named Web Host and intended for Web scenarios like ASP.NET Core applications but has since been generalized (hence the rename to Generic Host) to support other scenarios, such as Windows services, Linux daemon services, or even a console app.
+- A host is an object that encapsulates an app’s resources, such as:
+    - Dependency injection (DI)
+    - Logging
+    - Configuration
+    - IHostedService implementations
+- The generic host introduced with `ASP.NET` Core 3.0 and .NET Core 3.0 basically replaces the previous IWebHost and IWebHostBuilder. 
+- It follows the very same architecture and idea but is simply reduced to non-web tasks so that it can work with a number of different purposes. 
+- `ASP.NET` Core then just builds on top of this generic host.
+
+
+
+
+[Back](#content)
+
+# Static
+
+- Your static classes and static instance fields are shared between all requests to the application, and has the same lifetime as the application domain.
+- Therefore, you should be careful when using static instances, since you might have synchronization issues and the like. 
+- Also bear in mind, that static instances will not be GC'ed before the application pool is recycled, and therefore everything that is referenced by the static instance, will not be GC'ed. 
+- This can lead to memory usage problems.
+
+
+[Back](#content)
+
+
+# ActionResult
+
+- ActionResult is used to represent the action method result. 
+- Below are the subtypes of ActionResult:
+    - ViewResult
+    - PartialViewResult
+    - RedirectToRouteResult
+    - RedirectResult
+    - JavascriptResult
+    - JSONResult
+    - FileResult
+    - HTTPStatusCodeResult
+
+
+[Back](#content)
+
+# OAuth 
+- OAuth (Open Authorization) is an open standard for access granting/deligation protocol. 
+- It used as a way for Internet users to grant websites or applications access to their information on other websites but without giving them the passwords. 
+- It does not deal with authentication.
+- Basically there are three parties involved:
+  - oAuth Provider, oAuth Client and Owner.
+- oAuth Client (Application Which wants to access your credential)
+- oAuth Provider (eg. facebook, twitter...)
+- Owner (the person with facebook,twitter.. account )
 
 
 [Back](#content)
