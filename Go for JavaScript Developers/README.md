@@ -49,6 +49,8 @@
         }
     ```
 
+[Back](#content)
+
 ***
 
 
@@ -74,6 +76,12 @@
     )
     
     func main() {
+
+        // printing string - return letter
+        fmt.Println("T")         // T
+        // printing character - return bytes
+        fmt.Println('T')         // 84
+        fmt.Println(string('T')) // T
     
         v := 42
     
@@ -95,26 +103,7 @@
         fmt.Fprintf(os.Stdout, "A %s string\n", s)          // A formatted string
     }
 ```
-> **Variadic functions** are just like other functions. The only difference is its parameter defined in a way that it allows for an unknown number of arguments to be passed when calling the function.
 
-- The scan functions are used to take values from the standard input.
-  ```go
-        package main
-        
-        import (
-            "fmt"
-        )
-        
-        func main() {
-            var a, b int
-        
-            // use address-of operator to get the values into the variable
-            fmt.Scan(&a, &b)
-        
-            // print the values taken
-            fmt.Println(a, b)
-        }
-  ```
 - The stringer interface in fmt package
     - The stringer interface implementor can simply be passed to a print function as an argument and it will print in the way it is defined.
     ```go
@@ -148,6 +137,10 @@
     ```
 - **Documentation**
   - To get the GO documentation from the CLI, execute the following command - `go doc fmt` this command gets the information about fmt package, but if we are going to get specific information for instance Println function, we can run `go doc fmt.Println`
+
+
+[Back](#content)
+
 ***
 
 
@@ -218,7 +211,8 @@
 
 - **Control Structures**
   - **IF Statement:**
-    - the if statement can start with a short statement to execute before the condition.
+    - The expression need not be surrounded by parentheses ( ) but the braces { } are required.
+    - The if statement can start with a short statement to execute before the condition.
     - Variables declared by the statement are only in scope until the end of the if.
     ```go
         package main
@@ -235,13 +229,135 @@
             return fmt.Sprint(math.Sqrt(x))
         }
 
+        func pow(x, n, lim float64) float64 {
+            if v := math.Pow(x, n); v < lim { // the value of the variable can be assigned in the if statement
+                return v
+            } else {
+                fmt.Printf("%g >= %g\n", v, lim)
+            }
+            // can't use v here, throw an Error
+            // this scope can not instantiate v
+            return lim
+        }
+
         func main() {
             fmt.Println(sqrt(2), sqrt(-4))
+            fmt.Println(pow(3, 2, 10))
         }
     ```
 
+  - **Switch Statement**
+    - A switch statement is a shorter way to write a sequence of if - else statements. 
+    - It runs the first case whose value is equal to the condition expression.
+
+  ```go
+  package main
+
+    import (
+        "fmt"
+        "runtime"
+    )
+
+    func main() {
+
+        ///////////////////
+
+        fmt.Print("Go runs on ")
+
+        switch os := runtime.GOOS; os {
+        case "darwin":
+            fmt.Println("OS X.")
+        case "linux":
+            fmt.Println("Linux.")
+        default:
+            // freebsd, openbsd,
+            // plan9, windows...
+            fmt.Printf("%s.\n", os)
+        }
+        ///////////////////
+        // Note that you can use multiple arguments 
+        // in your case statement separated by a comma.
+         var city string
+
+        switch city {
+        case "Des Moines":
+            fmt.Println("You live in Iowa")
+        case "Minneapolis,", "St Paul":  // -
+            fmt.Println("You live in Minnesota")
+        case "Madison":
+            fmt.Println("You live in Wisconsin")
+        default:
+            fmt.Println("You're not from around here.")
+        }
+        ///////////////////
+        // no switch expression
+        switch { // -
+        case i > 10: fmt.Println("Greater than 10")
+        case i < 10: fmt.Println("Less than 10")
+        default: fmt.Println("Is 10")
+        }
+        /////////////////
+        // Add a fallthrough keyword automatically
+        // continue running the switch statement
+        switch {
+        case i != 10:
+            fmt.Println("Does not equal 10")
+            fallthrough // continue to next case
+        case i < 10: fmt.Println("Less than 10")
+        case i > 10: fmt.Println("Greater than 10")
+        default: fmt.Println("Is 10")
+        }
+    }
+
+  ```
 
 
+- **FOR Loops**
+  - It is similar to JavaScript FOR loop
+  - The basic for loop has three components separated by semicolons:
+    - the init statement: executed before the first iteration
+    - the condition expression: evaluated before every iteration
+    - the post statement: executed at the end of every iteration
+    ```go
+    package main
+
+        import "fmt"
+
+        func main() {
+            sum := 0
+            for i := 0; i < 10; i++ {
+                sum += i // sum = sum + i
+            }
+            fmt.Println(sum) // 45
+
+            ////////////////////
+            // The init and post statements are optional.
+            sum := 1
+            for ; sum < 10; { // -
+                sum += sum
+            }
+            fmt.Println(sum)
+            //////////////////
+            // This will behave like a while loop
+            sum := 1
+            for sum < 10 { // you can drop the semicolons
+                sum += sum
+            }
+            fmt.Println(sum)
+            ////////////////
+            // using range
+            var mySentence = "This is a sentence"
+
+            for index, letter := range mySentence { // -
+                fmt.Println("Index:", index, "Letter:", letter) // Index: 0 Letter: 84 ...
+                fmt.Println("Index:", index, "Letter:", string(letter)) // Index: 0 Letter: T ...
+            }
+
+
+        }
+    ```
+
+> The loop that does not exist is the `do while`
 
 
 [Back](#content)
@@ -250,6 +366,44 @@
 
 
 # Complex Structures
+
+
+- **Variadic functions** are just like other functions. 
+  - The only difference is its parameter defined in a way that it allows for an unknown number of arguments to be passed when calling the function.
+  - To declare a variadic function, the type of the final parameter is preceded by an ellipsis `...`
+    ```go
+    package main
+
+    import "fmt"
+
+    func main() {
+        variadicExample("red", "blue", "green", "yellow")
+    }
+
+    func variadicExample(s ...string) { // -
+        fmt.Println(s[0])
+        fmt.Println(s[3])
+    }
+    ```
+
+- The scan functions are used to take values from the standard input.
+  ```go
+        package main
+        
+        import (
+            "fmt"
+        )
+        
+        func main() {
+            var a, b int
+        
+            // use address-of operator to get the values into the variable
+            fmt.Scan(&a, &b)
+        
+            // print the values taken
+            fmt.Println(a, b)
+        }
+  ```
 
 [Back](#content)
 ***
