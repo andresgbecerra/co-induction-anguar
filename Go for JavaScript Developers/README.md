@@ -774,8 +774,8 @@
     }
     ```
 
-    - To run tests, use the command `go test` from within the directory where the test file lives.
-    - Test The Add Function from our `math.go` file in utils.
+ > To run tests, use the command `go test` from within the directory where the test file lives.
+
 
 
 [Back](#content)
