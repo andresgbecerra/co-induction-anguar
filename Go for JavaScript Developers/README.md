@@ -571,15 +571,16 @@
 
 
 > Nil slices: The zero value of a slice is nil.
-    ```go
-        func main() {
-            var s []int
-            fmt.Println(s, len(s), cap(s))
-            if s == nil {
-                fmt.Println("nil!")
-            }
+
+```go
+    func main() {
+        var s []int
+        fmt.Println(s, len(s), cap(s))
+        if s == nil {
+            fmt.Println("nil!")
         }
-    ```
+    }
+```
 
 
 - **Maps**
