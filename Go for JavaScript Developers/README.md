@@ -625,10 +625,133 @@
 
 
 [Back](#content)
+
 ***
 
 
 # Go Toolkit
+
+|  Commands  | Description |
+| ---------- | ----------- |
+| `go doc` |  will give you access to local help docs |
+| `go run <file name>` | to compile and run our program |
+| `go build` and `go install` | to compile all of your go packages and dependencies and put the executable in the current directory (when run without any flags). |
+| `go install` | also put the compiled dependencies into the `pkg` directory within your go workspace. |
+| `go build` | lets you build an executable file locally, which lets you test your application without having to deploy it immediately. |
+| `go fmt` |  will reformat your code based on Go standards. This is often run as a linter, (like on save of a file). |
+| `go list` | will list all of the packages in that current directory. |
+| `go vet` | runs through your source code and yells about any weird constructs |
+| `go get` | to install an external package, in Go you need to specify the location of where that executable lives. i.e, if we want to use the `golint` package, we would install it like so: `go get -u golang.org/x/lint/golint` |
+
+ 
+- **go lint**
+  - Go lint is concerned with style mistakes and maintaining a consistent coding style that is miantained at Google.
+  - Install `golint` using the command above.
+  - To find out where the library was put, run `go list -f {{.Target}} golang.org/x/lint/golint`
+  - For `golint` to be used globally, make sure the path you see from the above command is included in your `$PATH` variable.
+  
+
+- **Packages**
+  - Packages are directories with one or more Go source files that allow Go to reuse code across a program and across files.
+  - Every Go file must belong to a package.
+  - So far, the packages we've seen are `main`, the package we wrote, and `fmt` and `reflect`, which are built into the Go source code. 
+  - [See more packages](https://golang.org/pkg/).
+  - To import packages, you list them at the top of your file either like this:
+
+    ```go
+    import "fmt"
+    import "math"
+    import "reflect"
+    //////////
+    // or
+    import (
+        "fmt"
+        "math"
+        "reflect"
+    )
+    ```
+  - Some of the packages that ship with Go are:
+    - `strings` - simple functions to manipulate strings
+      - Methods: `Contains`, `Count`, `Index`, `HasPrefix`
+  
+    - `math` - mathematical operations
+      -  `Pow`, `Abs`, `Ceil`, `Floor` ...
+  
+    - `isNaN`, `NaN`
+    
+    - `io` - handles input/output methods related to the `os` package (like reading files)
+      - Methods: `Copy`, `Reader`, `Writer`
+
+    - `os` - methods around operating system functionality
+      - Methods: `Open`, `Rename`, `CreateFile`
+
+    - `testing` - Go's build in test suite
+      - Methods: `Skip`, `Run`, `Error`
+    
+    - `net/http` - provides http client and server implementations
+      - Methods: `Get`, `Post`, `Handle`
+
+
+
+- **Exported vs Unexported Names**
+  - When you import a package, you can only access that package's public, exported names. 
+  - These must start with a **capital letter**.
+  - Anything that starts with a **lowercase** letter is a **private** method and will NOT be exported. 
+  - These are only visible within the same package.
+
+    ```go
+    fmt.Println()
+    ```
+  > Within the `fmt` package, the function `Println` is exported (starts with a capital letter) and therefore can be accessed within our `main` package.
+  
+
+- **Custom Packages**
+  - To demonstrate how packages work, let's create a folder called `utils`, and within that create a file called `math.go` where we will add a few small functions.
+  - In `math.go` add the following:
+
+    ```go
+    package utils
+
+    import "fmt"
+
+    func printNum(num int) {
+        fmt.Println("Current Number: ", num)
+    }
+
+    func Add(nums ...int) int {
+        total := 0
+        for _, v := range nums {
+            printNum(v)
+            total += v
+        }
+        return total
+    }
+    ```
+
+  - And then in our `main.go` file, lets import and use this package.
+  - Note that the import name is a path that is relative to the `src` directory.
+  - Also note that the file name itself isn't necessary as long as that file lives within the package directory and has its package declaration at the top of the file.
+
+    ```go
+    import {
+    "fmt"
+    "path/from/src/to/utils" // => ie: myproject/utils
+    }
+
+    func calculateImportantData() int {
+        totalValue := utils.Add(1, 2, 3, 4, 5) // -
+        return totalValue
+    }
+
+    func main() {
+        total := calculateImportantData()
+        fmt.Println(total)
+    }
+    ```
+
+- **Testing**
+
+
 
 [Back](#content)
 ***
