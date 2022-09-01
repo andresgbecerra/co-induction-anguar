@@ -368,6 +368,38 @@
 # Complex Structures
 
 
+- **Functions**
+  - A function is a group of statements that exist within a program for the purpose of performing a specific task.
+  - At a high level, a function takes an input and returns an output.
+  ```go
+  package main
+
+    import "fmt"
+
+    // SimpleFunction prints a message
+    func SimpleFunction() {
+        fmt.Println("Hello World")
+    }
+    //////////////
+    // you can omit the type from all but the last.
+    func add(x, y int) int {
+	return x + y
+    }   
+    //////////////
+    // A function can return any number of results.
+    func printAge(age int) (ageOfSally int, ageOfBob int) {
+        ageOfBob = 21
+        ageOfSally = 35
+        return
+    }
+
+    func main() {
+        SimpleFunction()
+        fmt.Println(printAge())
+    }
+  ```
+
+
 - **Variadic functions** are just like other functions. 
   - The only difference is its parameter defined in a way that it allows for an unknown number of arguments to be passed when calling the function.
   - To declare a variadic function, the type of the final parameter is preceded by an ellipsis `...`
@@ -404,6 +436,192 @@
             fmt.Println(a, b)
         }
   ```
+
+
+- **Arrays**
+    - An array is a data structure that consists of a collection of elements of a single type or simply you can say a special variable, which can hold more than one value at a time. 
+    - The values an array holds are called its elements or items. 
+    - An array holds a specific number of elements, and it cannot grow or shrink. 
+    ```go
+    package main
+
+    import (
+        "fmt"
+        "reflect"
+    )
+
+    func main() {
+        // Initialize an empty array
+        var intArray [5]int
+        var strArray [5]string
+
+        fmt.Println(reflect.ValueOf(intArray).Kind()) // array
+        fmt.Println(reflect.ValueOf(strArray).Kind()) // array
+     
+        /////////////////
+        // You can initialize an array with pre-defined values using an array literal. 
+        var score [5]float64 = [5]float64{9, 1.5, 22, 7, 3.6}  // Defining Values
+        x := [5]int{10, 20, 30, 40, 50}   // Intialized with values
+        var y [5]int = [5]int{10, 20, 30} // Partial assignment
+        scores := [...]float64{9, 3, 6.4, 2, 6}
+
+        fmt.Println(x)  //  [10 20 30 40 50]
+        fmt.Println(y)  //  [10 20 30 0 0]
+    }
+    ```
+
+
+- **Make**
+  - Slices: Segments of an underlying array
+  - (+ Make): Must be associated with a space in memory
+  - Make: Initializes and allocates space in memory for `slice`, `map`, or `channel`.
+  - Slices can be created with the built-in `make` function; 
+  - This is how you create dynamically-sized arrays.
+  - The `make` function allocates a zeroed array and returns a slice that refers to that array:
+    ```go
+        // make(type, initial length, maximum capacity)
+        a := make([]int, 5)  // len(a)=5 -> [0 0 0 0 0]
+
+        // To specify a capacity, pass a third argument to make:
+        b := make([]int, 0, 5) // len(b)=0, cap(b)=5
+
+        b = b[:cap(b)] // len(b)=5, cap(b)=5
+        b = b[1:]      // len(b)=4, cap(b)=4
+    ```
+> **Make()** is necessary because, as seen with Arrays, Go is anticipating the need to set aside a specific length of memory for a variable being created. Since `slice` and `map` allow you to define a variable _without_ a set length, `make` helps Go establish where this variable will live and how to access it.
+
+
+- **Slice**
+  - `An array has a fixed size.` A slice, on the other hand, is a dynamically-sized, flexible view into the elements of an array.
+  - In practice, slices are much more common than arrays.
+  - Managing collections of data with slices and adding and removing elements from a slice.
+  - A slice is formed by specifying two indices, a `low` and `high` bound, separated by a colon:
+  - `a[low : high]`
+    ```go
+    package main
+
+    import "fmt"
+
+    func main() {
+        primes := [6]int{2, 3, 5, 7, 11, 13}
+
+        var s []int = primes[1:4]
+        fmt.Println(s) // [3 5 7]
+
+        ////////////////
+        
+        fruitArray := [5]string{"banana", "pear", "apple", "kumquat", "peach"}
+        fmt.Println(fruitArray[3:])     // [kumquat peach]
+        fmt.Println(fruitArray[:3])     // [banana pear apple]
+
+    }
+    ```
+- `fruitArray[3:]` ==> Everything after (and including) index 3
+- `fruitArray[:3]` ==> Everything up to (but not including) index 3
+
+- Slices are like **references** to arrays
+- A slice does not store any data, it just describes a section of an underlying array. 
+
+  ```go
+  /////////////////////
+  // Slices are like references to arrays
+  package main
+
+    import "fmt"
+
+    func main() {
+        names := [4]string{
+            "John",
+            "Paul",
+            "George",
+            "Ringo",
+        }
+        fmt.Println(names) // [John Paul George Ringo]
+
+        a := names[0:2]
+        b := names[1:3]
+        fmt.Println(a, b) // [John Paul] [Paul George]
+
+        b[0] = "XXX" // -
+        fmt.Println(a, b)       //[John XXX] [XXX George]
+        fmt.Println(names)      //[John XXX George Ringo]
+
+    }
+  ```
+- **append:** To add an item to the end of the slice, use the `append()` method
+  ```go
+    package main
+
+    import "fmt"
+
+    func main() {
+
+    slice1 := []int{1, 2, 3}
+    slice2 := append(slice1, 4, 5)// -
+
+    fmt.Println(slice1, slice2)                 // [1 2 3] [1 2 3 4 5]
+    fmt.Println(len(slice1), cap(slice1))       // 3 3
+    fmt.Println(len(slice2), cap(slice2))       // 5 6 - the capacity is 6 because it doubles the capacity of the first array
+        
+    }
+  ```
+
+- `len()` (Length) This indicates the longest this slice can be.
+- `cap()` (Capacity) This gets the maximum capacity that the slice can be.
+
+
+> Nil slices: The zero value of a slice is nil.
+    ```go
+        func main() {
+            var s []int
+            fmt.Println(s, len(s), cap(s))
+            if s == nil {
+                fmt.Println("nil!")
+            }
+        }
+    ```
+
+
+- **Maps**
+  - Similar to _Object_ in JavaScript
+  - A map is a data structure that provides you with an unordered collection of key/value pairs
+  - The strength of a map is its ability to retrieve data quickly based on the key. 
+  - A key works like an index, pointing to the value you associate with that key.
+  ```go
+  //////////////
+  // map[Key]Value - map[string]int - {"Mark": 10}
+  package main
+ 
+    import "fmt"
+    
+    var employee = map[string]int{"Mark": 10, "Sandy": 20}
+    
+    func main() {
+      fmt.Println(employee)
+      //////////////
+      var userEmails map[int]string = make(map[int]string)
+      userEmails[1] = "user1@gmail.com" // {1: "user1@gmail.com"}
+      userEmails[2] = "user2@gmail.com" // {2: "user2@gmail.com"}
+
+      fmt.Println(userEmails) // map[1:user1@gmail.com 2:user2@gmail.com]
+
+      //////////
+      m := make(map[string]int)
+
+      m["Answer"] = 42
+      fmt.Println("The value:", m["Answer"])  // The value: 42
+
+      m["Answer"] = 48
+      fmt.Println("The value:", m["Answer"])  // The value: 48
+
+      delete(m, "Answer") // delete method
+      fmt.Println("The value:", m["Answer"])  // The value: 0
+
+      v, ok := m["Answer"]
+      fmt.Println("The value:", v, "Present?", ok)    // The value: 0 Present? false
+    }
+  ```
+
 
 [Back](#content)
 ***
