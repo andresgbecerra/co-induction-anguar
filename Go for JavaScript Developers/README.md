@@ -786,6 +786,117 @@
 
 # Struts
 
+> A struct is a collection of fields.
+
+- Structs are the only way to create concrete user-defined types in Golang. 
+- Struct types are declared by composing a fixed set of unique fields. 
+- Structs can improve modularity and allow to create and pass complex data structures around the system.
+
+    ```go
+    type identifier struct{
+    field1 data_type
+    field2 data_type
+    field3 data_type
+    }
+    ```
+
+- A struct type `rectangle` is declared that has three data fields of different data-types. 
+- Here, struct used without instantiate a new instance of that type.
+
+    ```go
+    package main
+    
+    import "fmt"
+    
+    type rectangle struct {
+        length  float64
+        breadth float64
+        color   string
+    }
+    
+    func main() {
+        fmt.Println(rectangle{10.5, 25.10, "red"})
+    }
+    ```
+
+- **Reading a Struct**
+  - Then, in order to access the fields, we use dot notation similar to working with Objects in JS.
+
+    ```go
+    u := User{ID: 1, FirstName: "Marilyn", LastName: "Monroe", Email: "marilyn.monroe@gmail.com"}
+    fmt.Println(u.FirstName) // => "Marilyn"
+    ```
+
+  - To pass a struct to a function, we simply add the struct name within the function signature as the type of argument we are passing in.
+
+    ```go
+    func describeUser(u User) string {
+        desc := fmt.Sprintf("Name: %s %s, Email: %s, ID: %d", u.FirstName, u.LastName, u.Email, u.ID)
+        return desc
+    }
+
+    func main() {
+    u := User{ID: 1, FirstName: "Marilyn", LastName: "Monroe", Email: "marilyn.monroe@gmail.com"}
+    userDescription := describeUser(u) //  call this function.
+    fmt.Println(userDescription)
+    }
+    ```
+
+  - Let's create another struct for a group of users (think `admin` vs `guest`).
+
+    ```go
+    type User struct {
+        ID int
+        FirstName, LastName, Email string
+    }
+    type Group struct {
+        role            string
+        users           []User // -
+        newestUser      User   // -
+        spaceAvailable  bool
+    }
+
+    // function that describes the team of users:
+    func describeGroup(g Group) string {
+        desc := fmt.Sprintf("The %s user group has %d users. Newest user:  %s, Accepting New Users:  %t", g.role, len(g.users), g.newestUser.FirstName, g.spaceAvailable)
+        return desc
+    }
+
+    func main() {
+    u1 := User{ID: 1, FirstName: "Marilyn", LastName: "Monroe", Email: "marilyn.monroe@gmail.com"}
+    u2 := User{ID: 2, FirstName: "Humphrey", LastName: "Bogart", Email: "humphrey.bogart@gmail.com"}
+
+    g := Group{role: "admin", users: []User{u1, u2}, newestUser: u2, spaceAvailable: true}
+
+    groupDescription := describeGroup(g)
+
+    fmt.Println(groupDescription)
+    // The admin user group has 2 users. Newest user:  Humphrey, Accepting New Users:  true
+    }
+
+
+    ```
+
+
+- **Accessibility**
+  - Note that like variables and functions, only field names that have a **capital letter** are visible outside of the package where the struct is defined.
+
+    ```go
+    type User struct {
+    ID  int
+    Email  string
+    FirstName  string
+    LastName   string
+    }
+    ```
+
+- **Mutating Instances Of A Struct**
+  - In Go, unless otherwise indicated, we are passing around a _COPY_ of any variable we reference to existing functions. 
+  - In the case above, we pass a copy of the variable `g`, and then are asking our program to print the original value of `g`. 
+  - The original value is still safely untouched in memory.
+  - In order to permanently modify this variable, we need to use a special kind of variables called a `pointer`.
+
+
 
 [Back](#content)
 
@@ -793,6 +904,102 @@
 
 
 # Pointers
+- A pointer variable in Go is a variable that holds the _memory location_ of that variable, instead of a copy of its value.
+
+```go
+  var name string
+  var namePointer *string // - pointer
+
+  fmt.Println(name)         // ""
+  fmt.Println(namePointer) // <nil>
+```
+- A normal string variable (`name`) is assigned a value of `""`.
+- A pointer string variable (`namePointer`), however, is assigned it's default value of `<nil>` in anticipation of a future memory location.
+- To assign a variable it's address in memory, you use the `&` symbol (think "a - at - for address").
+
+```go
+  var name string
+  var namePointer *string // - pointer
+
+  fmt.Println(name)         // ""
+  fmt.Println(namePointer)  // <nil> 
+  fmt.Println(&name)        // 0xc000014250 - memory address
+  ///////////////
+  var name string = "Andres"
+  var namePointer *string = &name
+  var nameValue = *namePointer
+
+  fmt.Println(name)         // Andres
+  fmt.Println(namePointer)  // 0xc000014250 - memory address
+  fmt.Println(nameValue)    // Andres
+```
+- So now we're looking at the _memory address_ of a variable, rather than the value that is stored there. 
+- To get that value, we need to dig into that address and pull the value out. 
+- To `read through` a pointer variable to get the actual value, you use `pointer indirection` to "deference" that variable back to its original value.
+
+> - Pointer types are indicated with a `*` next to the _TYPE NAME_, indicates that variable will POINT TO a memory location.
+> - Pointer variable values are visible with a `*` next to the _VARIABLE NAME_.
+> - To read through a variable to see the pointer address, use a `&` next to the _VARIABLE NAME_.
+> - ie: `var nameValue = *namePointer` => "Andres"
+
+- **Pass By Value**
+  - Function parameters represent a COPY of the value that they reference. 
+  - This means that any change made to that variable within the function is modifying the copy, not the underlying value in memory. 
+
+```go
+package main
+
+import "fmt"
+import "strings"
+
+func changeName(n string) {
+    n = strings.ToUpper(n)
+}
+
+func main() {
+    name := "Andres"
+    changeName(name)
+    fmt.Println(name) // Andres - didn't Capitalize
+}
+
+///////////////
+// If we did want the `changeName` function to modify the name variable, we need to pass a pointer.
+
+func changeName(n *string) {
+	*n = strings.ToUpper(*n)
+}
+
+func main() {
+	name := "Andres"
+	changeName(&name)
+	fmt.Println(name) // ANDRES
+}
+
+```
+
+- **Pointers And Structs**
+  - Let's take the following struct:
+
+```go
+type Coordinates struct {
+  X, Y float64
+}
+
+var c = Coordinates{x: 120.5, y: 300}
+```
+
+- To access a field on a struct pointer, we would need syntax that looked like this:
+
+```go
+func main() {
+  pointerCoords = &c
+  (*pointerCoords).X =  200
+}
+```
+
+- The `(*pointerCoords)` bit is a tad cumbersome, so Go allows us to simply reference the pointer without the dereferencing asterisk but knows that behind the scenes we are talking about the pointer struct.
+
+
 
 
 [Back](#content)
