@@ -1236,7 +1236,125 @@ func main() {
 
 
 # Web Servers
+- To work with HTTP we need to import the HTTP package. It contains client and server implementation for HTTP.
+- To create a basic HTTP server, we need to create an endpoint. 
+- In Go, we need to use _handler functions_ that will handle different routes when accessed. 
+- Here is a simple server that listens to port 5050.
+  ```go
+  package main
+ 
+    import (
+        "fmt"
+        "net/http"
+    )
+    
+    func main() {
+            // handle route using handler function
+        http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+            fmt.Fprintf(w, "Welcome to new server!")
+        })
+    
+            // listen to port
+        http.ListenAndServe(":5050", nil)
+    }
+  ```
+- We can handle different routes just like before. 
+- We can simply use different handlers for each route we want to handle. Here are some examples.
+  ```go
+  package main
+ 
+    import (
+        "fmt"
+        "net/http"
+    )
+    
+    func main() {
+        http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+            fmt.Fprintf(w, "Welcome to new server!")
+        })
+    
+        http.HandleFunc("/students", func(w http.ResponseWriter, r *http.Request) {
+            fmt.Fprintf(w, "Welcome Students!")
+        })
+    
+        http.HandleFunc("/teachers", func(w http.ResponseWriter, r *http.Request) {
+            fmt.Fprintf(w, "Welcome teachers!")
+        })
+    
+        http.ListenAndServe(":5050", nil)
+    }
+  ```
+  
+- **Using a server mux**
+  - A mux is a multiplexer. 
+  - Go has a type servemux defined in http package which is a request multiplexer. 
+  - Here’s how we can use it for different paths. 
+  - Here we are using the io package to send results.
+  ```go
+  package main
+ 
+    import (
+        "io"
+        "net/http"
+    )
+    
+    func welcome(w http.ResponseWriter, r *http.Request) {
+        io.WriteString(w, "Welcome!")
+    }
+    
+    func main() {
+    
+        mux := http.NewServeMux() // multiplexer
+    
+        mux.HandleFunc("/welcome", welcome)
+    
+        http.ListenAndServe(":5050", mux)
+    }
+  ```
 
+- **Structs & JSON**
+    - we are used to working with JSON objecst when we make HTTP requests. 
+    - When working with a struct in Go, we can tell our program what we want our JSON too look like, and then encode/decode it (read: stringify/parse) back and forth into Go.
+    - In order to turn this struct into a JSON object, we can use the `enconding/json` package that ships with Go.
+
+```go
+package main
+
+import "fmt"
+import "encoding/json"
+
+
+type User struct {
+  ID int
+  FirstName string
+  LastName string
+  Email string
+}
+
+func main() {
+  u := User{
+    ID: 1,
+    FirstName: "user",
+    LastName: "test",
+    Email: "user.test@gmail.com",
+  }
+
+  data, _ := json.Marshal(u)
+  fmt.Println(string(data)) // {"ID":1,"FirstName":"user","LastName":"test","Email":"user.test@gmail.com"}
+}
+```
+
+> When you print this out, the structure is ALMOST there, but the formatting isn't conventional JSON.
+
+- To modify what we want those keys to look like , we can add an additional field to our struct called a `field tag`.
+```go
+type User struct {
+  ID int `json:"id"`
+  FirstName string `json:"firstName"`
+  LastName string `json:"lastName"`
+  Email string `json:"emailAddress"`
+}
+```
 
 [Back](#content)
 
@@ -1246,12 +1364,142 @@ func main() {
 # Hitting an External API
 
 
+- Example with Star Wars API (swapi):
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"log"
+	"net/http"
+)
+
+// BaseURL is the base endpoint for the star wars API
+const BaseURL = "https://swapi.dev/api/"
+
+// Planet is a planet type
+type Planet struct {
+	Name       string `json:"name"`
+	Population string `json:"population"`
+	Terrain    string `json:"terrain"`
+}
+
+// Person is a person type
+type Person struct {
+	Name         string `json:"name"`
+	HomeworldURL string `json:"homeworld"`
+	Homeworld    Planet
+}
+
+func (p *Person) getHomeworld() {
+	res, err := http.Get(p.HomeworldURL)
+	if err != nil {
+		log.Print("Error fetching homeworld", err)
+	}
+
+	var bytes []byte
+	if bytes, err = ioutil.ReadAll(res.Body); err != nil {
+		log.Print("Error reading response body", err)
+	}
+
+	json.Unmarshal(bytes, &p.Homeworld)
+}
+
+// AllPeople is a collection of Person types
+type AllPeople struct {
+	People []Person `json:"results"`
+}
+
+func getPeople(w http.ResponseWriter, r *http.Request) {
+	res, err := http.Get(BaseURL + "people")
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		log.Print("Failed to request star wars people")
+	}
+	fmt.Println(res)
+
+	bytes, err := ioutil.ReadAll(res.Body)
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		log.Print("Failed to parse request body")
+	}
+
+	var people AllPeople
+
+	fmt.Println(string(bytes))
+
+	if err := json.Unmarshal(bytes, &people); err != nil {
+		fmt.Println("Error parsing json", err)
+	}
+
+	fmt.Println(people)
+
+	for _, pers := range people.People {
+		pers.getHomeworld()
+		fmt.Println(pers)
+	}
+
+}
+func main() {
+	http.HandleFunc("/people", getPeople)
+	fmt.Println("Serving on :8080")
+	log.Fatal(http.ListenAndServe(":8080", nil))
+}
+
+```
+
+
 [Back](#content)
 
 ***
 
 
 # Concurrency
+- Concurrency in Golang is the ability for functions to run independent of each other. 
+- Goroutines are functions that are run concurrently. 
+- Golang provides Goroutines as a way to handle operations concurrently.
+- New goroutines are created by the `go` statement.
+- The `go` keyword makes the function call to return immediately, while the function starts running in the background as a goroutine and the rest of the program continues its execution. 
+- The main function of every Golang program is started using a goroutine, so every Golang program runs at least one goroutine.
+  
+  ```go
+    package main
+
+    import (
+        "fmt"
+        "time"
+    )
+
+    func say(s string) {
+        for i := 0; i < 5; i++ {
+            time.Sleep(100 * time.Millisecond)
+            fmt.Println(s)
+        }
+    }
+
+    func main() {
+        go say("world") // -
+        say("hello")
+    }
+  ```
+
+
+- **Channel**
+  - Go provides a mechanism called a **channel** that is used to share data between goroutines. 
+  - When you execute a concurrent activity as a goroutine a resource or data needs to be shared between goroutines, channels act as a conduit(pipe) between the goroutines and provide a mechanism that guarantees a synchronous exchange.
+  
+  > A channel is created by the make function, which specifies the chan keyword and a channel's element type.
+
+    ```go
+    ch <- v    // Send v to channel ch.
+    v := <-ch  // Receive from ch, and
+            // assign value to v.
+    ```
 
 [Back](#content)
 
