@@ -214,8 +214,9 @@
 # Variables
 
 - **Var, Let & Const**
-  - The var statement declares a function-scoped or globally-scoped variable, optionally initializing it to a value.
+  - The **var** statement declares a function-scoped or globally-scoped variable, optionally initializing it to a value.
   - Variables declared using **var** are created before any code is executed in a process known as _hoisting_. Their initial value is undefined.
+  - The **let** declaration declares a block-scoped local variable, optionally initializing it to a value.
   - The **let** keyword has some differences to **var**, with the most obvious being that **let** allows a more limited access to the variable than **var**. This is called “block scoping” as opposed to regular or function scoping.
   - Variables with the **const** keyword behave exactly like a variable declared with the **let** keyword with only one difference, any variable declared with the **const** keyword cannot be reassigned.
 
