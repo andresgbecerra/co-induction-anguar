@@ -240,12 +240,37 @@
 
 # Object Prototype  
   - A prototype is a blueprint of an object. 
+  - The prototype is an object that is associated with every functions and objects by default in JavaScript.
   - The prototype allows us to use properties and methods on an object even if the properties and methods do not exist on the current object. 
   - All javascript objects inherit properties from a prototype. For example,
     - Date objects inherit properties from the Date prototype
     - Math objects inherit properties from the Math prototype
     - Array objects inherit properties from the Array prototype.
     - On top of the chain is Object.prototype. Every prototype inherits properties and methods from the Object.prototype.
+  - The JavaScript **prototype** property allows you to add new properties to object constructors:
+    ```js
+    function Person(first, last, age, eyecolor) {
+      this.firstName = first;
+      this.lastName = last;
+      this.age = age;
+      this.eyeColor = eyecolor;
+    }
+
+    Person.prototype.nationality = "English";
+    ```
+  - The JavaScript prototype property also allows you to add new methods to objects constructors:
+    ```js
+      function Person(first, last, age, eyecolor) {
+        this.firstName = first;
+        this.lastName = last;
+        this.age = age;
+        this.eyeColor = eyecolor;
+      }
+
+      Person.prototype.name = function() {
+        return this.firstName + " " + this.lastName;
+      };
+    ```
   
 [Back](#content)
 
