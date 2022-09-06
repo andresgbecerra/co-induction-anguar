@@ -164,6 +164,11 @@
   - Array - `Collection of data as an ordered list`
    > It is important to remember that any data type that is not a primitive data type, is of Object type in javascript 
 
+- **Object Destructuring**  
+  - Object destructuring is a new way to extract elements from an object or an array.
+  - Using object destructuring we can extract all the elements inside an object in one line of code.
+
+
 
 [Back](#content)
 
@@ -499,9 +504,6 @@
 
 
   
-- **Object Destructuring**  
-  - Object destructuring is a new way to extract elements from an object or an array.
-  - Using object destructuring we can extract all the elements inside an object in one line of code.
 
 # Classes
   - Introduced in the ES6 version, classes are nothing but syntactic sugars for constructor functions.
