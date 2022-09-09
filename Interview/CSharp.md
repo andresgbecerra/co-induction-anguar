@@ -1245,11 +1245,49 @@ class Program
 
 - Thread represents an actual OS-level thread, with its own stack and kernel resources. 
 - Thread allows the highest degree of control; you can Abort() or Suspend() or Resume() a thread, you can observe its state, and you can set thread-level properties like the stack size, apartment state, or culture. 
-- ThreadPool is a wrapper around a pool of threads maintained by the CLR.
-- The **Task class** from the Task Parallel Library offers the best of both worlds. 
+- **ThreadPool** is a wrapper around a pool of threads maintained by the CLR.
+  - A Thread pool in C# is a collection of threads that can be used to perform a number of tasks in the background. 
+  - Once a thread completes its task, then again it is sent to the thread pool, so that it can be reused. 
+  - This reusability of threads avoids an application to create a number of threads which ultimately uses less memory consumption.
+
+- The **Task class** from the Task Parallel Library offers the best of both worlds. `The Task-related classes belong to System.Threading.Tasks namespace.`
   - Like the ThreadPool, a task does not create its own OS thread. 
   - Instead, tasks are executed by a TaskScheduler; the default scheduler simply runs on the ThreadPool. 
   - Unlike the ThreadPool, Task also allows you to find out when it finishes, and (via the generic Task) to return a result.
+  - A task in C# is used to implement Task-based Asynchronous Programming and was introduced with the .NET Framework 4. 
+  - The Task object is typically executed asynchronously on a thread pool thread rather than synchronously on the main thread of the application.
+  - A task scheduler is responsible for starting the Task and also responsible for managing it.
+  - By default, the Task scheduler uses threads from the thread pool to execute the Task.
+  - Tasks in C# basically used to make your application more responsive.
+  > From a performance point of view, the `Task.Run` or `Task.Factory.StartNew` methods are preferable to create and schedule the tasks. But, if you want the task creation and scheduling separately, then you need to create the task separately by using the Task class and then call the `Start` method to schedule the task execution for a later time.
+  ```cs
+    // Starting Task
+    Task task1 = Task.Run(() => { PrintCounter(); });
+    Task task2 =  Task.Factory.StartNew(PrintCounter); 
+    Task task3 = new Task(PrintCounter);
+    task3.Start();
+
+    static void PrintCounter()
+        {
+            Console.WriteLine($"Child Thread : {Thread.CurrentThread.ManagedThreadId} Started");
+            for (int count = 1; count <= 5; count++)
+            {
+                Console.WriteLine($"count value: {count}");
+            }
+            Console.WriteLine($"Child Thread : {Thread.CurrentThread.ManagedThreadId} Completed");
+        }
+  ```
+- If you want to make the main thread execution wait until all child tasks are completed, then you need to use the **Wait method** of the Task class. The Wait method of the Task class will block the execution of other threads until the assigned task has completed its execution.
+  ```cs
+   Task task1 = Task.Run(() => 
+            {
+                PrintCounter();
+            });
+            task1.Wait(); // wait-
+  ```
+
+
+
 
 [Back](#content)
 
