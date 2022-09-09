@@ -66,7 +66,13 @@
     - The Internal representation of an object is hidden from the view outside the object‘s definition. Only the required information can be accessed, whereas the rest of the data implementation is hidden.
   - **Polymorphism:** 
     - It is the ability of a type to take on many forms using a single interface
-    - The name means, one name, many forms. It is achieved by having multiple methods with the same name but different implementations.
+    - The name means, one name, many forms. 
+    - It is achieved by having multiple methods with the same name but different implementations.
+    - Implementing same thing in different ways:
+      | Compile-time Polymorphism | Runtime Polymorphism |
+      | ------------------------- | -------------------- |
+      | Method Overloading        | Method Overriding    |
+      | Early/static Binding      | Late/Dinamyc Binding |
   - **Abstraction:** 
     - It is the concealment of unnecessary program details so that the user only sees the essential attributes.
     - It is a process of identifying the critical behavior and data of an object and eliminating the irrelevant details.
@@ -751,16 +757,85 @@ class Student
 
 - **Method overloading:** 
   - It is the process of assigning different signatures or arguments to two or more methods bearing the same name. 
-  - It’s an example of polymorphism in object-oriented programming. 
+  - It’s an example of _static polymorphism_ in object-oriented programming, it occurs in _compile-time_. 
   - Techniques for overloading a method, **Method overloading** can be achieved in the three following ways:
     - By using different types of data for parameters in a method
     - By changing the number of parameters in a method
     - By changing the order of parameters in a method
+  ```cs
+  namespace MyFirstProgram
+  {
+      class Program
+      {
+          static void Main(string[] args)
+          {
+              // method overloading  = methods share same name, but different parameters
+              //                       name + parameters = signature
+              //                       methods must have a unique signature
+              //                      - Performs static polymorphism
+
+              double total;
+              
+              total = Multiply(2, 3, 4);
+
+              Console.WriteLine(total);
+              Console.ReadKey();
+          }
+
+          static double Multiply(double a, double b)
+          {      
+              return a * b;
+          }
+          static double Multiply(double a, double b, double c)
+          {
+              return a * b * c;
+          }
+      }
+  }
+  ```
 
 -  **Method overriding:** 
    -  It is used to invoke functions that belong to different classes. 
    -  This process creates a method in the derived class with the same signature as a method in the base class without modifying the code of the base class. 
-   -  This helps achieve runtime polymorphism.
+   -  This helps achieve _runtime polymorphism_ or _dynamic polymorphism_.
+  ```cs
+  namespace MyFirstProgram
+  {
+      class Person 
+      {
+        public string Name { get; set; }
+        public int age { get; set; }
+        public virtual void Work()
+        {
+          Console.WriteLine("It works...");
+        }
+      }
+      class Employee : Person
+      {
+        public double Salary { get; set; }
+        public string Company { get; set; }
+        public override void Work()
+        {
+          Console.WriteLine("It earns...");
+        }
+      }
+
+
+      class Program
+      {
+          static void Main(string[] args)
+          {
+              // method overriding  = virtual & override keyword are used to implement
+              //                      method overriding
+              //                      - Performs dynamic polymorphism
+
+             Person p1 = new Employee();
+             p1.Work(); // It earns...
+          }
+
+      }
+  }
+  ```
 
 
 [Back](#content)
