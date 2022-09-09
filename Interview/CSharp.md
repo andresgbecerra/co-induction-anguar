@@ -1259,6 +1259,7 @@ class Program
   - A task scheduler is responsible for starting the Task and also responsible for managing it.
   - By default, the Task scheduler uses threads from the thread pool to execute the Task.
   - Tasks in C# basically used to make your application more responsive.
+  - In C#.NET, the task is basically used to implement Asynchronous Programming.
   > From a performance point of view, the `Task.Run` or `Task.Factory.StartNew` methods are preferable to create and schedule the tasks. But, if you want the task creation and scheduling separately, then you need to create the task separately by using the Task class and then call the `Start` method to schedule the task execution for a later time.
   ```cs
     // Starting Task
