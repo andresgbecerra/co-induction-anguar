@@ -194,6 +194,13 @@ Dependency Injection (DI) is a design pattern which implements the IoC principle
 
 ![Dependency InJection](../assets/di-dependency-injection.png)
 
+- The Dependency Injection pattern involves 3 types of classes.
+  - Client Class: The client class (dependent class) is a class which depends on the service class
+  - Service Class: The service class (dependency) is a class that provides service to the client class.
+  - Injector Class: The injector class injects the service class object into the client class.
+
+  ![Dependency InJection](../assets/di-dependency-injection-classes.png)
+
 - Built-in IoC Container
   - The built-in container is represented by `IServiceProvider` implementation that supports constructor injection by default. 
   - The types (classes) managed by built-in IoC container are called **services**.
