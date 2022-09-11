@@ -1,21 +1,53 @@
 ## ASP.NET
 
+> ASP.NET is an open-source, server-side web-application framework designed for web development to produce dynamic web pages. 
 
+- It was developed by Microsoft to allow programmers to build dynamic web sites, applications and services. 
+- The name stands for **Active Server Pages Network Enabled Technologies**.
 ***
 
 ## Content
 
+- [Introduction](#introduction)
 - [Installation](#installation)
 - [CORS](#cors)
+- [Program.cs](#programcs)
 - [Middleware](#middleware)
 - [Dependency Injection](#dependency-injection)
 - [Page life cycle](#page-life-cycle)
+- [Host](#host)
 - [Generic Host](#generic-host)
+- [Servers](#servers)
+- [Configuration](#configuration)
+- [Environments](#environments)
+- [Logging](#logging)
+- [Routing](#routing)
+- [Content root](#content-root)
+- [Web Root](#web-root)
 - [Static](#static)
 - [ActionResult](#actionresult)
 - [OAuth](#oauth)
 
 ***
+
+# Introduction
+
+- ASP.NET Core provides the following benefits:
+  - Ability to develop and run on Windows, macOS, and Linux.
+  - Razor Pages makes coding page-focused scenarios easier and more productive.
+  - Blazor lets you use C# in the browser alongside JavaScript. Share server-side and client-side app logic all written with .NET.
+  - Ability to host on the following:
+    - Kestrel
+    - IIS
+    - HTTP.sys
+    - Nginx
+    - Apache
+    - Docker
+
+
+
+[Back](#content)
+
 
 # Installation
 
@@ -57,10 +89,25 @@
 
 [Back](#content)
 
+# Program.cs
+
+- `ASP.NET` Core apps created with the web templates contain the application _startup_ code in the Program.cs file. 
+- The Program.cs file is where:
+  - Services required by the app are configured.
+  - The app's request handling pipeline is defined as a series of middleware components.
+
+
+[Back](#content)
+
 # Middleware 
 
+- The request handling pipeline is composed as a series of middleware components. 
+- Each component performs operations on an HttpContext and either invokes the next middleware in the pipeline or terminates the request.
 - It is actually sequential series of delegates (piece of code), that can either short-circuit or pass on the HTTP request to next delegate. 
 - These are known as middleware, a concept well known to people who worked with Node.js.
+  
+> By convention, a middleware component is added to the pipeline by invoking a `Use{Feature}` extension method. 
+
 - Piece of your middleware can do one of the following:
     - Handle an incoming HTTP request by generating an HTTP response (maybe your authentication or authorization middleware will stop the request early and immediately create response)
     - Process the incoming request, change it and pass it to the next middleware in the pipeline
@@ -130,6 +177,8 @@
 # Dependency Injection
 
 Dependency Injection (DI) is a design pattern which implements the IoC principle to invert the creation of dependent objects.
+- Services are typically resolved from DI using constructor injection. 
+- The DI framework provides an instance of this service at runtime.
 
 > Inversion of Control (IoC): IoC Container (a.k.a. DI Container) is a framework for implementing automatic dependency injection.
 > - All the containers must provide easy support for the following DI lifecycle.
@@ -302,6 +351,26 @@ Dependency Injection (DI) is a design pattern which implements the IoC principle
 
 [Back](#content)
 
+# Host
+
+- On startup, an `ASP.NET Core` app builds a host. 
+- The host encapsulates all of the app's resources, such as:
+  - An HTTP server implementation
+  - Middleware components
+  - Logging
+  - Dependency injection (DI) services
+  - Configuration
+
+- There are three different hosts:
+  - .NET WebApplication Host, also known as the Minimal Host.
+  - .NET Generic Host
+  - `ASP.NET Core` Web Host
+
+
+
+
+[Back](#content)
+
 # Generic Host
 
 - The .NET Generic Host is a feature which sets up some convenient patterns for an application including those for dependency injection (DI), logging, and configuration. 
@@ -316,6 +385,101 @@ Dependency Injection (DI) is a design pattern which implements the IoC principle
 - `ASP.NET` Core then just builds on top of this generic host.
 
 
+
+
+[Back](#content)
+
+
+# Servers
+- An `ASP.NET` Core app uses an HTTP server implementation to listen for HTTP requests. 
+- The server surfaces requests to the app as a set of request features composed into an HttpContext.
+  - the Kestrel cross-platform server implementation, Kestrel can run as a public-facing edge server exposed directly to the Internet.
+  - IIS HTTP Server is a server for Windows that uses IIS.
+  - HTTP.sys is a server for Windows that isn't used with IIS.
+
+
+[Back](#content)
+
+# Configuration
+
+- `ASP.NET` Core provides a configuration framework that gets settings as name-value pairs from an ordered set of configuration providers.
+-  Built-in configuration providers are available for a variety of sources, such as `.json` files, `.xml` files, environment variables, and command-line arguments. 
+-  By default, `ASP.NET` Core apps are configured to read from `appsettings.json`, environment variables, the command line, and more.
+  
+> For managing confidential configuration data such as passwords, .NET Core provides the Secret Manager. 
+
+> For production secrets, we recommend Azure Key Vault.
+
+
+
+[Back](#content)
+
+# Environments
+
+- Execution environments, such as Development, Staging, and Production, are available in `ASP.NET` Core. 
+- Specify the environment an app is running in by setting the `ASPNETCORE_ENVIRONMENT` environment variable. 
+- `ASP.NET` Core reads that environment variable at app startup and stores the value in an `IWebHostEnvironment` implementation. 
+- This implementation is available anywhere in an app via dependency injection (DI).
+
+
+
+[Back](#content)
+
+
+# Logging
+
+- It supports a logging API that works with a variety of built-in and third-party logging providers. 
+- Available providers include:
+  - Console
+  - Debug
+  - Event Tracing on Windows
+  - Windows Event Log
+  - TraceSource
+  - Azure App Service
+  - Azure Application Insights
+
+- To create logs, resolve an `ILogger<TCategoryName>` service from dependency injection (DI) and call logging methods such as LogInformation
+
+
+[Back](#content)
+
+
+# Routing
+
+- Routing is responsible for matching incoming HTTP requests and dispatching those requests to the app's executable endpoints.
+
+
+
+[Back](#content)
+
+# Content root
+
+- The content root is the base path for:
+  - The executable hosting the app (.exe).
+  - Compiled assemblies that make up the app (.dll).
+  - Content files used by the app, such as:
+  - Razor files (.cshtml, .razor)
+  - Configuration files (.json, .xml)
+  - Data files (.db)
+  - The Web root, typically the wwwroot folder.
+
+- During development, the content root defaults to the project's root directory. 
+- This directory is also the base path for both the app's content files and the Web root. 
+- Specify a different content root by setting its path when building the host. 
+
+
+[Back](#content)
+
+# Web Root
+
+- The web root is the base path for public, static resource files, such as:
+  - Stylesheets (.css)
+  - JavaScript (.js)
+  - Images (.png, .jpg)
+
+- By default, static files are served only from the web root directory and its sub-directories. 
+- The web root path defaults to `{content root}/wwwroot`. 
+- Specify a different web root by setting its path when building the host.
 
 
 [Back](#content)
