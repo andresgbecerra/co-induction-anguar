@@ -129,7 +129,14 @@ How compiler process it works
 - MSIL is independent of hardware and the operating system. 
 - Cross language relationships are possible since MSIL is the same for all .NET languages.
 - MSIL is further converted into native code.
+- The execution process looks like this:
+  - Source code is converted to CIL bytecode and a Common Language Infrastructure assembly **CLI** is created.
+  - Upon execution of a CIL assembly, its code is passed through the runtime's JIT compiler to generate native code. Ahead-of-time compilation may also be used, which eliminates this step, but at the cost of executable-file portability.
+  - The computer's processor executes the native code.
 
+  > An **assembly** in the Common Language Infrastructure (**CLI**) is a compiled code library used for deployment, versioning, and security.
+  > - There are two types: process assemblies (EXE) and library assemblies (DLL) Dynamic-link library.
+  > - An assembly can consist of one or more files
 
 [Back](#content)
 
