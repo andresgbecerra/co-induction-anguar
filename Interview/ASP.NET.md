@@ -106,7 +106,7 @@
 - Each component performs operations on an HttpContext and either invokes the next middleware in the pipeline or terminates the request.
 - It is actually sequential series of _delegates_ (piece of code), that can either short-circuit or pass on the HTTP request to next delegate. 
 - Request _delegates_ are used to build the request pipeline. The request _delegates_ handle each HTTP request.
-- Request _delegates_ are configured using Run, Map, and Use extension methods.
+- Request _delegates_ are configured using `Run`, `Map`, and `Use` extension methods.
 - These are known as middleware, a concept well known to people who worked with Node.js.
 
   
@@ -189,6 +189,10 @@ Dependency Injection (DI) is a design pattern which implements the IoC principle
 >   - Register
 >   - Resolve
 >   - Dispose
+
+> The Dependency Inversion Principle (DIP) states that high level modules should not depend on low level modules; both should depend on abstractions. Abstractions should not depend on details.  Details should depend upon abstractions.
+
+![Dependency InJection](../assets/di-dependency-injection.png)
 
 - Built-in IoC Container
   - The built-in container is represented by `IServiceProvider` implementation that supports constructor injection by default. 
