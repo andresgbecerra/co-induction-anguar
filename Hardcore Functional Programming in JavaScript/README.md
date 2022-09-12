@@ -320,6 +320,11 @@ Examples:
   
 > the essence of software development is composition, and monads make composition easier.
 
+- In functional programming, a monad is a software design pattern with a structure that combines program fragments (functions) and wraps their return values in a type with additional computation. 
+- In addition to defining a wrapping monadic type, monads define two operators: one to wrap a value in the monad type, and another to compose together functions that output values of the monad type (these are known as monadic functions).
+
+> A monad is an abstract data type constructor that used to represent computations in functional programming. Monads allow application developers to chain actions together to build a pipeline. The monad assigns additional processing rules to each action in the program.
+
 
 
 
