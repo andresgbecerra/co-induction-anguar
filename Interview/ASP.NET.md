@@ -26,6 +26,8 @@
 - [Web Root](#web-root)
 - [Static](#static)
 - [ActionResult](#actionresult)
+- [Authentication](#authentication)
+- [Authorization](#authorization)
 - [OAuth](#oauth)
 
 ***
@@ -466,6 +468,58 @@ Dependency Injection (DI) is a design pattern which implements the IoC principle
 
 - Routing is responsible for matching incoming HTTP requests and dispatching those requests to the app's executable endpoints.
 
+- Attribute routing for REST APIs
+  - REST APIs should use attribute routing to model the app's functionality as a set of resources where operations are represented by HTTP verbs.
+  - Attribute routing uses a set of attributes to map actions directly to route templates.
+```cs
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllers();
+
+var app = builder.Build();
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
+```
+- In the preceding code, `MapControllers` is called to map attribute routed controllers.
+- `HomeController` matches a set of URLs similar to what the default conventional route `{controller=Home}/{action=Index}/{id?}` matches.
+```cs
+public class HomeController : Controller
+{
+    [Route("")]
+    [Route("Home")]
+    [Route("Home/Index")]
+    [Route("Home/Index/{id?}")]
+    public IActionResult Index(int? id)
+    {
+        return ControllerContext.MyDisplayRouteInfo(id);
+    }
+
+    [Route("Home/About")]
+    [Route("Home/About/{id?}")]
+    public IActionResult About(int? id)
+    {
+        return ControllerContext.MyDisplayRouteInfo(id);
+    }
+}
+```
+
+
+- **HTTP verb templates**
+  - `ASP.NET` Core has the following HTTP verb templates:
+  ```cs
+  [HttpGet]
+  [HttpPost]
+  [HttpPut]
+  [HttpDelete]
+  [HttpHead]
+  [HttpPatch]
+  ```
 
 
 [Back](#content)
@@ -528,6 +582,47 @@ Dependency Injection (DI) is a design pattern which implements the IoC principle
 
 
 [Back](#content)
+
+# Authentication
+
+- Authentication is the process of determining a user's identity. 
+- In `ASP.NET` Core, authentication is handled by the authentication service, `IAuthenticationService`, which is used by authentication middleware. 
+- The authentication service uses registered authentication handlers to complete authentication-related actions.
+- The registered authentication handlers and their configuration options are called "schemes".
+- Authentication schemes are specified by registering authentication services in `Program.cs`:
+  - By calling a scheme-specific extension method after a call to AddAuthentication, such as AddJwtBearer or AddCookie. 
+  - These extension methods use AuthenticationBuilder.AddScheme to register schemes with appropriate settings.
+  - Less commonly, by calling AuthenticationBuilder.AddScheme directly.
+
+
+[Back](#content)
+
+# Authorization
+
+- Authorization is the process of determining whether a user has access to a resource.
+- Authorization refers to the process that determines what a user is able to do. 
+- Authorization types:
+  - Authorization provides a simple, declarative `role` and a `rich policy-based` model.
+- Authorization is controlled with `AuthorizeAttribute` and its various parameters. 
+- In its most basic form, applying the `[Authorize]` attribute to a controller, action, or Razor Page, limits access to that component to authenticated users.
+- You can also use the `AllowAnonymous` attribute to allow access by non-authenticated users to individual actions. For example:
+  ```cs
+  [Authorize]
+  public class AccountController : Controller
+  {
+      [AllowAnonymous]
+      public ActionResult Login()
+      {
+      }
+
+      public ActionResult Logout()
+      {
+      }
+  }
+  ```
+
+[Back](#content)
+
 
 # OAuth 
 - OAuth (Open Authorization) is an open standard for access granting/deligation protocol. 
