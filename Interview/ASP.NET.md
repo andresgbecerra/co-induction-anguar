@@ -201,6 +201,8 @@ Dependency Injection (DI) is a design pattern which implements the IoC principle
 
   ![Dependency InJection](../assets/di-dependency-injection-classes.png)
 
+  > the injector class creates an object of the service class, and injects that object to a client object. In this way, the DI pattern separates the responsibility of creating an object of the service class out of the client class.
+
 - Built-in IoC Container
   - The built-in container is represented by `IServiceProvider` implementation that supports constructor injection by default. 
   - The types (classes) managed by built-in IoC container are called **services**.
@@ -420,6 +422,7 @@ Dependency Injection (DI) is a design pattern which implements the IoC principle
 - `ASP.NET` Core provides a configuration framework that gets settings as name-value pairs from an ordered set of configuration providers.
 -  Built-in configuration providers are available for a variety of sources, such as `.json` files, `.xml` files, environment variables, and command-line arguments. 
 -  By default, `ASP.NET` Core apps are configured to read from `appsettings.json`, environment variables, the command line, and more.
+-  Application configuration in `ASP.NET` Core is performed using one or more configuration providers.
   
 > For managing confidential configuration data such as passwords, .NET Core provides the Secret Manager. 
 
