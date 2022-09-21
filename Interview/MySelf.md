@@ -6,6 +6,7 @@
 - [Tell me about yourself](#tell-me-about-yourself)
 - [Why Do you want to work Here](#why-do-you-want-to-work-here)
 - [Sell Yourself](#sell-yourself)
+- [Why should we hire you?](#why-should-we-hire-you)
 - [What are your Strengths](#what-are-your-strengths)
 - [What are your Weaknesses](#what-are-your-weaknesses)
 - [Where do you see yourself in five years](#where-do-you-see-yourself-in-five-years)
@@ -14,6 +15,7 @@
 - [Linkedin](#linkedin)
 - [Tell me about a time you failed at something](#tell-me-about-a-time-you-failed-at-something)
 - [What did you like or dislike about your previous role?](#what-did-you-like-or-dislike-about-your-previous-role)
+- [In your current (last) position, what features do (did) you like the most? The least?](#in-your-current-last-position-what-features-do-did-you-like-the-most-the-least)
 
 
 ***
@@ -49,6 +51,15 @@
 [Back](#content) 
 # Sell Yourself
  - `In my previous position, I worked late into the night fixing bugs reported by the client that affected the production environment and delayed the ongoing sprint development. I even learned to design in Figma to help the design team build the templates when they were behind schedule.` 
+  
+[Back](#content) 
+
+# Why should we hire you? 
+
+- I think you should hire me because of three main reasons. 
+- First, I have vast experience working as a Frontend developer inside the E-commerce Field. This experience has given me the opportunity to work with projects and clients around the globe, methodologies, and multi-cultural teams. 
+- Second, I´m a resilient person who adapts and learns fast, which helps in fast-paced environments such as yours. 
+- And Third, I am a problem solver, as I told you before, I´d like to think I’m a person that always comes up with creative solutions for problems”
   
 [Back](#content) 
 # What are your Strengths
@@ -90,6 +101,8 @@
 # What are your Weaknesses
 
 - >I consider myself **impatient**, that is, I require immediacy, I like to see the results a little earlier, I would like to advance faster, but then what I do is to set benchmarks in the tasks and work to achieve them, this way I feel I can have results in the short term.
+  
+- >I would say that I´m not a patient person when working on projects that depend on others, but this has been an opportunity to improve my communication and negotiation skills. I started to be more proactive, asking more questions, and being more helpful so we can complete every task on time.
 ```
 - Briefly describe a real weakness that wouldn't be a major handicap on the job. 
 - How you're already working on that weakness
@@ -100,6 +113,8 @@
 # Where do you see yourself in five years
 
 `"My goal right now is to find a position at a company where I can grow and take on new challenges over time. Ultimately, I'd like to assume more management responsibilities and maybe get involved in software product strategy as well. But most importantly, I want to work for an organization where I can build a career."`
+
+- “My long-term goals involve growing with a company where I can continue to learn, take on additional responsibilities, and contribute as much value as I can.”
 
 [Back](#content) 
 # Ask Questions
@@ -120,6 +135,13 @@
 - "How is the development team structured?"
 - "How is the development team composed?"
 - "What is your current work schedule?"
+- What are the biggest challenges that someone in this position would face?
+- What training programs are available to your employees?
+- Are there opportunities for advancement or professional development?
+- What’s your favorite part about working here?
+- I’ve read about the company’s founding, but can you tell me more about...?
+- Where do you see this company in the next few years?
+- What can you tell me about your new products or plans for growth?
 
 
 [Back](#content) 
@@ -190,6 +212,14 @@ Sorry I can't find my words
 # What did you like or dislike about your previous role?
 
 - What I really dislike is that there is no room for growth in that company. It’s a small business, and as a developer I cannot really move up the career ladder. Surely, I learned a lot with them, and I also believe that I helped them too. I believe that I should have a better job at the moment, perhaps a role of a senior developer or tech lead. That’s why I applied for a job in your company, where I see more opportunities for career growth.
+
+
+[Back](#content) 
+
+# In your current (last) position, what features do (did) you like the most? The least?
+
+- The most: “I enjoyed having to use my initiative. I have implemented and improved a number of the systems including the order processing system.”
+- The least: “There was a lack of growth opportunities in such a small company. One of the reasons I am so interested in your company is that it is a much larger organization with formal career planning structures already in place.”
 
 
 [Back](#content) 
