@@ -12,6 +12,8 @@
 - [Ask Questions](#ask-questions)
 - [Experiences](#experiences)
 - [Linkedin](#linkedin)
+- [Tell me about a time you failed at something](#tell-me-about-a-time-you-failed-at-something)
+- [What did you like or dislike about your previous role?](#what-did-you-like-or-dislike-about-your-previous-role)
 
 
 ***
@@ -75,6 +77,14 @@
 ```
 
 
+- Communication
+- Collaboration
+- Positivity
+- Problem-solving
+- Fast learning
+- Flexibility
+
+
 [Back](#content) 
 
 # What are your Weaknesses
@@ -125,6 +135,10 @@ Sorry I can't find my words
 [Back](#content) 
 
 # Experiences
+- For the first two years of my professional life, I worked in ...
+- In 2018 I got my first job ...
+
+
 - **Tech Experience:** & **most interesting project:**
   - The last project before joining Unosquare, was related to a software for quality control of clinical samples implemented in clinical laboratories in Colombia, the main objective of the project was to manage the data of each clinical sample and facilitate the interpretation through the use of graphs, grids and different components.
   - Using Angular with redux to improve performance and share data across the application.
@@ -158,6 +172,25 @@ Sorry I can't find my words
   Projects:
    - SATENA Official mobile App (iOS / Android)
    - Passenger Control App(.NET Core/ Angular / Xamarin), This app allows to efficiently classify the type of passenger, reducing the waiting time by 42% and improving the dispatch of the flight.
+
+[Back](#content) 
+
+
+# Tell me about a time you failed at something
+
+- In my previous job, I started working as a software developer. It was the first time I was part of a big project. I had two weeks to develop a few components of the application. I didn’t plan it well, and I missed the deadline. It delayed other team members who needed to use my part for their work. I failed my team and the customer. Since then, I always plan out various milestones in a schedule before I start coding. I’ve never missed a deadline since then.
+- In my first job, I was assigned to make a series of changes to a customer’s live website. I had two hours to do them. I hadn’t tested the changes before, and they didn’t work. I undid everything because time was running out. I had to schedule the process all over again, and the customer was upset. Since then, I always use a test server to apply all changes and validate them before taking them to a live website.
+
+
+[Back](#content) 
+
+
+
+
+# What did you like or dislike about your previous role?
+
+- What I really dislike is that there is no room for growth in that company. It’s a small business, and as a developer I cannot really move up the career ladder. Surely, I learned a lot with them, and I also believe that I helped them too. I believe that I should have a better job at the moment, perhaps a role of a senior developer or tech lead. That’s why I applied for a job in your company, where I see more opportunities for career growth.
+
 
 [Back](#content) 
 
