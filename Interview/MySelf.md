@@ -16,6 +16,7 @@
 - [Tell me about a time you failed at something](#tell-me-about-a-time-you-failed-at-something)
 - [What did you like or dislike about your previous role?](#what-did-you-like-or-dislike-about-your-previous-role)
 - [In your current (last) position, what features do (did) you like the most? The least?](#in-your-current-last-position-what-features-do-did-you-like-the-most-the-least)
+- [STAR technique](#star-technique)
 
 
 ***
@@ -221,6 +222,16 @@ Sorry I can't find my words
 - The most: “I enjoyed having to use my initiative. I have implemented and improved a number of the systems including the order processing system.”
 - The least: “There was a lack of growth opportunities in such a small company. One of the reasons I am so interested in your company is that it is a much larger organization with formal career planning structures already in place.”
 
+
+[Back](#content) 
+
+# STAR technique
+
+- **Situation:** Where were you? What was your role?
+- **Task:** What needed to be done? What was the project’s goal? What were you aiming for? What was your objective?
+- **Action:** What did you do? How did you do it? What were your actions? How did you work towards the task?
+- **Result:** What was the outcome? How did you know you had been successful? What did you learn from the experience?
+- The STAR technique for interviews helps you to stay focused on the details of your examples that matter most to the employer - your actions and the result.
 
 [Back](#content) 
 
